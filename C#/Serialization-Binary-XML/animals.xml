@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<ArrayOfAnimal xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Animal>
+    <Name>Mario</Name>
+    <Weight>60</Weight>
+    <Height>30</Height>
+    <AnimalID>0</AnimalID>
+  </Animal>
+  <Animal>
+    <Name>Luigi</Name>
+    <Weight>55</Weight>
+    <Height>24</Height>
+    <AnimalID>0</AnimalID>
+  </Animal>
+  <Animal>
+    <Name>Peach</Name>
+    <Weight>40</Weight>
+    <Height>20</Height>
+    <AnimalID>0</AnimalID>
+  </Animal>
+</ArrayOfAnimal>
