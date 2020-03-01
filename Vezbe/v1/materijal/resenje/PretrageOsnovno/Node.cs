@@ -11,7 +11,6 @@ namespace PretrageOsnovno
         public string Name { get; set; }
         public double Heuristic { get; set; }
         public List<Link> Links { get; set; }
-        // polje Links predstavlja sve veze koje vode iz tog cvora
 
         public Node (string name, double heuristic)
 	    {

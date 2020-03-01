@@ -13,18 +13,19 @@ namespace PretrageOsnovno
             string[] linesLinks = System.IO.File.ReadAllLines(@".\..\..\Graphs\Graph.txt");
             string[] linesNodes = System.IO.File.ReadAllLines(@".\..\..\Graphs\Nodes.txt");
             instance = new Graph(linesNodes, linesLinks);
-            
+
             //ispisuje sadrzaj grafa u konzoli
             instance.printGraph();
-            /*
+
             BreadthFirstSearch bfs = new BreadthFirstSearch();
             DepthFirstSearch dfs = new DepthFirstSearch();
+            AStarSearch astar = new AStarSearch();
             IterativeDepthFirstSearch idfs = new IterativeDepthFirstSearch();
 
-            State solution = bfs.Search("NS", "NI");
+            State solution = astar.Search("NS", "NI");
 
             // TODO 5: ispisati duzinu predjenog puta u konzoli
-
+            Console.WriteLine("Ukupna duzina puta je: " + solution.Cost);
             List<State> resenje = new List<State>();
             if (solution != null)
             {
@@ -48,7 +49,7 @@ namespace PretrageOsnovno
             }
             System.IO.File.WriteAllText(@".\..\..\Graphs\Resenje.txt", output);
             #endregion
-            */
+
             // Zadrzava otvorenu konzolu u debug modu
             Console.WriteLine("Press any key to exit.");
             System.Console.ReadKey();
