@@ -21,14 +21,15 @@ namespace PretrageOsnovno
             DepthFirstSearch dfs = new DepthFirstSearch();
             IterativeDepthFirstSearch idfs = new IterativeDepthFirstSearch();
 
-            State solution = bfs.Search("NS", "NI");
-
+            State solution = dfs.Search("NS", "NI");
+            
             // TODO 5: ispisati duzinu predjenog puta u konzoli
 
             List<State> resenje = new List<State>();
             if (solution != null)
             {
                 resenje = solution.path();
+                
             }
             /*
             #region ispis i snimanje resenja u datoteku
