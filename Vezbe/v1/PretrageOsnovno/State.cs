@@ -42,6 +42,24 @@ namespace PretrageOsnovno
             List<State> children = new List<State>();
 
             // TODO 2: pronaci moguca sledeca stanja na osnovu veza koje vode iz cvora u kom je trenutno stanje
+            #region PronalazenjeMogucihStanja
+            /*
+             * Ideja je proci kroz sve linkove trenutnog cvora
+             * i videti gde sve mogu da zavrse, to staviti u strukturu NextState()
+             * i ta sledeca stanja dodati u listu children.
+             */
+
+            foreach (Link link in this.Node.Links)
+            {
+                Node endNode = link.EndNode;
+                double cenaLinka = link.Cost;   // na to dodati jos cenu trenutnog cvora jer generalno tako funkcionise
+                // cena odredjenog cvora, tj. cena roditelja i "puta" do njega
+                cenaLinka += this.Cost;
+                children.Add(NextState(endNode, cenaLinka));
+                
+            }
+
+            #endregion
 
             return children;
         }

@@ -16,7 +16,7 @@ namespace PretrageOsnovno
             
             //ispisuje sadrzaj grafa u konzoli
             instance.printGraph();
-            /*
+            
             BreadthFirstSearch bfs = new BreadthFirstSearch();
             DepthFirstSearch dfs = new DepthFirstSearch();
             IterativeDepthFirstSearch idfs = new IterativeDepthFirstSearch();
@@ -30,7 +30,7 @@ namespace PretrageOsnovno
             {
                 resenje = solution.path();
             }
-
+            /*
             #region ispis i snimanje resenja u datoteku
 
             Console.WriteLine("Konacno resenje : ");
