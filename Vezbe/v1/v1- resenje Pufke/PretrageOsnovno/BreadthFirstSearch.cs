@@ -12,6 +12,8 @@ namespace PretrageOsnovno
         public State Search(string startNodeName, string endNodeName)
         {
             // TODO 4: implementirati algoritam prvi u dubinu širinu
+            Node startNode = Program.instance.graph[startNodeName];
+            Node endNode = Program.instance.graph[endNodeName];
             return null;
         }
     }
