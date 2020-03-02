@@ -13,3 +13,8 @@
 # DFS
 ![image](https://user-images.githubusercontent.com/49925421/75670101-7103dc80-5c7c-11ea-93d7-1bbbfa608f83.png)
 
+### Bitno je da uocimo razliku izmedju ova dva algoritma
+### BFS (Breadth First Search) je tehnika zasnovana na cvorovima i sluzi za pronalazenje najkrace putanje u grafu. Ona koristi Queue kao strukturu podataka koja funkcionise na principu first in first out (FIFO), algoritam je sporiji od DFS-a. Algoritam je dosta dobar kada se vcor koji trazimo nalazi blizu. 
+![image](https://user-images.githubusercontent.com/49925421/75670783-b543ac80-5c7d-11ea-909f-65f47107675a.png)
+### DFS (Depth First Search) je tehnika koja se bazira na granama. Koristi Stack kao srtrukturu podataka. Algoritam je dosta dobar kada je resenje dosta udaljeno.
+![image](https://user-images.githubusercontent.com/49925421/75670835-ca204000-5c7d-11ea-8a82-1fe7e9ddf1dc.png)
