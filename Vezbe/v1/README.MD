@@ -20,4 +20,4 @@
 
 ![BFS vs DFS](https://user-images.githubusercontent.com/49925421/75672251-a6122e00-5c80-11ea-9009-17f0ae46a401.png)
 
-U ovom konktretnom primeru implementacije bitno je primetiti da se za modelovanje striktura Queue i Stack koristi Lista, glavna razlika je u nacinu dodavanja u listu, kod BFS-a dodajemo element na kraj a pri obradi uzimamo sa pocetka, na taj nacin simuliramo FIFO, kod DFS-a dodajemo na pocetak i uzimamo sa pocetka na taj nacin simuliramo Stack tj LIFO.
+### U ovom konktretnom primeru implementacije bitno je primetiti da se za modelovanje striktura Queue i Stack koristi Lista, glavna razlika je u nacinu dodavanja u listu, kod BFS-a dodajemo element na kraj a pri obradi uzimamo sa pocetka, na taj nacin simuliramo FIFO, kod DFS-a dodajemo na pocetak i uzimamo sa pocetka na taj nacin simuliramo Stack tj LIFO.
