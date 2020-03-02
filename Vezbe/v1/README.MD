@@ -11,4 +11,5 @@
 ![image](https://user-images.githubusercontent.com/49925421/75670002-42860180-5c7c-11ea-9e4e-9475e3fa5210.png)
 
 # DFS
-![image](https://user-images.githubusercontent.com/49925421/75669789-efac4a00-5c7b-11ea-8e28-5f049d27f06d.png)
+![image](https://user-images.githubusercontent.com/49925421/75670101-7103dc80-5c7c-11ea-93d7-1bbbfa608f83.png)
+
