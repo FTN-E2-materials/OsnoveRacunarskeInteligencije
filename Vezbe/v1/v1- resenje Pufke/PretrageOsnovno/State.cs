@@ -69,6 +69,7 @@ namespace PretrageOsnovno
                 path.Insert(0, tt);
                 tt = tt.Parent;
             }
+
             return path;
         }
     }

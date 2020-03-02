@@ -31,14 +31,14 @@ namespace PretrageOsnovno
                 else
                 {
                     List<State> mogucaSledecaStanja = naObradi.children();
-                    //zaObradu.InsertRange(0, mogucaSledecaStanja);
+                      //zaObradu.InsertRange(0, mogucaSledecaStanja);
                     foreach (State next in mogucaSledecaStanja)
                     {
                         zaObradu.Insert(0, next);
                     }
                 }
             }
-          
+           
             
             return null;
         }
