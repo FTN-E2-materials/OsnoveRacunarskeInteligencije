@@ -22,6 +22,8 @@ namespace PretrageOsnovno
 
             List<State> red = new List<State>();            // RED - FIFO princip cemo simulirati preko liste i dodavanja na kraj
                                                             // za razliku od DFS gde UBACUJEMO na pocetak i tako simuliramo STEK
+            red.Add(new State(startNode));
+
             while (red.Count > 0)
             {
                 State naObradi = red[0];
