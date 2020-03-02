@@ -1,4 +1,8 @@
- # FORMIRANJE GRAFA
+# STRUKTURA PROGRAMA
+
+![image](https://user-images.githubusercontent.com/49925421/75669216-f5556000-5c7a-11ea-85c2-0d173f4846b6.png)
+
+# FORMIRANJE GRAFA
 ![image](https://user-images.githubusercontent.com/49925421/75668631-e1f5c500-5c79-11ea-85f6-bc7efde271da.png)
 
 ### Potrebno je implementirati metode za formiranje grafa, metodu koja odredjuje moguca sledeca stanja u koja se moze preci iz trenutnog stanja, algoritme za pretragu (DFS, BFS, iterativni DFS i nakon pronalaska resenja u konzolu je potrebno ispisati ukupnu duzinu puta koji je predjen. 
