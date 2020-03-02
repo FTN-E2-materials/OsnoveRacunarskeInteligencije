@@ -32,7 +32,7 @@ namespace PretrageOsnovno
                 resenje = solution.path();
                 
             }
-            /*
+            
             #region ispis i snimanje resenja u datoteku
 
             Console.WriteLine("Konacno resenje : ");
@@ -50,7 +50,7 @@ namespace PretrageOsnovno
             }
             System.IO.File.WriteAllText(@".\..\..\Graphs\Resenje.txt", output);
             #endregion
-            */
+            
             // Zadrzava otvorenu konzolu u debug modu
             Console.WriteLine("Press any key to exit.");
             System.Console.ReadKey();
