@@ -203,6 +203,9 @@ namespace Lavirint
                 case 3:
                     tt = 0;
                     break;
+                case 4:
+                    tt = 0;
+                    break;
             }                    
 
             Main.lavirint.polja[i,j] = tt;
