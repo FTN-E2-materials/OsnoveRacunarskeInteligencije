@@ -125,7 +125,7 @@ namespace Lavirint
                         case 3:
                             cc2 = Color.FromArgb(100, Color.Red);
                             break;
-                        case 4:
+                        case 4:// dodavanje jos jedne boje
                             cc2 = Color.FromArgb(100, Color.MediumBlue);
                             break;
                     }

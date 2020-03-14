@@ -125,6 +125,9 @@ namespace Lavirint
                         case 3:
                             cc2 = Color.FromArgb(100, Color.Red);
                             break;
+                        case 4:// dodavanje jos jedne kutije plave boje
+                            cc2 = Color.FromArgb(100, Color.MediumBlue);
+                            break;
                     }
                     String ttS = lavirintPoruke[i][j];
                     gr.FillRectangle(new SolidBrush(cc2), r);
@@ -196,7 +199,10 @@ namespace Lavirint
                 case 2:
                     tt = 3;
                     break;
-                case 3:
+                case 3: // na treci klik dobija vrednost 4
+                    tt = 4;
+                    break;
+                case 4:// na cetvrti se vraca u belo stanje
                     tt = 0;
                     break;
             }                    
