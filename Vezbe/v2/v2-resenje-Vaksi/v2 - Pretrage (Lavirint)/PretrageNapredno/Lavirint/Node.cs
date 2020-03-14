@@ -19,9 +19,15 @@ namespace Lavirint
             // TODO 2: Implementirati logiku za validna/nevalidna stanja iz zabranu prolaska kroz zidove
             /*
              * Ideja je da ako su kordinate negativne ili vece od mogucih da je to nevalino stanje.
+             * U slucaju da je u pitanju "siva kutija" i tu ne bi smeo da ide.
              */
             if (markI < 0 || markJ < 0 || markI >= Main.lavirint.brojVrsta || markJ >= Main.lavirint.brojKolona)
             {
+                return false;
+            }
+
+            if(Main.lavirint.polja[markI,markJ] == 1)
+            {   // siva kutija je na tom polju
                 return false;
             }
 
