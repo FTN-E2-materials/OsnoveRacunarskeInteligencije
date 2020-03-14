@@ -52,7 +52,17 @@ namespace Lavirint
         public bool cirkularnaPutanja()
         {
             // TODO 3: proveriti da li trenutno stanje odgovara poziciji koja je vec vidjena u grani pretrazivanja
-            
+            State trenutnoStanje = this.parent;
+            while(trenutnoStanje != null)
+            {   // iteriramo kroz sva stanja dok ne dodjemo do korena, tj do stanja
+                // kome je roditelj null(koren)
+                if (this.node.Equals(trenutnoStanje.node))
+                {   // znaci da imamo imamo cirkularnu putanju
+                    return true;
+                }   // a ako nemamo prelazimo na sledece stanje u hijerarhiji
+                trenutnoStanje = trenutnoStanje.parent;
+            }
+
             return false;
         }
     }
