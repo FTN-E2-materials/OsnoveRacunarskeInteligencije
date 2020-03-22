@@ -1,3 +1,9 @@
+
+
+
+
+
+
 <h1 align = "center"> Markovljevi procesi odlucivanja </h1>
 
 <p align="center">
@@ -74,3 +80,56 @@ Kod deterministickih pretraga trazili smo ***plan*** tj. niz akcija koje nas vod
 
 ## Napomena
 Svi primeri ilustrovani su primena znanja koja se zahteva na ispitu.
+
+
+
+
+## Odredjivanje akcija iz vrednosti
+Ako predpostavimo da imamo *optimalne vrednosti*, nije bas ocigledno koje bi akcije trebali izvrsiti, stoga radimo *jedan korak* ***mini-expectimax-a***
+
+<p align="center">
+
+  <img width="500" height="75" src="https://user-images.githubusercontent.com/45834270/77262036-41e8f580-6c93-11ea-9bba-51382663848d.png">
+
+</p>
+
+  - ovo se naziva ***ekstrakcijom politike*** jer nam daje politiku koja je implicitno data *vrednostima*
+  - argmax vraca akciju
+
+
+<p align="center">
+
+  <img width="800" height="406" src="https://user-images.githubusercontent.com/45834270/77262361-92615280-6c95-11ea-860d-26021576415e.png">
+
+</p>
+
+<p align="center">
+
+  <img width="800" height="406" src="https://user-images.githubusercontent.com/45834270/77264838-85dff880-6c9b-11ea-985c-e7e0b37da056.png">
+
+</p>
+
+<p align="center">
+
+  <img width="800" height="406" src="https://user-images.githubusercontent.com/45834270/77262106-c63b7880-6c93-11ea-8e09-58c913e7ecd1.png">
+
+</p>
+
+<p align="center">
+
+  <img width="800" height="353" src="https://user-images.githubusercontent.com/45834270/77265771-e5d79e80-6c9d-11ea-82ae-5f5984e06be4.png">
+
+</p>
+
+<p align="center">
+
+  <img width="800" height="353" src="https://user-images.githubusercontent.com/45834270/77266030-a2c9fb00-6c9e-11ea-88b4-fa395d8284d7.png">
+
+</p>
+
+<p align="center">
+
+  <img width="800" height="353" src="https://user-images.githubusercontent.com/45834270/77266177-03f1ce80-6c9f-11ea-8ac5-330a6e2a0ef8.png">
+
+</p>
+
