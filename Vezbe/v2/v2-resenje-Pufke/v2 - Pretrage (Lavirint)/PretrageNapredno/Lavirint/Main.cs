@@ -163,7 +163,13 @@ namespace Lavirint
             //TODO 7: Dopuniti metodu pozivima odgovarajucih metoda iz klase napisane u prethodnom koraku
             inicijalizacijaPretrage();
             ADepthSearch aDepth = new ADepthSearch();
-            
+            State s = pocetnoStanje;
+            State solution = aDepth.searchCombined(s);
+            if (solution != null)
+            {
+                resenje = solution.path();
+            }
+
             displayPanel1.Refresh();
         }
 

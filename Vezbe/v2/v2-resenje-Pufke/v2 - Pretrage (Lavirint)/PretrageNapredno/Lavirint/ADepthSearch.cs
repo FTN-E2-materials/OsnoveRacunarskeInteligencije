@@ -7,13 +7,13 @@ namespace Lavirint
 {
     class ADepthSearch
     {
-        //TODO 6: Implementirati klasu koja kombinuje algoritme Prvi u dubinu i A*
-        public State search(State pocetnoStanje)
+        //TODO 5: Implementirati klasu koja kombinuje algoritme Prvi u dubinu i A*
+        public State searchCombined(State pocetnoStanje)
         {
             List<State> stanjaNaObradi = new List<State>();
-            Hashtable predjeniPut = new Hashtable(); //Hashtable Represents a collection of key/value pairs that are organized based on the hash code of the key.
+            Hashtable predjeniPut = new Hashtable();
             stanjaNaObradi.Add(pocetnoStanje);
-            while(stanjaNaObradi.Count > 0)
+            while (stanjaNaObradi.Count > 0)
             {
                 State naObradi = stanjaNaObradi[0];
 
@@ -31,7 +31,6 @@ namespace Lavirint
                 }
                 stanjaNaObradi.Remove(naObradi);
             }
-                
             return null;
         }
     }

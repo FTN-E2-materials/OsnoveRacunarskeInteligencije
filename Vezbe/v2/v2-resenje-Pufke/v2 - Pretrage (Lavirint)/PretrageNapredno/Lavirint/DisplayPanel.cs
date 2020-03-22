@@ -24,7 +24,7 @@ namespace Lavirint
             iconAgent = Properties.Resources.robot;
         }
 
-       
+
         public String[][] lavirintPoruke;
         private bool[,] visited;
         public int X, Y;
@@ -125,8 +125,7 @@ namespace Lavirint
                         case 3:
                             cc2 = Color.FromArgb(100, Color.Red);
                             break;
-                        //Dodajemo jos jednu boju
-                        case 4:
+                        case 4:// dodavanje jos jedne boje
                             cc2 = Color.FromArgb(100, Color.MediumBlue);
                             break;
                     }
@@ -139,7 +138,7 @@ namespace Lavirint
             }
 
             // nacrtati iconu
-            gr.DrawImage(icon, dx * iconJ + dx/2-icon.Width/2, dy * iconI + dy/2-icon.Height/2);
+            gr.DrawImage(icon, dx * iconJ + dx / 2 - icon.Width / 2, dy * iconI + dy / 2 - icon.Height / 2);
 
             // nacrtati ikone agenata
             foreach (List<int> agent in agentPositions)
@@ -148,7 +147,7 @@ namespace Lavirint
             }
         }
 
-        
+
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
@@ -188,7 +187,7 @@ namespace Lavirint
 
             int j = eX / dx;
             int i = eY / dy;
-            int tt = Main.lavirint.polja[i,j];
+            int tt = Main.lavirint.polja[i, j];
             switch (tt)
             {
                 case 0:
@@ -201,19 +200,20 @@ namespace Lavirint
                     tt = 3;
                     break;
                 case 3:
-                    tt = 0;
+                    tt = 4;
                     break;
                 case 4:
                     tt = 0;
                     break;
-            }                    
+            }
 
-            Main.lavirint.polja[i,j] = tt;
+            Main.lavirint.polja[i, j] = tt;
             InvalidateAdv(i, j);
         }
 
-        public void moveIcon(int dI, int dJ) { 
-            int nI = iconI+dI;
+        public void moveIcon(int dI, int dJ)
+        {
+            int nI = iconI + dI;
             int nJ = iconJ + dJ;
             if (nI < 0)
                 nI = Main.lavirint.brojVrsta - 1;
@@ -226,14 +226,15 @@ namespace Lavirint
             int sIconI = iconI;
             int sIconJ = iconJ;
             // ovaj deo je da se spreci prolazak kroz zidove
-            if (Main.lavirint.polja[nI,nJ] != 1) {
+            if (Main.lavirint.polja[nI, nJ] != 1)
+            {
                 iconI = nI;
                 iconJ = nJ;
                 Main.manualRobotPozicija.markI = iconI;
                 Main.manualRobotPozicija.markJ = iconJ;
                 InvalidateAdv(iconI, iconJ);
                 InvalidateAdv(sIconI, sIconJ);
-            }            
+            }
         }
 
         public void moveAgentIcon(int agentIndex, int dI, int dJ)
@@ -269,10 +270,12 @@ namespace Lavirint
         protected override void OnKeyUp(KeyEventArgs e)
         {
             base.OnKeyUp(e);
-            if (e.KeyData == Keys.Back) {
+            if (e.KeyData == Keys.Back)
+            {
                 int n = lavirintPoruke[iconI][iconJ].Length;
-                if(n > 1){
-                    lavirintPoruke[iconI][iconJ] = lavirintPoruke[iconI][iconJ].Substring(0, n - 2); 
+                if (n > 1)
+                {
+                    lavirintPoruke[iconI][iconJ] = lavirintPoruke[iconI][iconJ].Substring(0, n - 2);
                 }
             }
         }
