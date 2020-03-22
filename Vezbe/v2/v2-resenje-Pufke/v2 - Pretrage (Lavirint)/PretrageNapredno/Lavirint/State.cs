@@ -10,6 +10,7 @@ namespace Lavirint
         public Node node;
         public double cost;
         public int level;
+        public Boolean kutija; //Vrednost ove promenljive zazvisi od toga da li trenutno stanje sadrzi kutiju
 
         public State sledeceStanje(Node node)
         {

@@ -12,7 +12,7 @@ namespace Lavirint
             // TODO 5.1: Implementirati algoritam vodjene pretrage A*
             List<State> stanjaNaObradi = new List<State>();
             stanjaNaObradi.Add(pocetnoStanje);
-            while(stanjaNaObradi.Count > 0)
+            while (stanjaNaObradi.Count > 0)
             {
                 State naObradi = getBest(stanjaNaObradi);
 
@@ -28,13 +28,12 @@ namespace Lavirint
                 }
                 stanjaNaObradi.Remove(naObradi);
             }
+
             return null;
         }
 
-        
         public double heuristicFunction(State s)
         {
-            // TODO 5.2: Implementirati heuristicku funkciju (funkcija odredjuje rastojanje)
             return Math.Sqrt(Math.Pow(s.node.markI - Main.krajnjiNode.markI, 2)
                 + Math.Pow(s.node.markJ - Main.krajnjiNode.markJ, 2));
         }
@@ -42,12 +41,12 @@ namespace Lavirint
         public State getBest(List<State> stanja)
         {
             State rez = null;
-            double min = Double.MinValue;
+            double min = Double.MaxValue;
 
-            foreach(State s in stanja)
+            foreach (State s in stanja)
             {
                 double h = heuristicFunction(s) + s.cost;
-                if(h < min)
+                if (h < min)
                 {
                     min = h;
                     rez = s;
