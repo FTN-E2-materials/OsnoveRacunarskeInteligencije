@@ -120,3 +120,12 @@ Aktivno skupljamo podatke dok ucimo Q-vrednosti. Q-vrednosti cemo uciti slicno k
   <img width="840" height="333" src="https://user-images.githubusercontent.com/45834270/77370863-197bfc80-6d62-11ea-8167-c843883f7617.png">
 
 </p>
+
+<br><br><br><br><br>
+<br><br>
+
+<p align="center">
+
+  <img width="840" height="481" src="https://user-images.githubusercontent.com/45834270/77374140-39172300-6d6a-11ea-844d-b265811dbef4.png">
+
+</p>
