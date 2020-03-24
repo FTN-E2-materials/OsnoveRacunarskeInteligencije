@@ -1,3 +1,4 @@
+
 <h1 align="center"> Reinforcement Learning </h1>
 
 <p align="center">
@@ -129,3 +130,70 @@ Aktivno skupljamo podatke dok ucimo Q-vrednosti. Q-vrednosti cemo uciti slicno k
   <img width="840" height="481" src="https://user-images.githubusercontent.com/45834270/77374140-39172300-6d6a-11ea-844d-b265811dbef4.png">
 
 </p>
+
+<p align="center">
+
+  <img width="840" height="481" src="https://user-images.githubusercontent.com/45834270/77426082-13266880-6dd4-11ea-94d7-fb1baa0986ac.png">
+
+</p>
+
+<br><br>
+
+## Approximate Q-Learning
+
+Posto za realne probleme nije izvodljivo popunjavati cele matrice(sa Q-vrednostima), ulazimo u fundamentalnu ideju **Masinskog ucenja** a to je da naucimo mali broj Q-vrednosti, i onda kada se nadjemo u slicnoj situaciji, da znamo da delujemo na osnovu generalizovanog ucenja.
+
+<p align="center">
+
+  <img width="840" height="431" src="https://user-images.githubusercontent.com/45834270/77431072-7b794800-6ddc-11ea-9f48-fafad26588d2.png">
+
+</p>
+
+<p align="center">
+
+  <img width="840" height="431" src="https://user-images.githubusercontent.com/45834270/77431407-f3477280-6ddc-11ea-936d-686b415a6b18.png">
+
+</p>
+
+<p align="center">
+
+  <img width="840" height="481" src="https://user-images.githubusercontent.com/45834270/77432084-e0816d80-6ddd-11ea-8a25-c6954421cf5d.png">
+
+</p>
+
+<p align="center">
+
+  <img width="840" height="481" src="https://user-images.githubusercontent.com/45834270/77437218-b2535c00-6de4-11ea-97d8-95d711872dc4.png">
+
+</p>
+
+<p align="center">
+
+  <img width="840" height="431" src="https://user-images.githubusercontent.com/45834270/77437969-900e0e00-6de5-11ea-9501-7f0908316c51.png">
+
+</p>
+
+<p align="center">
+
+  <img width="840" height="431" src="https://user-images.githubusercontent.com/45834270/77438136-be8be900-6de5-11ea-93c9-18239f58fe8b.png">
+
+</p>
+
+<p align="center">
+
+  <img width="840" height="431" src="https://user-images.githubusercontent.com/45834270/77438431-16c2eb00-6de6-11ea-8a5f-e0805cd39c9e.png">
+
+</p>
+
+<p align="center">
+
+  <img width="840" height="431" src="https://user-images.githubusercontent.com/45834270/77438806-92249c80-6de6-11ea-9e55-2206394c5a4b.png">
+
+</p>
+
+<p align="center">
+
+  <img width="840" height="281" src="https://user-images.githubusercontent.com/45834270/77439488-635af600-6de7-11ea-9e6e-d9c8e25b5acc.png">
+
+</p>
+
