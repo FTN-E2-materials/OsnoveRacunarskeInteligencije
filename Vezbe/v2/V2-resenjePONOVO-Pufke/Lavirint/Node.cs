@@ -25,7 +25,20 @@ namespace Lavirint
         {
             // TODO 1: Implementirati metodu tako da odredjuje dozvoljeno kretanje u lavirintu.
             List<Node> nextNodes = new List<Node>();
-            
+            int[,] movements = new int[,] { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } }; //Manipulisemo i j kordinatama na taj nacin omogucavamo kretanje
+            //desno, levo, gore, dole
+
+            for (int i=0; i<movements.GetLength(0); ++i)
+            {
+                int newMarkI = movements[i, 0] + this.markI;
+                int newMarkJ = movements[i, 1] + this.markJ;
+
+                if (validCoords(newMarkI, newMarkJ))
+                {
+                    nextNodes.Add(new Node(newMarkI, newMarkJ));
+                }
+            }
+
             return nextNodes;
         }
 
