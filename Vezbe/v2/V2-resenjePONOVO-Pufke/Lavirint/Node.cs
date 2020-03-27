@@ -17,7 +17,16 @@ namespace Lavirint
         private bool validCoords(int markI, int markJ)
         {
             // TODO 2: Implementirati logiku za validna/nevalidna stanja iz zabranu prolaska kroz zidove
-
+            if (markI < 0 || markJ < 0 || markI>= Main.lavirint.brojVrsta || markJ >= Main.lavirint.brojKolona)
+            {
+                return false;
+            }
+            
+            //slucaj kada je naisao na zid, zid ima vrednost 1, zelena kockica tj pocetna kockica 2, crvena 3 itd...
+            if(Main.lavirint.polja[markI,markJ] == 1)
+            {
+                return false;
+            }
             return true;
         }
 
