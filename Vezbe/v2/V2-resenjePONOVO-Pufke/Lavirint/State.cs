@@ -49,10 +49,20 @@ namespace Lavirint
             return putanja;
         }
 
+        //Krecemo se kroz rodjitelje od noda , kroz sve perente i proveravamo da li smo vec bili u tom stejtu
+        //Ovo moze dugo da traje postoje alternativna resenja
         public bool cirkularnaPutanja()
         {
             // TODO 3: proveriti da li trenutno stanje odgovara poziciji koja je vec vidjena u grani pretrazivanja
-            
+            State currentState = this.parent;
+            while (currentState != null)
+            {
+                if (this.node.Equals(currentState.node))
+                {
+                    return true;
+                }
+                currentState = currentState.parent;
+            }
             return false;
         }
     }
