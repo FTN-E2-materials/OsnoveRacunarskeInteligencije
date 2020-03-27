@@ -4,15 +4,12 @@ using System.Text;
 
 namespace Lavirint
 {
-    public class State //Klasa State modeluje jedno stanje u lavirintu i sadrzi sve informacije koje su nam potrebne
+    public class State
     {
-        public State parent;     // Ko je roditeljski state
-        public Node node;        // O kom cvoru je rec
-        public double cost;      // Cena
-        public int level;        // i nivo
-        public bool kutija;
-
-
+        public State parent;
+        public Node node;
+        public double cost;
+        public int level;
 
         public State sledeceStanje(Node node)
         {
@@ -21,7 +18,6 @@ namespace Lavirint
             rez.parent = this;
             rez.cost = this.cost + 1;
             rez.level = this.level + 1;
-            rez.kutija = this.kutija;
             return rez;
         }
 
@@ -56,15 +52,7 @@ namespace Lavirint
         public bool cirkularnaPutanja()
         {
             // TODO 3: proveriti da li trenutno stanje odgovara poziciji koja je vec vidjena u grani pretrazivanja
-            State currentState = this.parent;
-            while(currentState != null)
-            {
-                if(this.node.Equals(currentState.node) && this.kutija == currentState.kutija)
-                {
-                    return true;
-                }
-                currentState = currentState.parent;
-            }
+            
             return false;
         }
     }
