@@ -9,33 +9,38 @@ namespace Lavirint
     {
         public State search(State pocetnoStanje)
         {
-            // TODO 5.1: Implementirati algoritam vodjene pretrage A*
-            List<State> stanjaNaObradi = new List<State>();
-            stanjaNaObradi.Add(pocetnoStanje);
-            while (stanjaNaObradi.Count > 0)
-            {
-                State naObradi = getBest(stanjaNaObradi);
+            List<State> stanjaZaObradu = new List<State>();
+            Hashtable predjeniPut = new Hashtable();
+            stanjaZaObradu.Add(pocetnoStanje);
 
-                if (!naObradi.cirkularnaPutanja())
+            while (stanjaZaObradu.Count > 0)
+            {
+                State naObradi = getBest(stanjaZaObradu);
+
+                if (!predjeniPut.ContainsKey(naObradi.GetHashCode()))
                 {
                     Main.allSearchStates.Add(naObradi);
                     if (naObradi.isKrajnjeStanje())
                     {
                         return naObradi;
                     }
-                    List<State> mogucaSledecaStanja = naObradi.mogucaSledecaStanja();
-                    stanjaNaObradi.AddRange(mogucaSledecaStanja);
-                }
-                stanjaNaObradi.Remove(naObradi);
-            }
+                    predjeniPut.Add(naObradi.GetHashCode(),null);
+                    List<State> sledecaStanja = naObradi.mogucaSledecaStanja();
 
+                    foreach (State s in sledecaStanja)
+                    {
+                        stanjaZaObradu.Add(s);
+                    }
+                }
+                stanjaZaObradu.Remove(naObradi);
+            }
             return null;
         }
 
+        //funkcija odredjuje rastojanje
         public double heuristicFunction(State s)
         {
-            return Math.Sqrt(Math.Pow(s.node.markI - Main.krajnjiNode.markI, 2)
-                + Math.Pow(s.node.markJ - Main.krajnjiNode.markJ, 2));
+            return Math.Sqrt(Math.Pow(s.markI - Main.krajnjeStanje.markI, 2) + Math.Pow(s.markJ - Main.krajnjeStanje.markJ, 2))+s.cost;
         }
 
         public State getBest(List<State> stanja)
@@ -45,7 +50,7 @@ namespace Lavirint
 
             foreach (State s in stanja)
             {
-                double h = heuristicFunction(s) + s.cost;
+                double h = heuristicFunction(s);
                 if (h < min)
                 {
                     min = h;
@@ -54,5 +59,8 @@ namespace Lavirint
             }
             return rez;
         }
+
+
+
     }
 }

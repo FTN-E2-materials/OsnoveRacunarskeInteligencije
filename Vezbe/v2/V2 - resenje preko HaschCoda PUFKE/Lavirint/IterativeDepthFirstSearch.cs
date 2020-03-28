@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Collections;
+using System.Windows.Forms;
 
 namespace Lavirint
 {
-    class ADepthSearch
+    class IterativeDeepFirstSeach
     {
-        //TODO 6: Implementirati klasu koja kombinuje algoritme Prvi u dubinu i A*
-        public State search(State pocetnoStanje)
+        public State search(State state, int maxDepth)
         {
             return null;
         }

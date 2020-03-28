@@ -13,53 +13,42 @@ namespace Lavirint
         public DisplayPanel()
         {
             InitializeComponent();
-            Main.lavirint = new Lavirint(Main.BROJ_VRSTA, Main.BROJ_KOLONA);
-            resetLavirintPoseceno();
-            lavirintPoruke = new String[Main.lavirint.brojVrsta][];
-            for (int i = 0; i < Main.lavirint.brojVrsta; i++)
+            State.lavirint = new int[Main.brojVrsta,Main.brojKolona];
+            lavirintPoruke = new String[Main.brojVrsta][];
+            for (int i = 0; i < Main.brojVrsta; i++)
             {
-                lavirintPoruke[i] = new String[Main.lavirint.brojKolona];
+                lavirintPoruke[i] = new String[Main.brojKolona];
             }
             icon = Properties.Resources.robot2;
-            iconAgent = Properties.Resources.robot;
         }
 
-
+       
         public String[][] lavirintPoruke;
         private bool[,] visited;
         public int X, Y;
         public int iconI = 0;
         public int iconJ = 0;
-
-        public List<List<int>> agentPositions = new List<List<int>>();
         Image icon = null;
-        Image iconAgent = null;
 
-        public void resetLavirintPoruke()
-        {
-            lavirintPoruke = new String[Main.lavirint.brojVrsta][];
-            for (int i = 0; i < Main.lavirint.brojVrsta; i++)
+        public void resetLavirintPoruke() {
+            lavirintPoruke = new String[Main.brojVrsta][];
+            for (int i = 0; i < Main.brojVrsta; i++)
             {
-                lavirintPoruke[i] = new String[Main.lavirint.brojKolona];
+                lavirintPoruke[i] = new String[Main.brojKolona];
             }
         }
 
         public void resetLavirintPoseceno()
         {
-            visited = new bool[Main.lavirint.brojVrsta, Main.lavirint.brojKolona];
+            visited = new bool[Main.brojVrsta, Main.brojKolona];
         }
 
         public void poseceno(State state)
         {
-            visited[state.node.markI, state.node.markJ] = true;
+            visited[state.markI, state.markJ] = true;
         }
 
-        public void resetAgents()
-        {
-            agentPositions = new List<List<int>>();
-        }
-
-        //TODO 4.1: Prosiriti metodu tako da se napravi novi Color objekat npr: Color.MediumBlue
+        //TODO 3.1: Prosiriti metodu tako da se napravi novi Color objekat npr: Color.MediumBlue
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -72,10 +61,10 @@ namespace Lavirint
             // nacrtaj grid
             int width = rec.Width;
             int height = rec.Height;
-            int dx = (int)(width / Main.lavirint.brojKolona);
-            int dy = (int)(height / Main.lavirint.brojVrsta);
+            int dx = (int)(width / Main.brojKolona);
+            int dy = (int)(height / Main.brojVrsta);
 
-            for (int j = 0; j < Main.lavirint.brojKolona; j++)
+            for (int j = 0; j < Main.brojKolona; j++)
             {
                 Color c = Color.FromArgb(40, Color.Gray);
                 int xx = dx * j;
@@ -83,7 +72,7 @@ namespace Lavirint
                 int yH = height;
                 gr.DrawLine(new Pen(c), xx, y0, xx, yH);
             }
-            for (int i = 0; i < Main.lavirint.brojVrsta; i++)
+            for (int i = 0; i < Main.brojVrsta; i++)
             {
                 Color c = Color.FromArgb(40, Color.Gray);
                 int yy = dy * i;
@@ -92,9 +81,9 @@ namespace Lavirint
                 gr.DrawLine(new Pen(c), x0, yy, xH, yy);
             }
 
-            for (int i = 0; i < Main.lavirint.brojVrsta; i++)
+            for (int i = 0; i < Main.brojVrsta; i++)
             {
-                for (int j = 0; j < Main.lavirint.brojKolona; j++)
+                for (int j = 0; j < Main.brojKolona; j++)
                 {
                     int xx = (int)(dx / 2) + dx * j;
                     int yy = (int)(dy / 2) + dy * i;
@@ -113,7 +102,7 @@ namespace Lavirint
                         cc1 = Color.FromArgb(100, Color.YellowGreen);
                         cc2 = Color.FromArgb(20, Color.YellowGreen);
                     }
-                    int tt = Main.lavirint.polja[i, j];
+                    int tt = State.lavirint[i,j];
                     switch (tt)
                     {
                         case 1:
@@ -125,7 +114,7 @@ namespace Lavirint
                         case 3:
                             cc2 = Color.FromArgb(100, Color.Red);
                             break;
-                        case 4:// dodavanje jos jedne boje
+                        case 4:
                             cc2 = Color.FromArgb(100, Color.MediumBlue);
                             break;
                     }
@@ -138,16 +127,10 @@ namespace Lavirint
             }
 
             // nacrtati iconu
-            gr.DrawImage(icon, dx * iconJ + dx / 2 - icon.Width / 2, dy * iconI + dy / 2 - icon.Height / 2);
-
-            // nacrtati ikone agenata
-            foreach (List<int> agent in agentPositions)
-            {
-                gr.DrawImage(iconAgent, dx * agent[1] + dx / 2 - icon.Width / 2, dy * agent[0] + dy / 2 - icon.Height / 2);
-            }
+            gr.DrawImage(icon, dx * iconJ + dx/2-icon.Width/2, dy * iconI + dy/2-icon.Height/2);
         }
 
-
+        
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
@@ -156,8 +139,8 @@ namespace Lavirint
             Rectangle rec = this.ClientRectangle;
             int width = rec.Width;
             int height = rec.Height;
-            int dx = (int)(width / Main.lavirint.brojKolona);
-            int dy = (int)(height / Main.lavirint.brojVrsta);
+            int dx = (int)(width / Main.brojKolona);
+            int dy = (int)(height / Main.brojVrsta);
 
             int j = eX / dx;
             int i = eY / dy;
@@ -173,7 +156,7 @@ namespace Lavirint
             }
         }
 
-        //TODO 4.2: Prosiriti metodu cirkularnog brojaca jos jednim stanjem 
+        //TODO 3.2: Prosiriti metodu 
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
@@ -182,12 +165,12 @@ namespace Lavirint
             Rectangle rec = this.ClientRectangle;
             int width = rec.Width;
             int height = rec.Height;
-            int dx = (int)(width / Main.lavirint.brojKolona);
-            int dy = (int)(height / Main.lavirint.brojVrsta);
+            int dx = (int)(width / Main.brojKolona);
+            int dy = (int)(height / Main.brojVrsta);
 
             int j = eX / dx;
             int i = eY / dy;
-            int tt = Main.lavirint.polja[i, j];
+            int tt = State.lavirint[i,j];
             switch (tt)
             {
                 case 0:
@@ -205,60 +188,32 @@ namespace Lavirint
                 case 4:
                     tt = 0;
                     break;
-            }
+            }                    
 
-            Main.lavirint.polja[i, j] = tt;
+            State.lavirint[i,j] = tt;
             InvalidateAdv(i, j);
         }
 
-        public void moveIcon(int dI, int dJ)
-        {
-            int nI = iconI + dI;
+        public void moveIcon(int dI, int dJ) { 
+            int nI = iconI+dI;
             int nJ = iconJ + dJ;
             if (nI < 0)
-                nI = Main.lavirint.brojVrsta - 1;
-            if (nI > Main.lavirint.brojVrsta - 1)
+                nI = Main.brojVrsta - 1;
+            if (nI > Main.brojVrsta - 1)
                 nI = 0;
             if (nJ < 0)
-                nJ = Main.lavirint.brojKolona - 1;
-            if (nJ > Main.lavirint.brojKolona - 1)
+                nJ = Main.brojKolona - 1;
+            if (nJ > Main.brojKolona - 1)
                 nJ = 0;
             int sIconI = iconI;
             int sIconJ = iconJ;
             // ovaj deo je da se spreci prolazak kroz zidove
-            if (Main.lavirint.polja[nI, nJ] != 1)
-            {
+            if (State.lavirint[nI,nJ] != 1) {
                 iconI = nI;
                 iconJ = nJ;
-                Main.manualRobotPozicija.markI = iconI;
-                Main.manualRobotPozicija.markJ = iconJ;
                 InvalidateAdv(iconI, iconJ);
                 InvalidateAdv(sIconI, sIconJ);
-            }
-        }
-
-        public void moveAgentIcon(int agentIndex, int dI, int dJ)
-        {
-            int nI = agentPositions[agentIndex][0] + dI;
-            int nJ = agentPositions[agentIndex][1] + dJ;
-            if (nI < 0)
-                nI = Main.lavirint.brojVrsta - 1;
-            if (nI > Main.lavirint.brojVrsta - 1)
-                nI = 0;
-            if (nJ < 0)
-                nJ = Main.lavirint.brojKolona - 1;
-            if (nJ > Main.lavirint.brojKolona - 1)
-                nJ = 0;
-            int sIconI = agentPositions[agentIndex][0];
-            int sIconJ = agentPositions[agentIndex][1];
-            // ovaj deo je da se spreci prolazak kroz zidove
-            if (Main.lavirint.polja[nI, nJ] != 1)
-            {
-                agentPositions[agentIndex][0] = nI;
-                agentPositions[agentIndex][1] = nJ;
-                InvalidateAdv(iconI, iconJ);
-                InvalidateAdv(sIconI, sIconJ);
-            }
+            }            
         }
 
         protected override void OnKeyPress(KeyPressEventArgs e)
@@ -270,12 +225,10 @@ namespace Lavirint
         protected override void OnKeyUp(KeyEventArgs e)
         {
             base.OnKeyUp(e);
-            if (e.KeyData == Keys.Back)
-            {
+            if (e.KeyData == Keys.Back) {
                 int n = lavirintPoruke[iconI][iconJ].Length;
-                if (n > 1)
-                {
-                    lavirintPoruke[iconI][iconJ] = lavirintPoruke[iconI][iconJ].Substring(0, n - 2);
+                if(n > 1){
+                    lavirintPoruke[iconI][iconJ] = lavirintPoruke[iconI][iconJ].Substring(0, n - 2); 
                 }
             }
         }
@@ -313,8 +266,8 @@ namespace Lavirint
             Rectangle rec = this.ClientRectangle;
             int width = rec.Width;
             int height = rec.Height;
-            int dx = (int)(width / Main.lavirint.brojKolona);
-            int dy = (int)(height / Main.lavirint.brojVrsta);
+            int dx = (int)(width / Main.brojKolona);
+            int dy = (int)(height / Main.brojVrsta);
             Rectangle tt1 = new Rectangle(j * dx, i * dy, dx, dy);
             this.Invalidate(tt1);
         }
