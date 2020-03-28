@@ -8,6 +8,7 @@ namespace Lavirint
     class AStarSearch
     {
         //Razlika izmedju slepih pretraga i A* je sto smo kod njih uzimali prvi element a sada cemo najbolji getBest()
+       //A* trazi najkraci i optimalan put
         public State search(State pocetnoStanje)
         {
             // TODO 5.1: Implementirati algoritam vodjene pretrage A*

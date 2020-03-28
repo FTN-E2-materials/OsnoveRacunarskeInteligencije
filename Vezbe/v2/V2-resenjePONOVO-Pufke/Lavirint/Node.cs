@@ -7,11 +7,12 @@ namespace Lavirint
     public class Node
     {
         public int markI, markJ;
-
+        public bool kutija;//dodali smo kutiju u node da bi znali jel sadrzi kutiju ili ne
         public Node(int markI, int markJ)
         {
             this.markI = markI;
             this.markJ = markJ;
+            this.kutija = false; //Inicijalno postavljamo kutiju na false kad pravimo cvor
         }
 
         private bool validCoords(int markI, int markJ)
@@ -35,7 +36,16 @@ namespace Lavirint
         {
             // TODO 1: Implementirati metodu tako da odredjuje dozvoljeno kretanje u lavirintu.
             List<Node> nextNodes = new List<Node>();
-            int[,] movement = new int[,] { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
+            int[,] movement = new int[,] { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };//{markI,markJ}
+            //desno,levo,gore,dole
+
+            //plava kutija ima vrednost 4, ovo smo dodali da bi markirali da smo pokupili kutiju
+            #region kutija
+            if(Main.lavirint.polja[markI,markJ] == 4)
+            {
+                kutija = true;
+            }
+            #endregion
 
             for (int i = 0; i < movement.GetLength(0); i++)
             {
@@ -59,7 +69,8 @@ namespace Lavirint
             }
 
             Node node = (Node)obj;
-            return this.markI == node.markI && this.markJ == node.markJ;
+            //sada kada imamo plavu kutiju, morai smo da ovo proslirimo sa node.kutija
+            return this.markI == node.markI && this.markJ == node.markJ && node.kutija;
         }
 
         public override int GetHashCode()

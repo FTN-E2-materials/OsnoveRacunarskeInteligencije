@@ -18,6 +18,8 @@ namespace Lavirint
             rez.parent = this;
             rez.cost = this.cost + 1;
             rez.level = this.level + 1;
+            //takodje moramo da uvedemo tu novu kutiju i ovde
+            rez.node.kutija = this.node.kutija;
             return rez;
         }
 
@@ -34,7 +36,7 @@ namespace Lavirint
 
         public bool isKrajnjeStanje()
         {
-            return Main.krajnjiNode.Equals(this.node);
+            return Main.krajnjiNode.Equals(this.node) && this.node.kutija;
         }
 
         public List<State> path()
@@ -55,9 +57,9 @@ namespace Lavirint
         {
             // TODO 3: proveriti da li trenutno stanje odgovara poziciji koja je vec vidjena u grani pretrazivanja
             State currentState = this.parent;
-            while (currentState != null)
-            {
-                if (this.node.Equals(currentState.node))
+            while (currentState != null)                        //Posto imamo ubacenu sada i plavu kutiju moramo da pored metode Equals utvrdimo i da li se te kutije poklapaju
+            {                                                   //this.node.kutija == currentState.node.kutija
+                if (this.node.Equals(currentState.node) && this.node.kutija == currentState.node.kutija)
                 {
                     return true;
                 }
