@@ -34,7 +34,29 @@ namespace Lavirint
         {
             // TODO 1: Implementirati metodu tako da odredjuje dozvoljeno kretanje u lavirintu.
             List<Node> nextNodes = new List<Node>();
-            int[,] potezi = new int[,] { { 0, 1 },{ 0, -1 },{ 1, 0 },{ 1, 0 },{ -1, 0 },{ 1, 1 },{ 1, -1 },{ -1, 1 },{ -1, -1 } };
+            //int[,] potezi = new int[,] { { 0, 1 },{ 0, -1 },{ 1, 0 },{ 1, 0 },{ -1, 0 },{ 1, 1 },{ 1, -1 },{ -1, 1 },{ -1, -1 } };
+            int[,] potezi = new int[,] { { 1, 2 }, { -1, 2 }, { -2, 1 },{ -2, -1 },{ 2, 1 },{ 2, -1 }, { -2, -1 },{ -2, 1 },{ -1, -2 },{ 1, -2 } };
+            #region objasnjenjeKretanja
+            /*
+             * ----------------------> J kordinata
+             * |
+             * |
+             * |
+             * |
+             * |
+             * ^
+             * I kordinata
+             * 
+             * To znaci da bi isao desno, povesavas J kordinatiu
+             * Da bi isao levo, smanjujes J kordinatu
+             * Da bi isao gore, SMANJUJES I kordinatu
+             * Da bi isao dole, POVECAVAS I kordinatu
+             * 
+             * Redom predstavljanje kretanje figure 'konj' u igri sah.
+             * desno-gore, desno-dole, gore-desno, gore-levo, dole-desno, dole-levo, levo-gore, levo-dole
+             */
+            #endregion
+
             int brojPoteza = potezi.GetLength(0);
             
             for (int i = 0; i < brojPoteza; i++)
