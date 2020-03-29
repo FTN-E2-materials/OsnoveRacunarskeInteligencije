@@ -6,7 +6,7 @@ namespace Lavirint
 {
     public class State
     {
-        public static int[,] lavirint;
+        public static int[,] lavirint; //Staticka promenljiva koaj opisuje ceo nas lavirint i ne moramo vise da pristupamo Mainu svaki put
         State parent;
         public int markI, markJ; //vrsta i kolona
         public double cost;
@@ -30,7 +30,10 @@ namespace Lavirint
             //TODO 2: Prosiriti metodu tako da se ne moze prolaziti kroz sive kutije
             List<State> rez = new List<State>();
 
-          
+            //Dodajemo za PLAVU kutiju
+            if(lavirint[markI, markJ] == 4){
+                kutija = true;
+            }
 
             if ((markJ > 0) && (lavirint[markI, markJ - 1] != 1))
             {
@@ -57,12 +60,13 @@ namespace Lavirint
 
         public override int GetHashCode()
         {
-            return 100 * markI + markJ;
+            int code = 10 * markI + markJ; //Ako nemamo kutiju ti ce nam biti od 0-200
+            return kutija ? code + 1000 : code; //Ako imamo kutiju taj kod nam ide dalje 
         }
 
         public bool isKrajnjeStanje()
-        {
-            return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ;
+        { //Proveravamo i da li smo pokupili kutiju to je uslov && kutija
+            return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ && kutija;
         }
 
         public List<State> path()

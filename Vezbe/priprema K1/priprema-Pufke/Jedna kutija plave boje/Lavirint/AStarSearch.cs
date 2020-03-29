@@ -10,7 +10,7 @@ namespace Lavirint
         public State search(State pocetnoStanje)
         {
             List<State> stanjaZaObradu = new List<State>();
-            Hashtable predjeniPut = new Hashtable();
+            Hashtable predjeniPut = new Hashtable(); //predjeni put je Hash tabla u kojoj cuvamo sva stanja koja smo vec obisli, drugacije hesujemo stanja sa kutijom i stanja bez kutije
             stanjaZaObradu.Add(pocetnoStanje);
 
             while (stanjaZaObradu.Count > 0)
