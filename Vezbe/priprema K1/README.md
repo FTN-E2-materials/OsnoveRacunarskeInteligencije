@@ -1,4 +1,4 @@
-<h1 align = "cente"> Varijante zadataka na kolokvijumu </h1>
+<h1 align = "center"> Varijante zadataka na kolokvijumu </h1>
 
 ## Sta ocekivati 
   - Dodati neku kutiju druge boje, npr zutu.
