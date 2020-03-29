@@ -35,11 +35,9 @@ namespace Lavirint
             {
                 kutija = true;
             }
-
-
+    
             for (int i = -2; i <= 2; i += 4)
-            {
-                //Console.WriteLine("i {0}", i);
+            {                                       //Ove dve for petlje nam daju kombinaciju kretanja levo desno za dva polja i gore dole za jedno polje
                 int newMarkI = markI + i;
                 for (int j = -1; j <= 1; j += 2)
                 {
@@ -52,7 +50,6 @@ namespace Lavirint
                             {
                                 State novo = sledeceStanje(newMarkI, newMarkJ);
                                 rez.Add(novo);
-                                //Console.WriteLine("I: " + markI + "J: " + markJ);
                             }
                         }
                     }
@@ -60,8 +57,7 @@ namespace Lavirint
             }
 
             for (int j = -2; j <= 2; j += 4)
-            {
-                //Console.WriteLine("i {0}", i);
+            {                                        //Ove dve for petlje nam daju kombinaciju kretanja gore dole za dva polja i levo desno za jedno polje
                 int newMarkJ = markJ + j;
                 for (int i = -1; i <= 1; i += 2)
                 {
@@ -74,7 +70,6 @@ namespace Lavirint
                             {
                                 State novo = sledeceStanje(newMarkI, newMarkJ);
                                 rez.Add(novo);
-                                //Console.WriteLine("I: " + markI + "J: " + markJ);
                             }
                         }
                     }
