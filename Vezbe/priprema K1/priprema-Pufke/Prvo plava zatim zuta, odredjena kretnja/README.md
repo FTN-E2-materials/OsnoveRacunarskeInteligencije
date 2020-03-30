@@ -1,0 +1,1 @@
+### Robot skuplja PRVO plavu pa zatim zutu kutiju, redosled skupljanja je bitan. Robot se prvo krece kao sahovska figura konj, kada skupi plavu kutiju krece se kao sahovska figura lovac.
