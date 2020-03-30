@@ -1,0 +1,1 @@
+### Robot skuplja jednu plavu kutiju i jednu zutu kutiju pre nego sto dodje do cilja, normalno se krece, redosled skupljanja kutija nije bitan
