@@ -20,7 +20,7 @@ namespace Lavirint
                 if (!predjeniPut.ContainsKey(naObradi.GetHashCode()))
                 {
                     Main.allSearchStates.Add(naObradi);
-                    if (naObradi.kutija)
+                    if (naObradi.kutijaPokupljena)
                     {
                         AStarSearch aZvezda = new AStarSearch();
                         return aZvezda.search(naObradi);

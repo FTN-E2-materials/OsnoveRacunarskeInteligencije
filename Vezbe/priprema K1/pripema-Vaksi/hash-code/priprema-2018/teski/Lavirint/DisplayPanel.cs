@@ -114,8 +114,8 @@ namespace Lavirint
                         case 3:
                             cc2 = Color.FromArgb(100, Color.Red);
                             break;
-                        case 4:
-                            cc2 = Color.FromArgb(100, Color.MediumBlue);
+                        case 4:// TODO 3.1.1: Dodati novu boju za kutiju koja mora da se pokupi
+                            cc2 = Color.FromArgb(200, Color.MediumBlue);
                             break;
                     }
                     String ttS = lavirintPoruke[i][j];
@@ -182,10 +182,10 @@ namespace Lavirint
                 case 2:
                     tt = 3;
                     break;
-                case 3:
+                case 3: // TODO 3.2: prosirenje za kutiju
                     tt = 4;
                     break;
-                case 4:
+                case 4: 
                     tt = 0;
                     break;
             }                    

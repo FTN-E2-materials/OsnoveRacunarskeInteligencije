@@ -7,6 +7,11 @@ namespace Lavirint
 {
     class AStarSearch
     {
+        //Implementirati A* pretragu
+        /*
+         * Vodjena pretraga koja uzima najbolja resenje po heuristici.
+         * Za pamcenje stanja opet koristimo Hastable
+         */
         public State search(State pocetnoStanje)
         {
             List<State> stanjaZaObradu = new List<State>();
@@ -37,7 +42,12 @@ namespace Lavirint
             return null;
         }
 
-        //funkcija odredjuje rastojanje
+        
+        /*
+         * Funkcija koja odredjuje rastojanje.
+         * Trenutno na osnovu EUKLIDSKOG rastojanja 
+         * od ciljnog stanja.
+         */
         public double heuristicFunction(State s)
         {
             return Math.Sqrt(Math.Pow(s.markI - Main.krajnjeStanje.markI, 2) + Math.Pow(s.markJ - Main.krajnjeStanje.markJ, 2))+s.cost;

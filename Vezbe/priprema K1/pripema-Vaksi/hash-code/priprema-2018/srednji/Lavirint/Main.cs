@@ -63,12 +63,20 @@ namespace Lavirint
 
         public static State pocetnoStanje = null;
         public static State krajnjeStanje = null;
-
+        // TODO 2.1: Prikupljanje svih portala
+        /*
+         * Kako bi znali na kojoj poziciji na tabli smo usli u portal,
+         * jer zelimo mogucnost u teleportovanje samo do svih ostalih portala.
+         * 
+         */
+        public static List<Point> portali = null;
 
         private void inicijalizacijaPretrage() {
             displayPanel1.resetLavirintPoruke();
             displayPanel1.resetLavirintPoseceno();
             allSearchStates = new List<State>();
+            // TODO 2.2: Incijalizcija liste portala
+            portali = new List<Point>();
             for (int i = 0; i < Main.brojVrsta; i++)
             {
                 for (int j = 0; j < Main.brojKolona; j++)
@@ -85,6 +93,9 @@ namespace Lavirint
                         krajnjeStanje = new State();
                         krajnjeStanje.markI = i;
                         krajnjeStanje.markJ = j;
+                    }else if (tt == 6)
+                    { // TODO 2.2: Dodati portal u listu svih portala.
+                        portali.Add(new Point(i, j));
                     }
                 }
             }
@@ -172,12 +183,6 @@ namespace Lavirint
             inicijalizacijaPretrage();
             ADepthSearch aDepth = new ADepthSearch();
             State sp = pocetnoStanje;
-            //TODO 6: Pozvati odgovarajuce metode ADepthSearch klase
-            State solution = aDepth.searchCombined(sp);
-            if (solution != null)
-            {
-                resenje = solution.path();
-            }
             displayPanel1.Refresh();
         }
 

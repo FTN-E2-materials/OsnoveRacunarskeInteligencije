@@ -48,7 +48,7 @@ namespace Lavirint
             visited[state.markI, state.markJ] = true;
         }
 
-        //TODO 3.1: Prosiriti metodu tako da se napravi novi Color objekat npr: Color.MediumBlue
+        //Prosiriti metodu tako da se napravi novi Color objekat npr: Color.MediumBlue
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -114,8 +114,14 @@ namespace Lavirint
                         case 3:
                             cc2 = Color.FromArgb(100, Color.Red);
                             break;
-                        case 4:
-                            cc2 = Color.FromArgb(100, Color.MediumBlue);
+                        case 4:// TODO 1.1: Dodavanje plave, narandzaste kutije i portala ( crno polje )
+                            cc2 = Color.FromArgb(150, Color.MediumBlue);
+                            break;
+                        case 5:
+                            cc2 = Color.FromArgb(150, Color.Orange);
+                            break;
+                        case 6:
+                            cc2 = Color.FromArgb(190, Color.Black);
                             break;
                     }
                     String ttS = lavirintPoruke[i][j];
@@ -156,7 +162,7 @@ namespace Lavirint
             }
         }
 
-        //TODO 3.2: Prosiriti metodu 
+        //Prosiriti metodu 
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
@@ -182,10 +188,16 @@ namespace Lavirint
                 case 2:
                     tt = 3;
                     break;
-                case 3:
+                case 3: // TODO 1.2: Dodavanje plave, narandzaste kutije i portala ( crno polje ) - onMouseDown
                     tt = 4;
                     break;
                 case 4:
+                    tt = 5;
+                    break;
+                case 5:
+                    tt = 6;
+                    break;
+                case 6: 
                     tt = 0;
                     break;
             }                    
