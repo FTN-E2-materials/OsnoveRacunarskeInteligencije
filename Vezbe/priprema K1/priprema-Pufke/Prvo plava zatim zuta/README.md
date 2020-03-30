@@ -1,0 +1,1 @@
+### Robot skuplja PRVO plavu pa zatim zutu kutiju, redosled skupljanja je bitan. Kretnja robota nije definisana.
