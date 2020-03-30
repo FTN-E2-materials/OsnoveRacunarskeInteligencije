@@ -30,7 +30,12 @@ namespace Lavirint
             //TODO 2: Prosiriti metodu tako da se ne moze prolaziti kroz sive kutije
             List<State> rez = new List<State>();
 
-          
+
+            if (lavirint[markI, markJ] == 4)
+            {
+
+                kutija = true;
+            }
 
             if ((markJ > 0) && (lavirint[markI, markJ - 1] != 1))
             {
@@ -57,12 +62,15 @@ namespace Lavirint
 
         public override int GetHashCode()
         {
-            return 100 * markI + markJ;
+            int code = 10 * markI + markJ;
+            return kutija ? code + 10000 : code;
+
+            //return 100 * markI + markJ;
         }
 
         public bool isKrajnjeStanje()
         {
-            return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ;
+            return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ && kutija;
         }
 
         public List<State> path()
