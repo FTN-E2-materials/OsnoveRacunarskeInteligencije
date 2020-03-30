@@ -117,6 +117,9 @@ namespace Lavirint
                         case 4:
                             cc2 = Color.FromArgb(100, Color.MediumBlue);
                             break;
+                        case 5:
+                            cc2 = Color.FromArgb(100, Color.Yellow);
+                            break;
                     }
                     String ttS = lavirintPoruke[i][j];
                     gr.FillRectangle(new SolidBrush(cc2), r);
@@ -186,6 +189,9 @@ namespace Lavirint
                     tt = 4;
                     break;
                 case 4:
+                    tt = 5;
+                    break;
+                case 5:
                     tt = 0;
                     break;
             }                    

@@ -17,6 +17,7 @@ namespace Lavirint
     {
         public static int brojVrsta = 10, brojKolona = 10;
         public static List<State> allSearchStates;
+
         public Main()
         {
             InitializeComponent();
@@ -64,8 +65,6 @@ namespace Lavirint
         public static State pocetnoStanje = null;
         public static State krajnjeStanje = null;
 
-       //Lista Point-a(x, y) kordinate polja u kojima se nalaze kutije kojetreba da pokupimo
-        public static List<Point> kutijeKojeTrebaPokupiti = new List<Point>();
 
         private void inicijalizacijaPretrage() {
             displayPanel1.resetLavirintPoruke();
@@ -87,10 +86,6 @@ namespace Lavirint
                         krajnjeStanje = new State();
                         krajnjeStanje.markI = i;
                         krajnjeStanje.markJ = j;
-                    }
-                    else if (tt == 4)
-                    {//Smestamo kutije u listu
-                        kutijeKojeTrebaPokupiti.Add(new Point(i, j));
                     }
                 }
             }
@@ -179,9 +174,13 @@ namespace Lavirint
             ADepthSearch aDepth = new ADepthSearch();
             State sp = pocetnoStanje;
             //TODO 6: Pozvati odgovarajuce metode ADepthSearch klase
+            State solution = aDepth.searchCombined(sp);
+            if (solution != null)
+            {
+                resenje = solution.path();
+            }
             displayPanel1.Refresh();
         }
-
 
         private void showSearchPath_Click(object sender, EventArgs e)
         {
