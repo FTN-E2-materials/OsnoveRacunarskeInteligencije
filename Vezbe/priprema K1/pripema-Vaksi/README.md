@@ -8,4 +8,4 @@
      - *teski* - kupljenje ***tri plave*** pa ***dve narandzaste*** (*po redosledu*), ali tako da se robo krece sto dalje od polja koja predstavljaju ***vatru***.
 
 ## Pomoc oko savladavanja zadataka
-  - fajl 'kretanje' sadrzi objasnjenje moguceg kretanja i pozicioniranja 
+  - fajl [kretanje](https://github.com/vlaksi/OsnoveRacunarskeInteligencije/tree/master/Vezbe/priprema%20K1/pripema-Vaksi/kretanje) sadrzi objasnjenje moguceg kretanja i pozicioniranja 
