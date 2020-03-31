@@ -6,6 +6,6 @@
      - *laki* - kupljenje ***plave*** kutije kretanjem robota kao sahovske figure ***konj***
      - *srednji* - kupljenje prvo **plave** pa **narandzaste** kutije (*po redosledu*) ali tako da na tabli budu portali, odnosno polja kroz koja robo moze da se teleportuje na bilo koji drugi portal u lavirintu
      - *teski* - kupljenje ***tri plave*** pa ***dve narandzaste*** (*po redosledu*), ali tako da se robo krece sto dalje od polja koja predstavljaju ***vatru***.
-
+  - *vatrogasac* - kupljenje ***plave*** pa potom obilazak **narandzastih** kutija, kretanje ***lovca*** pre nego sto pokupimo vodu(plavu) a nakon toga kao ***kralj***.
 ## Pomoc oko savladavanja zadataka
   - fajl [kretanje](https://github.com/vlaksi/OsnoveRacunarskeInteligencije/tree/master/Vezbe/priprema%20K1/pripema-Vaksi/kretanje) sadrzi objasnjenje moguceg kretanja i pozicioniranja 
