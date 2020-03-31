@@ -63,9 +63,14 @@ namespace Lavirint
 
         public static State pocetnoStanje = null;
         public static State krajnjeStanje = null;
-
+        // TODO 7: Implementirati rukovanje vatrama
+        // Tako sto cemo skupiti sve vatre i posle cemo kroz heuristiku "bezati" od njih.
+        public static List<Point> vatre = null;
 
         private void inicijalizacijaPretrage() {
+            // TODO 7.1: Inicijalizovati sve polozaje vatre za heuristiku
+            vatre = new List<Point>();
+
             displayPanel1.resetLavirintPoruke();
             displayPanel1.resetLavirintPoseceno();
             allSearchStates = new List<State>();
@@ -85,6 +90,9 @@ namespace Lavirint
                         krajnjeStanje = new State();
                         krajnjeStanje.markI = i;
                         krajnjeStanje.markJ = j;
+                    }else if(tt == 6)
+                    {  // TODO 7.2: Skupljati sve vatre
+                        vatre.Add(new Point(i, j));
                     }
                 }
             }
@@ -172,7 +180,7 @@ namespace Lavirint
             inicijalizacijaPretrage();
             ADepthSearch aDepth = new ADepthSearch();
             State sp = pocetnoStanje;
-            //TODO 6: Pozvati odgovarajuce metode ADepthSearch klase
+            // Pozvati odgovarajuce metode ADepthSearch klase
             State solution = aDepth.searchCombined(sp);
             if (solution != null)
             {

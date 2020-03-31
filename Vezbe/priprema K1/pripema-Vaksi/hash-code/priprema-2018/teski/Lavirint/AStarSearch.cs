@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Collections;
+using System.Drawing;
 
 namespace Lavirint
 {
     class AStarSearch
     {
-        //TODO 9: Implementirati A* pretragu
+        // Implementirati A* pretragu
         /*
          * Vodjena pretraga koja uzima najbolja resenje po heuristici.
          * Za pamcenje stanja opet koristimo Hastable
@@ -49,8 +50,22 @@ namespace Lavirint
          * od ciljnog stanja.
          */
         public double heuristicFunction(State s)
-        {
-            return Math.Sqrt(Math.Pow(s.markI - Main.krajnjeStanje.markI, 2) + Math.Pow(s.markJ - Main.krajnjeStanje.markJ, 2))+s.cost;
+        { 
+            double heuristika = Math.Sqrt(Math.Pow(s.markI - Main.krajnjeStanje.markI, 2) + Math.Pow(s.markJ - Main.krajnjeStanje.markJ, 2))+s.cost;
+            // TODO 8: Promeniti heuristiku kako bi izbegavao vatru.
+
+            foreach(Point pozicija in Main.vatre)
+            {
+                double udaljenostOdVatre = Math.Sqrt(Math.Pow(s.markI - pozicija.X, 2) + Math.Pow(s.markJ - pozicija.Y, 2));
+                // Ako smo bliu vatre, daj sto vecu heuristiku, jer getBest(stanje) bira sto manje heuristike
+                // samim tim bezimo od vatre(visoke heuristike)
+                if (Math.Sqrt(Math.Pow(s.markI - pozicija.X, 2) + Math.Pow(s.markJ - pozicija.Y, 2)) == 0)
+                    heuristika += 100000;
+                else
+                    heuristika += 10 / udaljenostOdVatre;
+            }
+
+            return heuristika;
         }
 
         public State getBest(List<State> stanja)

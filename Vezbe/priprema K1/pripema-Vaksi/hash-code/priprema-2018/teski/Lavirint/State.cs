@@ -11,12 +11,23 @@ namespace Lavirint
         public int markI, markJ; //vrsta i kolona
         public double cost;
         public int level;
-        // TODO 1: Omoguciti kretanje robota kao sahovska figura konj.
-        public bool kutijaPokupljena;
-        private static int [,] koraci = { { -1, -2 }, { -2, -1 }, { -2, 1 }, { -1, 2 }, { 1, 2 }, { 2, 1 }, { 2, -1 }, { 1, -2 } };
 
+        // Omoguciti kretanje u svim pravcima oko svoje ose.
+        private static int[,] koraci = { { 1, 0 }, { 1, 1 }, { 1, -1 }, { -1, 1 }, { 0, -1 }, { 0, 1 }, { -1, -1 }, { -1, 0 } };
+
+        // TODO 2: Omoguciti vodjenje evidencije o plavim i narandzastim kutijama.
+        private List<int> plaveKutije = new List<int>();        // cuvamo kutiju na hesh-u 10 * x_kord + y_kord
+        private List<int> narandzasteKutije = new List<int>();  // cuvamo kutiju na hesh-u 10 * x_kord + y_kord
+        public static int potrebnoPlavih = 3;
+        public static int potrebnoNarandzastih = 2;
+        /*
+         * U svakom elementu liste npr plaveKutije imamo hesh koji predstavlja to polje.
+         * Svako polje ima svoj hesh.
+         */
 
         
+
+
         public State sledeceStanje(int markI, int markJ)
         {
             State rez = new State();
@@ -25,12 +36,48 @@ namespace Lavirint
             rez.parent = this;
             rez.cost = this.cost + 1;
             rez.level = this.level + 1;
-            // TODO 8.1: Da li je kutija pokupljena
-            rez.kutijaPokupljena = this.kutijaPokupljena;
-            if(lavirint[markI,markJ] == 4)
-            {   // kutija je pokupljena ako smo obisli 4-rku odnosno plavo polje.
-                rez.kutijaPokupljena = true;
+
+            // TODO 4: Implementirati kupljenje kutija.
+
+
+            // TODO 100: probati ovo prebaciti da imamo neku static public koju cemo samo dekrementovati 
+            // dok se ne smanji na nulu i to je to.
+
+            // Cuvamo skupljene plave kutije u igri, za svako sledece stanje.
+            foreach (int hesh in this.plaveKutije)
+            {
+                rez.plaveKutije.Add(hesh);
+
             }
+
+            
+            // Provera da li je trenutno polje nova plava kutija
+            if( lavirint[markI, markJ] == 4 && !rez.plaveKutije.Contains(10*markI +markJ))
+            {  // u pitanju je polj 4(plava) i hesh te tog polja nije vec u plavimKutijama.
+               // da ne bi pokupili istu kutiju vise puta !
+                rez.plaveKutije.Add(10 * markI + markJ);
+
+            }
+
+            // TODO 4.1: Omoguciti redosled kupljenja [ plave pre narandzastih ]
+            // Ako su plave skupljene, tek onda omoguciti skupljanje narandzastih.
+            if(rez.plaveKutije.Count >= potrebnoPlavih)
+            {
+                // Cuvamo hesh prethodno skupljenih narandzastih kutija
+                // i tako za svako sledece stanje.
+                foreach(int hesh in this.narandzasteKutije)
+                {
+                    rez.narandzasteKutije.Add(hesh);
+                }
+
+                // Proveravamo da li je trenutno polje nova narandzasta kutija.
+                if(lavirint[markI,markJ] == 5 && !rez.narandzasteKutije.Contains(10 * markI + markJ))
+                {  // ako je u pitanju naradzasta i nije vec pokupljena, mozemo je dodati
+                    rez.narandzasteKutije.Add(10 * markI + markJ);
+                }
+
+            }
+
             return rez;
         }
 
@@ -60,8 +107,7 @@ namespace Lavirint
 
         public List<State> mogucaSledecaStanja()
         {
-
-            //TODO 2: Implementirati metodu tako da odredjuje moguca sledeca stanja
+            // TODO 3: Implementirati metodu tako da odredjuje moguca sledeca stanja
             List<State> validnaSledecaStanja = new List<State>();
 
             for(int i = 0; i < koraci.GetLength(0); i++)
@@ -76,23 +122,38 @@ namespace Lavirint
 
             }
 
-
-
-            
-
             return validnaSledecaStanja;
         }
 
         public override int GetHashCode()
         {
-            // TODO 8.2: Dozvola vracanja po istom polju samo ako imamo kutiju(pokupili smo je)
+            // TODO 5: Omoguciti prolazak kroz isto polje ako smo sad pokupili kutiju.
+
+            // Dozvola vracanja po istom polju samo ako imamo kutiju(pokupili smo je)
             // hash - predstvlja jedinstvenu vrednost jednog polja u matrici
-            int hash = 100 * markI + markJ;
-            if (kutijaPokupljena)
-            {   // ako je kutija pokupljena znaci da imamo novi hash za to polje
-                // defakto, to polje sada dobija novi hash i preko njega se moze preci 
-                hash = hash + 1000;
+            int hash = 10 * markI + markJ;
+            int koeficijentHesha = 10;
+            /*
+             * Sada imamo ukupno 5 kutija. Sto znaci, da
+             * moramo omoguciti da kroz neko polje mozemo proci
+             * 5 puta. To cemo omoguciti tako sto, za svaku kutiju
+             * koju je pokupio, mi promenimo hash za to polje.
+             * Odnosno svakom novom kutijom on dobija mogucnost 
+             * prolaska kroz to polje.
+             * 
+             */
+            // Oznacavamo kutije koje su koriscene.
+            foreach (int polje in this.plaveKutije)
+            {
+                hash += polje * koeficijentHesha;
+                koeficijentHesha *= 10;
             }
+            foreach(int polje in this.narandzasteKutije)
+            {
+                hash += polje * koeficijentHesha;
+                koeficijentHesha *= 10;
+            }
+
 
             return hash;
 
@@ -100,7 +161,13 @@ namespace Lavirint
 
         public bool isKrajnjeStanje()
         {
-            return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ && kutijaPokupljena;
+            // TODO 6: Prosiriti proveru za krajnje stanje.
+            if (plaveKutije.Count < potrebnoPlavih)
+                return false;
+            if (narandzasteKutije.Count < potrebnoNarandzastih)
+                return false;
+           
+            return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ;
         }
 
         public List<State> path()

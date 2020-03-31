@@ -48,7 +48,7 @@ namespace Lavirint
             visited[state.markI, state.markJ] = true;
         }
 
-        //TODO 3.1: Prosiriti metodu tako da se napravi novi Color objekat npr: Color.MediumBlue
+        // Prosiriti metodu tako da se napravi novi Color objekat npr: Color.MediumBlue
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -114,9 +114,16 @@ namespace Lavirint
                         case 3:
                             cc2 = Color.FromArgb(100, Color.Red);
                             break;
-                        case 4:// TODO 3.1.1: Dodati novu boju za kutiju koja mora da se pokupi
-                            cc2 = Color.FromArgb(200, Color.MediumBlue);
+                        case 4://TODO 1.1: Prosiriti mogucnost dodavanja plavog, narandzastog, ljubicastog(vatra) polja
+                            cc2 = Color.FromArgb(100, Color.MediumBlue);    // plava kutija
                             break;
+                        case 5:
+                            cc2 = Color.FromArgb(250, Color.OrangeRed);     // narandzasta kutija
+                            break;
+                        case 6:
+                            cc2 = Color.FromArgb(100, Color.Orange);        // vatra
+                            break;
+                        
                     }
                     String ttS = lavirintPoruke[i][j];
                     gr.FillRectangle(new SolidBrush(cc2), r);
@@ -156,7 +163,7 @@ namespace Lavirint
             }
         }
 
-        //TODO 3.2: Prosiriti metodu 
+        // Prosiriti metodu 
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
@@ -182,10 +189,16 @@ namespace Lavirint
                 case 2:
                     tt = 3;
                     break;
-                case 3: // TODO 3.2: prosirenje za kutiju
-                    tt = 4;
+                case 3: //TODO 1.2: Prosiriti mogucnost dodavanja plavog, narandzastog, ljubicastog(vatra) polja - OnMouseDown
+                    tt = 4;             // plava
                     break;
-                case 4: 
+                case 4:
+                    tt = 5;             // narandzasta
+                    break;
+                case 5:
+                    tt = 6;             // vatra
+                    break;
+                case 6: 
                     tt = 0;
                     break;
             }                    
