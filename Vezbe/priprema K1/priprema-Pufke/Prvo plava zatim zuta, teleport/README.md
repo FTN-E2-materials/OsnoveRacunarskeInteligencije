@@ -1,1 +1,1 @@
-### srednji (tezina) - kupljenje prvo plave pa zute kutije (po redosledu) ali tako da na tabli budu portali, odnosno polja kroz koja robot moze da se teleportuje na bilo koji drugi portal u lavirintu (teleport je crne boje)
+### kupljenje prvo plave pa zute kutije (po redosledu) ali tako da na tabli budu portali, odnosno polja kroz koja robot moze da se teleportuje na NAJBLIZI TELEPORT CILJU nakon skupljanja plave i zute kutije (teleport je crne boje)
