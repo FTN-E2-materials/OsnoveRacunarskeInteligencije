@@ -1,0 +1,1 @@
+### doći od starta (zeleno polje) do cilja (crveno polje),pre toga potrebno je prvo skupiti plavu, zatim zutu kutiju, ali tako da na tabli budu portali, odnosno polja kroz koja robot može da se teleportuje na bilo koji drugi portal u lavirintu
