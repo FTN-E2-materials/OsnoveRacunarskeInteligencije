@@ -1,4 +1,4 @@
-<h2> Opšti način za definisanje načina kretanja </h2>
+﻿<h2> Opšti način za definisanje načina kretanja </h2>
 
 <h4> Figure: </h4>
 <ul>
@@ -8,6 +8,25 @@
 <li> Kraljica: int [,] kraljica = { { 1, 1 }, { -1, 1 }, { 1, -1 }, { -1, -1 }, { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } }; </li>
 <li> Konj: int [,] konj = { { -1, -2 }, { -2, -1 }, { -2, 1 }, { -1, 2 }, { 1, 2 }, { 2, 1 }, { 2, -1 }, { 1, -2 } }; </li>
 </ul>
+
+#### Kordinatni sistem
+<pre>
+
+             ----------------------> J kordinata
+             |
+             |
+             |
+             |
+             |
+             I kordinata
+              
+             * To znaci da bi isao desno, povesavas J kordinatiu
+             * Da bi isao levo, smanjujes J kordinatu
+             * Da bi isao gore, SMANJUJES I kordinatu
+             * Da bi isao dole, POVECAVAS I kordinatu
+             
+             
+</pre>
 
 <h4> Kretanje: </h4>
 <ul>
