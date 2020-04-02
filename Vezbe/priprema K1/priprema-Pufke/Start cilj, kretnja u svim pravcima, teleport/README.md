@@ -1,0 +1,1 @@
+###	doći od starta (zeleno polje) do cilja (crveno polje), ali tako da na tabli budu portali (crno polje), odnosno polja kroz koja robot može da se teleportuje na bilo koji drugi portal u lavirintu, robot moze da se krece u svim pravcima (gore,dole,levo,desno,dijagonalno)
