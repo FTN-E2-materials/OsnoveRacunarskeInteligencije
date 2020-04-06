@@ -1,0 +1,1 @@
+### doći od starta (zeleno polje) do cilja (crveno polje), uz prvobitno kupljenje tri plave i dve narandžaste kutije (bez određenog redosleda)
