@@ -31,4 +31,4 @@
 <img width="400" height="300" src="https://user-images.githubusercontent.com/49925421/78716950-18c99580-7920-11ea-9575-0c8c6cf36368.png">
 <img width="800" height="300" src="https://user-images.githubusercontent.com/49925421/78717555-1287e900-7921-11ea-9b7f-6ec82b126eba.png">
 
-<img width="1000" height="350" src="https://user-images.githubusercontent.com/49925421/78717899-99d55c80-7921-11ea-9795-e574e18b09b6.png">
+<img width="500" height="350" src="https://user-images.githubusercontent.com/49925421/78719991-29c8d580-7925-11ea-9916-a119b0b9aef5.png">
