@@ -36,11 +36,20 @@ namespace Masinsko_Ucenje
             List<double> y = new List<double>();
 
             // TODO 1: Ucitati i isparsirati skup podataka iz lines u x i y
-            // TODO 4.1: Izvršiti linearnu regresiju na primeru predviđanja stope smrtnosti od raka kože na osnovu geografske širine američkih država.
+            foreach(string red in lines)
+            {
+                string[] elementi = red.Split(',');         // nas delimitar u csv fajlu je bio ,
+                x.Add(double.Parse(elementi[1]));           // kolonu Lat uzimamo kao x-vrednost        
+                y.Add(double.Parse(elementi[2]));           // kolonu Mort uzimamo kao y-vrednost
+            }
 
+            // TODO 4.1: Izvršiti linearnu regresiju na primeru predviđanja stope smrtnosti od raka kože na osnovu geografske širine američkih država.
+            regression.fit(x.ToArray(), y.ToArray());
 
             // TODO 4.2: Izvršiti predikciju stope mortaliteta za vrednost geografske širine od tačno 37
-
+            double rezultatRegresije = regression.predict(37.0);
+            Console.WriteLine("Prediktovana vrednost za geografsku sirinu od 37 je " + rezultatRegresije + "\n\n");
+            
             // draw regresiion line on a chart
             drawRegressionResults(x, y);
         }
@@ -55,6 +64,14 @@ namespace Masinsko_Ucenje
             double toleracijaNaGresku = Convert.ToDouble(tbErr.Text);
 
             // TODO 8: Klasterizovati američke države na osnovu geografkse dužine i širine
+            foreach(string red in lines)
+            {
+                string[] elementi = red.Split(',');         // csv fajl ima delimiter zarez ,
+                Point kmeansElement = new Point(double.Parse(elementi[1]), double.Parse(elementi[2]));
+                kmeansElements.Add(kmeansElement);
+            }
+            this.kmeans.elementi = kmeansElements;
+            this.kmeans.podeliUGrupe(k, toleracijaNaGresku);
 
             // draw clustering results on a chart
             drawClusteringResults();

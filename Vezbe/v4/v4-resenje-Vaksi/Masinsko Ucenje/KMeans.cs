@@ -20,6 +20,10 @@ namespace Masinsko_Ucenje
             for (int i = 0; i < brojGrupa; i++)
             {
                 // TODO 5: na slucajan nacin inicijalizovati centre grupa
+                int slucajanIndex = rnd.Next(elementi.Count);
+                Cluster grupa = new Cluster();
+                grupa.centar = elementi[slucajanIndex];
+                grupe.Add(grupa);
             }
             //------------- iterativno racunanje centara ---
             for (int it = 0; it < 1000; it++)
@@ -61,7 +65,7 @@ namespace Masinsko_Ucenje
 
         public double rastojanje(Point c)
         {   // TODO 6: implementirati funkciju rastojanja
-            return 0;
+            return Math.Abs(c.x - centar.x) + Math.Abs(c.y - centar.y);
         }
 
         public double pomeriCentar()
@@ -69,6 +73,22 @@ namespace Masinsko_Ucenje
             double sX = 0;
             double sY = 0;
             double retVal = 0;
+
+            foreach(Point c in elementi)
+            {
+                sX += c.x;
+                sY += c.y;
+            }
+
+            int brojElemenata = elementi.Count();
+            if (brojElemenata != 0)
+            {
+                Point noviCentar = new Point((int)(sX/brojElemenata),(int)(sY/brojElemenata));
+                retVal = rastojanje(noviCentar);
+                centar = noviCentar;
+            }
+
+
 
             return retVal;
         }
