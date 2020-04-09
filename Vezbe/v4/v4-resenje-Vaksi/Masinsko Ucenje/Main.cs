@@ -67,7 +67,7 @@ namespace Masinsko_Ucenje
             foreach(string red in lines)
             {
                 string[] elementi = red.Split(',');         // csv fajl ima delimiter zarez ,
-                Point kmeansElement = new Point(double.Parse(elementi[1]), double.Parse(elementi[2]));
+                Point kmeansElement = new Point(double.Parse(elementi[1]), double.Parse(elementi[4]));
                 kmeansElements.Add(kmeansElement);
             }
             this.kmeans.elementi = kmeansElements;
