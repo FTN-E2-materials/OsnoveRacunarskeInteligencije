@@ -20,16 +20,23 @@ namespace Masinsko_Ucenje
             for (int i = 0; i < brojGrupa; i++)
             {
                 // TODO 5: na slucajan nacin inicijalizovati centre grupa
+                int ii = rnd.Next(elementi.Count);
+                Cluster grupa = new Cluster(); //Pravimo novu grupu, odredjena je sa centrom i sa elementima koji joj pripadaju
+                grupa.centar = elementi[ii];
+                grupe.Add(grupa);
             }
             //------------- iterativno racunanje centara ---
+            //Odnosno ovde cemo da racunamo koliko su nam elementi blizu centara, i da dodeljujemo elemente koji su najblize
+            //tim centrima, i da pomeramo te centre
             for (int it = 0; it < 1000; it++)
             {
-                foreach (Cluster grupa in grupe)
+                foreach (Cluster grupa in grupe)//Ispraznimo sve elemente
                     grupa.elementi = new List<Point>();
 
                 foreach (Point cc in elementi)
                 {
                     int najblizaGrupa = 0;
+                    //Ova ovde logika trazi minimalno rastojanje u odnosu na sve centre
                     for (int i = 0; i < brojGrupa; i++)
                     {
                         if (grupe[najblizaGrupa].rastojanje(cc) >
@@ -38,15 +45,16 @@ namespace Masinsko_Ucenje
                             najblizaGrupa = i;
                         }
                     }
-                    grupe[najblizaGrupa].elementi.Add(cc);
+                    grupe[najblizaGrupa].elementi.Add(cc);//Smestimo sve grupe 
                 }
                 double err = 0;
+                //Racunamo koliko su nam se centri pomerili
                 for (int i = 0; i < brojGrupa; i++)
-                {
-                    err += grupe[i].pomeriCentar();
+                {//Funkcija za toleranciju, tj koliko ih pustamo da se pomeraju
+                    err += grupe[i].pomeriCentar(); //Ako se pomeraju puno idemo na novu iteraciju
                 }
                 if (err < errT)
-                    break;
+                    break;//Ako se pomeraju manje od dozvoljenog to zanci da zavrsavamo algoritam
 
                 Main.clusteringHistory.Add(Main.DeepClone(this.grupe));
             }
@@ -61,7 +69,10 @@ namespace Masinsko_Ucenje
 
         public double rastojanje(Point c)
         {   // TODO 6: implementirati funkciju rastojanja
-            return 0;
+            //Menhetn rastojanje, u sustini ova funkcija nam gore daje informaciju koliko su slicni element c i nas centar
+            //Gore kad odredjujemo nase grupe trazimo da je arasdtojanje sto manje, i onda dodelimo toj grupi
+            return Math.Abs(c.x - centar.x) + Math.Abs(c.y - centar.y);
+
         }
 
         public double pomeriCentar()
