@@ -26,16 +26,23 @@ namespace Masinsko_Ucenje
             InitializeComponent();
 
             lines = File.ReadAllLines(@"./../../data/skincancer.csv");
-            lines = lines.Skip(1).ToArray(); // skip header row (State, Lat, Mort, Ocean, Long)
+            lines = lines.Skip(1).ToArray(); // skip header row (State, Lat, Mort, Ocean, Long) preskacemo heder, trebaju nam samo podaci
         }
 
         private void btnLinearRegression_Click(object sender, EventArgs e)
         {
-            regression = new LinearRegression();
-            List<double> x = new List<double>();
+            regression = new LinearRegression(); //OVO DOLE MORA DA SE ZNA NA KOLOKVIJUMU (Linearna regresija kao najlaksi zadatak) 
+            List<double> x = new List<double>(); //X je nezavisna promenljiva, y je zavisna promenlji, od x zavisi y
             List<double> y = new List<double>();
 
             // TODO 1: Ucitati i isparsirati skup podataka iz lines u x i y
+            foreach (string line in lines)
+            {
+                string[] elements = line.Split(',');// Splitujemo csv fajl po zarezima
+                x.Add(double.Parse(elements[1])); //uzimamo latitude atribut kao x vrednost
+                y.Add(double.Parse(elements[2])); //uzimamo mortaliti atribut kao y vrednost
+            }
+
             // TODO 4.1: Izvršiti linearnu regresiju na primeru predviđanja stope smrtnosti od raka kože na osnovu geografske širine američkih država.
 
 
