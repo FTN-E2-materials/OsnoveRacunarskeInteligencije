@@ -7,3 +7,11 @@ C:\Users\Vaxi\Desktop\6-semestar\OsnoveRacunarskeInteligencije\git\vezbe\v4\v4-r
 C:\Users\Vaxi\Desktop\6-semestar\OsnoveRacunarskeInteligencije\git\vezbe\v4\v4-reseno\Masinsko Ucenje\obj\x86\Debug\Masinsko Ucenje.csproj.CoreCompileInputs.cache
 C:\Users\Vaxi\Desktop\6-semestar\OsnoveRacunarskeInteligencije\git\vezbe\v4\v4-reseno\Masinsko Ucenje\obj\x86\Debug\Masinsko Ucenje.exe
 C:\Users\Vaxi\Desktop\6-semestar\OsnoveRacunarskeInteligencije\git\vezbe\v4\v4-reseno\Masinsko Ucenje\obj\x86\Debug\Masinsko Ucenje.pdb
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\v4\v4-reseno\Masinsko Ucenje\bin\Debug\Masinsko Ucenje.exe
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\v4\v4-reseno\Masinsko Ucenje\bin\Debug\Masinsko Ucenje.pdb
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\v4\v4-reseno\Masinsko Ucenje\obj\x86\Debug\Masinsko Ucenje.csprojAssemblyReference.cache
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\v4\v4-reseno\Masinsko Ucenje\obj\x86\Debug\Masinsko_Ucenje.Main.resources
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\v4\v4-reseno\Masinsko Ucenje\obj\x86\Debug\Masinsko_Ucenje.Properties.Resources.resources
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\v4\v4-reseno\Masinsko Ucenje\obj\x86\Debug\Masinsko Ucenje.csproj.GenerateResource.cache
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\v4\v4-reseno\Masinsko Ucenje\obj\x86\Debug\Masinsko Ucenje.exe
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\v4\v4-reseno\Masinsko Ucenje\obj\x86\Debug\Masinsko Ucenje.pdb

@@ -24,7 +24,7 @@ namespace Masinsko_Ucenje
                 suma_proizvoda_x_y += x[i] * y[i];
                 suma_x += x[i];
                 suma_y += y[i];
-                suma_x_na_kvadrat += x[i] + x[i];
+                suma_x_na_kvadrat += x[i] * x[i];
             }
             //k je ustvari a u onoj formuli, n je b , x.Lenght je n u fomruli
             this.k = (x.Length * suma_proizvoda_x_y - suma_x * suma_y) / (x.Length * suma_x_na_kvadrat - suma_x * suma_x);

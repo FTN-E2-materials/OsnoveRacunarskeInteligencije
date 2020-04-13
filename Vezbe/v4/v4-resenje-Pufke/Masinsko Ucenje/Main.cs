@@ -44,9 +44,11 @@ namespace Masinsko_Ucenje
             }
 
             // TODO 4.1: Izvršiti linearnu regresiju na primeru predviđanja stope smrtnosti od raka kože na osnovu geografske širine američkih država.
-
+            regression.fit(x.ToArray(), y.ToArray());
 
             // TODO 4.2: Izvršiti predikciju stope mortaliteta za vrednost geografske širine od tačno 37
+            double regressionResult = regression.predict(37.0);
+            Console.WriteLine("Prediktovana vrednost za geografsku sirinu od 37 je " + regressionResult + "\n");
 
             // draw regresiion line on a chart
             drawRegressionResults(x, y);
