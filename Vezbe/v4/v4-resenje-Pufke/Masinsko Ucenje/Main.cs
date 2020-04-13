@@ -39,8 +39,8 @@ namespace Masinsko_Ucenje
             foreach (string line in lines)
             {
                 string[] elements = line.Split(',');// Splitujemo csv fajl po zarezima
-                x.Add(double.Parse(elements[1])); //uzimamo latitude atribut kao x vrednost
-                y.Add(double.Parse(elements[2])); //uzimamo mortaliti atribut kao y vrednost
+                x.Add(double.Parse(elements[1])); //uzimamo latitude atribut kao x vrednost (geografska pozicija jug-sever)
+                y.Add(double.Parse(elements[2])); //uzimamo mortaliti atribut kao y vrednost (stopa smrtnosti)
             }
 
             // TODO 4.1: Izvršiti linearnu regresiju na primeru predviđanja stope smrtnosti od raka kože na osnovu geografske širine američkih država.
