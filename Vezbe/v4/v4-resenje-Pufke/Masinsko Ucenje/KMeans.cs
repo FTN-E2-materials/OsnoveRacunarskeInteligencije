@@ -80,7 +80,21 @@ namespace Masinsko_Ucenje
             double sX = 0;
             double sY = 0;
             double retVal = 0;
-
+            //Treba da izracunamo srednju vrednost za x i srednju vrednost za y i da vratimo kolika je razliak izmedju starog i novog centra
+            foreach( Point c in elementi)
+            {
+                sX += c.x;
+                sY += c.y;
+            }
+            int n = elementi.Count();
+            if(n != 0)
+            {
+                //novi centar = srednja vrednost svih tacaka grupe
+                Point nCentar = new Point((sX / n), (sY / n));
+                //Rastojanje starog i novog centra
+                retVal = rastojanje(nCentar);
+                centar = nCentar; // pregazimo statri centar novim centrom
+            }
             return retVal;
         }
     }

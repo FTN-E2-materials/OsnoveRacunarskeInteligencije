@@ -60,11 +60,18 @@ namespace Masinsko_Ucenje
             clusteringHistory = new List<List<Cluster>>();
 
             List<Point> kmeansElements = new List<Point>();
-            int k = Convert.ToInt32(tbK.Value);
-            double toleracijaNaGresku = Convert.ToDouble(tbErr.Text);
+            int k = Convert.ToInt32(tbK.Value);//Koliko nam je k, tj koliko imamo grupaa
+            double toleracijaNaGresku = Convert.ToDouble(tbErr.Text);//Kolika nam je tolerancija na gresku
 
             // TODO 8: Klasterizovati američke države na osnovu geografkse dužine i širine
-
+            foreach(string line in lines)
+            {
+                string[] elements = line.Split(',');
+                Point kmeansElement = new Point(double.Parse(elements[1]), double.Parse(elements[4]));//prvi latitude, cetvrti lonfitude 
+                kmeansElements.Add(kmeansElement);//dodamo sve te lemente
+            }
+            this.kmeans.elementi = kmeansElements;
+            this.kmeans.podeliUGrupe(k, toleracijaNaGresku);
             // draw clustering results on a chart
             drawClusteringResults();
         }
