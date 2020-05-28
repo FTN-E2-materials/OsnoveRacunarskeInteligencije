@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace Lavirint
@@ -13,7 +14,8 @@ namespace Lavirint
         public int level;
 
         // TODO: Ovde odredjujem/dodajem atribute za moguce korake, atribute da li su kutije pokupljene i slicno.
-        //public bool kutijaPokupljena;
+        public bool pokupljenaPlavaKutija;
+        public bool pokupljenjaNarandzastaKutija;
         private static int [,] koraci = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
 
         // TODO: Ovde govorimo sta sledece stanje ima i sta nosi sa sobom
@@ -27,6 +29,30 @@ namespace Lavirint
             rez.level = this.level + 1;
             // TODO: Ovde recimo mozemo dodati da li je kutija pokupljena
             // Pa ako jeste onda atribut za indikaciju pokupljenosti kutije za ovo stanje stavimo na true
+            rez.pokupljenaPlavaKutija = this.pokupljenaPlavaKutija;
+            rez.pokupljenjaNarandzastaKutija = this.pokupljenjaNarandzastaKutija;
+            if(lavirint[rez.markI,rez.markJ] == 4)
+            {
+                rez.pokupljenaPlavaKutija = true;
+            }
+            if (lavirint[rez.markI, rez.markJ] == 5 && rez.pokupljenaPlavaKutija)
+            {
+                rez.pokupljenjaNarandzastaKutija = true;
+            }
+
+            if(lavirint[rez.markI, rez.markJ] == 6)
+            {
+                foreach (Point pozicija in Main.portali)
+                {
+                    if(rez.markI != pozicija.X)
+                    {
+                        rez.markI = pozicija.X;
+                        rez.markJ = pozicija.Y;
+                        break;
+                    }
+
+                }
+            }
 
             return rez;
         }
@@ -80,6 +106,14 @@ namespace Lavirint
         public override int GetHashCode()
         {
             int hash = 10 * markI + markJ;
+            if (pokupljenaPlavaKutija)
+            {
+                hash = 100 + 10 * markI + markJ;
+            }
+            if (pokupljenjaNarandzastaKutija)
+            {
+                hash = 200 + 10 * markI + markJ;
+            }
             return hash;
         }
 
@@ -87,7 +121,7 @@ namespace Lavirint
         public bool isKrajnjeStanje()
         {
             //return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ && kutijaPokupljena;
-            return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ;
+            return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ && pokupljenaPlavaKutija && pokupljenjaNarandzastaKutija;
         }
 
         public List<State> path()

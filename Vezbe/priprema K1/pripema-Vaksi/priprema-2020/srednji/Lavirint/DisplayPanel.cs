@@ -117,6 +117,12 @@ namespace Lavirint
                         case 4:// TODO: Ispod ovoga dodajemo novu boju za kutije 
                             cc2 = Color.FromArgb(200, Color.MediumBlue);
                             break;
+                        case 5:
+                            cc2 = Color.FromArgb(200, Color.Orange);
+                            break;
+                        case 6: // portal
+                            cc2 = Color.FromArgb(200, Color.MediumPurple);
+                            break;
                     }
                     String ttS = lavirintPoruke[i][j];
                     gr.FillRectangle(new SolidBrush(cc2), r);
@@ -186,6 +192,12 @@ namespace Lavirint
                     tt = 4;
                     break;
                 case 4: 
+                    tt = 5;
+                    break;
+                case 5: // portal
+                    tt = 6;
+                    break;
+                case 6:
                     tt = 0;
                     break;
             }                    

@@ -63,6 +63,8 @@ namespace Lavirint
 
         public static State pocetnoStanje = null;
         public static State krajnjeStanje = null;
+        // TODO: Ovde dodajem ako hocu neku recimo listu portala, vatri da cuvam
+        // odnosno unapred znam gde su pa ih onda ovde i inicijalizujem
 
 
         private void inicijalizacijaPretrage() {
