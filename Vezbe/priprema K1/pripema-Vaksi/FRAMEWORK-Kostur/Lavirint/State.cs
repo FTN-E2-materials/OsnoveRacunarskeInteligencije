@@ -17,6 +17,7 @@ namespace Lavirint
         private static int [,] koraci = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
 
         // TODO: Ovde govorimo sta sledece stanje ima i sta nosi sa sobom
+        // voditi da racuna da ono preuzme sve od prethodnog sto treba !
         public State sledeceStanje(int markI, int markJ)
         {
             State rez = new State();

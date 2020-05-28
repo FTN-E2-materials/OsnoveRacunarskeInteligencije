@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Lavirint
 {
@@ -13,9 +11,9 @@ namespace Lavirint
         public int level;
 
         // TODO: Ovde odredjujem/dodajem atribute za moguce korake, atribute da li su kutije pokupljene i slicno.
-        //public bool kutijaPokupljena;
-        private static int [,] koraci = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
-
+        public bool kutijaPokupljena;
+        private static int[,] koraci = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
+        
         // TODO: Ovde govorimo sta sledece stanje ima i sta nosi sa sobom
         public State sledeceStanje(int markI, int markJ)
         {
@@ -27,18 +25,22 @@ namespace Lavirint
             rez.level = this.level + 1;
             // TODO: Ovde recimo mozemo dodati da li je kutija pokupljena
             // Pa ako jeste onda atribut za indikaciju pokupljenosti kutije za ovo stanje stavimo na true
-
+            rez.kutijaPokupljena = this.kutijaPokupljena;
+            if ( lavirint[rez.markI,rez.markJ] == 4)
+            {
+                rez.kutijaPokupljena = true;
+            }
             return rez;
         }
 
         // TODO: Ovde odredjujemo validne kordinate
         private bool validneKordinate(int kordI, int kordJ)
         {
-            if(kordI<0 || kordI >= Main.brojVrsta)
+            if (kordI < 0 || kordI >= Main.brojVrsta)
             {
                 return false;
             }
-            if(kordJ<0 || kordJ >= Main.brojKolona)
+            if (kordJ < 0 || kordJ >= Main.brojKolona)
             {
                 return false;
             }
@@ -48,21 +50,21 @@ namespace Lavirint
              * kutiju.
              * 
              */
-            if(lavirint[kordI,kordJ] == 1)
+            if (lavirint[kordI, kordJ] == 1)
             {
                 return false;
             }
 
             return true;
         }
-        
+
         // TODO: Ovde odredjujemo moguca sledeca kretanja
         // Ako se nista posebno ne trazi, ovo je dovoljno.
         public List<State> mogucaSledecaStanja()
         {
             List<State> validnaSledecaStanja = new List<State>();
 
-            for(int i = 0; i < koraci.GetLength(0); i++)
+            for (int i = 0; i < koraci.GetLength(0); i++)
             {
                 int novoI = markI + koraci[i, 0];
                 int novoJ = markJ + koraci[i, 1];
@@ -79,7 +81,19 @@ namespace Lavirint
         // TODO: Ovde odredjujemo koji je hash code
         public override int GetHashCode()
         {
+            /*
+             *  Tabla je 10*10, da bi sigurno hash bio jedinstven
+             *  na 'nizoj frekvenciji' dajem da se ide kad nije pokupljena kutija
+             *  a na 'visoj frekvenciji' kada je pokupljenja.
+             *  
+             *  niza frekvencija: [0-99] joj je opseg hesh-a 
+             *  visa frekvencija: [100-199] opseg hesh-a
+             */
             int hash = 10 * markI + markJ;
+            if (kutijaPokupljena)
+            {
+                hash = 100 + 10 * markI + markJ;
+            }
             return hash;
         }
 
@@ -87,7 +101,7 @@ namespace Lavirint
         public bool isKrajnjeStanje()
         {
             //return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ && kutijaPokupljena;
-            return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ;
+            return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ && kutijaPokupljena;
         }
 
         public List<State> path()
@@ -102,6 +116,6 @@ namespace Lavirint
             return putanja;
         }
 
-        
+
     }
 }
