@@ -14,7 +14,7 @@ namespace Lavirint
 
         // TODO: Ovde odredjujem/dodajem atribute za moguce korake, atribute da li su kutije pokupljene i slicno.
         //public bool kutijaPokupljena;
-        private static int [,] koraci = { { -1, -2 }, { -2, -1 }, { -2, 1 }, { -1, 2 }, { 1, 2 }, { 2, 1 }, { 2, -1 }, { 1, -2 } };
+        private static int [,] koraci = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
 
         // TODO: Ovde govorimo sta sledece stanje ima i sta nosi sa sobom
         public State sledeceStanje(int markI, int markJ)
@@ -79,7 +79,7 @@ namespace Lavirint
         // TODO: Ovde odredjujemo koji je hash code
         public override int GetHashCode()
         {
-            int hash = 99;
+            int hash = 10 * markI + markJ;
             return hash;
         }
 
