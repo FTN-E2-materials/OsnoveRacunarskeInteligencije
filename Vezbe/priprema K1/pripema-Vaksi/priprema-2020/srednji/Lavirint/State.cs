@@ -40,20 +40,6 @@ namespace Lavirint
                 rez.pokupljenjaNarandzastaKutija = true;
             }
 
-            if(lavirint[rez.markI, rez.markJ] == 6)
-            {
-                foreach (Point pozicija in Main.portali)
-                {
-                    if(rez.markI != pozicija.X)
-                    {
-                        rez.markI = pozicija.X;
-                        rez.markJ = pozicija.Y;
-                        break;
-                    }
-
-                }
-            }
-
             return rez;
         }
 
@@ -96,10 +82,33 @@ namespace Lavirint
                 if (validneKordinate(novoI, novoJ))
                 {
                     validnaSledecaStanja.Add(sledeceStanje(novoI, novoJ));
+
+                    if (lavirint[markI, markJ] == 6)
+                    {   // u pitanju je teleport pa su ostali teleporti validna sledeca stanja
+                        validnaSledecaStanja.AddRange(dobaviValidnaSledecaStanjaZaTeleport());
+                    }
                 }
+
 
             }
             return validnaSledecaStanja;
+        }
+
+        private List<State> dobaviValidnaSledecaStanjaZaTeleport()
+        {
+            List<State> validnaSledecaStanjaZaTeleport = new List<State>();
+            foreach (Point portal in Main.portali)
+            {
+                if (markI == portal.X && markJ == portal.Y)
+                {
+                    continue;
+                }
+
+                validnaSledecaStanjaZaTeleport.Add(sledeceStanje(portal.X, portal.Y));
+
+            }
+
+            return validnaSledecaStanjaZaTeleport;   
         }
 
         // TODO: Ovde odredjujemo koji je hash code
