@@ -82,33 +82,11 @@ namespace Lavirint
                 if (validneKordinate(novoI, novoJ))
                 {
                     validnaSledecaStanja.Add(sledeceStanje(novoI, novoJ));
-
-                    if (lavirint[markI, markJ] == 6)
-                    {   // u pitanju je teleport pa su ostali teleporti validna sledeca stanja
-                        validnaSledecaStanja.AddRange(dobaviValidnaSledecaStanjaZaTeleport());
-                    }
+                    dodajValidnaSledecaStanjaZaTeleport(validnaSledecaStanja);
                 }
-
 
             }
             return validnaSledecaStanja;
-        }
-
-        private List<State> dobaviValidnaSledecaStanjaZaTeleport()
-        {
-            List<State> validnaSledecaStanjaZaTeleport = new List<State>();
-            foreach (Point portal in Main.portali)
-            {
-                if (markI == portal.X && markJ == portal.Y)
-                {
-                    continue;
-                }
-
-                validnaSledecaStanjaZaTeleport.Add(sledeceStanje(portal.X, portal.Y));
-
-            }
-
-            return validnaSledecaStanjaZaTeleport;   
         }
 
         // TODO: Ovde odredjujemo koji je hash code
@@ -145,6 +123,29 @@ namespace Lavirint
             return putanja;
         }
 
-        
+        private void dodajValidnaSledecaStanjaZaTeleport(List<State> validnaSledecaStanja)
+        {
+            if (lavirint[markI, markJ] == 6)
+            {   // u pitanju je teleport pa su ostali teleporti validna sledeca stanja
+                validnaSledecaStanja.AddRange(dobaviValidnaSledecaStanjaZaTeleport());
+            }
+        }
+
+        private List<State> dobaviValidnaSledecaStanjaZaTeleport()
+        {
+            List<State> validnaSledecaStanjaZaTeleport = new List<State>();
+            foreach (Point portal in Main.portali)
+            {
+                if (markI == portal.X && markJ == portal.Y)
+                {
+                    continue;
+                }
+
+                validnaSledecaStanjaZaTeleport.Add(sledeceStanje(portal.X, portal.Y));
+
+            }
+
+            return validnaSledecaStanjaZaTeleport;
+        }
     }
 }

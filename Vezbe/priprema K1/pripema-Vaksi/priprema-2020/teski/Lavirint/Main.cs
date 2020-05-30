@@ -64,11 +64,11 @@ namespace Lavirint
         public static State pocetnoStanje = null;
         public static State krajnjeStanje = null;
 
-
         private void inicijalizacijaPretrage() {
             displayPanel1.resetLavirintPoruke();
             displayPanel1.resetLavirintPoseceno();
             allSearchStates = new List<State>();
+
             for (int i = 0; i < Main.brojVrsta; i++)
             {
                 for (int j = 0; j < Main.brojKolona; j++)

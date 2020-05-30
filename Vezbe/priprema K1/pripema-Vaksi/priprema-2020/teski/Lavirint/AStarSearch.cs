@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Collections;
+using System.Windows.Forms;
 
 namespace Lavirint
 {
@@ -20,22 +21,28 @@ namespace Lavirint
             while (stanjaZaObradu.Count > 0)
             {
                 State naObradi = getBest(stanjaZaObradu);
-
+                //MessageBox.Show(naObradi.GetHashCode().ToString());
+                // Zelim da ako smo na ovom putu PRVI PUT, tek onda ga obradimo
                 if (!predjeniPut.ContainsKey(naObradi.GetHashCode()))
                 {
+
+                    // da ga dodam u sva obidjenja stanja
                     Main.allSearchStates.Add(naObradi);
                     if (naObradi.isKrajnjeStanje())
                     {
                         return naObradi;
                     }
+                    // da ga dodam u predjeni put
                     predjeniPut.Add(naObradi.GetHashCode(),null);
                     List<State> sledecaStanja = naObradi.mogucaSledecaStanja();
 
+                    // i da njegova moguca sledeca stanja takodje dodam kao stanja za obradu
                     foreach (State s in sledecaStanja)
                     {
                         stanjaZaObradu.Add(s);
                     }
                 }
+                // kada ga obradim, uklonim ga iz liste stanja za obradu
                 stanjaZaObradu.Remove(naObradi);
             }
             return null;

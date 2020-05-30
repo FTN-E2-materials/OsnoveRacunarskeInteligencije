@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Lavirint
 {
@@ -15,6 +17,9 @@ namespace Lavirint
         // TODO: Ovde odredjujem/dodajem atribute za moguce korake, atribute da li su kutije pokupljene i slicno.
         //public bool kutijaPokupljena;
         private static int [,] koraci = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
+        private List<int> plaveKutije = new List<int>();
+        public static int potrebnoPlavih = 3;
+
 
         // TODO: Ovde govorimo sta sledece stanje ima i sta nosi sa sobom
         public State sledeceStanje(int markI, int markJ)
@@ -27,6 +32,18 @@ namespace Lavirint
             rez.level = this.level + 1;
             // TODO: Ovde recimo mozemo dodati da li je kutija pokupljena
             // Pa ako jeste onda atribut za indikaciju pokupljenosti kutije za ovo stanje stavimo na true
+            //rez.plaveKutije.AddRange(this.plaveKutije);
+            foreach (int plava in this.plaveKutije)
+            {
+                rez.plaveKutije.Add(plava);
+            }
+
+            if(lavirint[rez.markI, rez.markJ] == 4 && !rez.plaveKutije.Contains(10 * rez.markI + rez.markJ))
+            {
+                int hashPlaveKutije = 10 * rez.markI + rez.markJ;
+                rez.cost = -10000;
+                rez.plaveKutije.Add(hashPlaveKutije);
+            }
 
             return rez;
         }
@@ -79,14 +96,24 @@ namespace Lavirint
         // TODO: Ovde odredjujemo koji je hash code
         public override int GetHashCode()
         {
-            int hash = 10 * markI + markJ;
+            int hash = 10 * this.markI + this.markJ;
+            int nivoFrekvencije = 100;
+
+            foreach (int hashPlavogPolja in this.plaveKutije)
+            {
+                hash += nivoFrekvencije;
+            }
             return hash;
         }
 
         // TODO: Ovde menjamo kada se krajnje stanje uslovljava i zavisi od necega
         public bool isKrajnjeStanje()
         {
-            //return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ && kutijaPokupljena;
+            if(plaveKutije.Count < potrebnoPlavih)
+            {
+                return false;
+            }
+            
             return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ;
         }
 
