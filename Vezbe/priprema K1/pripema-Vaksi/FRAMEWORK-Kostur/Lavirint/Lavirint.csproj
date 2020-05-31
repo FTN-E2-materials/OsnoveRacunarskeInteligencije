@@ -46,19 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ADepthSearch.cs" />
-    <Compile Include="AStarSearch.cs" />
-    <Compile Include="BreadthFirstSearch.cs">
+    <Compile Include="Pretrage\ADepthSearch.cs" />
+    <Compile Include="Pretrage\AStarSearch.cs" />
+    <Compile Include="Pretrage\BreadthFirstSearch.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DepthFirstSearch.cs" />
+    <Compile Include="Pretrage\DepthFirstSearch.cs" />
     <Compile Include="DisplayPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DisplayPanel.Designer.cs">
       <DependentUpon>DisplayPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="IterativeDepthFirstSearch.cs" />
+    <Compile Include="Pretrage\IterativeDepthFirstSearch.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
