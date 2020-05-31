@@ -17,8 +17,14 @@ namespace Lavirint
     {
         public static int brojVrsta = 10, brojKolona = 10;
         public static List<State> allSearchStates;
-        public static int plavaBrojac = 0;
-        public static int narandzastaBrojac = 0;
+        public static int brojSkupljenihPlavihKutija;
+        public static int brojSkupljenihZutihKutija;
+        public static int pozicijaIkutije1;
+        public static int pozicijaJkutije1;
+        public static int pozicijaIkutije2;
+        public static int pozicijaJkutije2;
+        public static int pozicijaIZutekutije1;
+        public static int pozicijaJZutekutije1;
         public Main()
         {
             InitializeComponent();
@@ -68,6 +74,8 @@ namespace Lavirint
 
 
         private void inicijalizacijaPretrage() {
+            brojSkupljenihPlavihKutija = 0;
+            brojSkupljenihZutihKutija = 0;
             displayPanel1.resetLavirintPoruke();
             displayPanel1.resetLavirintPoseceno();
             allSearchStates = new List<State>();
@@ -171,16 +179,16 @@ namespace Lavirint
 
         private void ADepth_Click(object sender, EventArgs e)
         {
-            inicijalizacijaPretrage();
+           /* inicijalizacijaPretrage();
             ADepthSearch aDepth = new ADepthSearch();
             State sp = pocetnoStanje;
-           
+            //TODO 6: Pozvati odgovarajuce metode ADepthSearch klase
             State solution = aDepth.searchCombined(sp);
             if (solution != null)
             {
                 resenje = solution.path();
             }
-            displayPanel1.Refresh();
+            displayPanel1.Refresh();*/
         }
 
         private void showSearchPath_Click(object sender, EventArgs e)

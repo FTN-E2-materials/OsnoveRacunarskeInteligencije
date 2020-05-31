@@ -9,7 +9,7 @@ namespace Lavirint
     {
         //TODO 5: Implementirati klasu koja kombinuje algoritme Prvi u dubinu i A*
         public State searchCombined(State pocetnoStanje)
-        {
+        {/*
             List<State> stanjaNaObradi = new List<State>();
             Hashtable predjeniPut = new Hashtable();
             stanjaNaObradi.Add(pocetnoStanje);
@@ -20,7 +20,7 @@ namespace Lavirint
                 if (!predjeniPut.ContainsKey(naObradi.GetHashCode()))
                 {
                     Main.allSearchStates.Add(naObradi);
-                    if (naObradi.plavaKutija || naObradi.narandzastaKutija)
+                    if (naObradi.kutija)
                     {
                         AStarSearch aZvezda = new AStarSearch();
                         return aZvezda.search(naObradi);
@@ -30,7 +30,7 @@ namespace Lavirint
                     stanjaNaObradi.InsertRange(0, mogucaSledecaStanja);
                 }
                 stanjaNaObradi.Remove(naObradi);
-            }
+            }*/
             return null;
         }
     }

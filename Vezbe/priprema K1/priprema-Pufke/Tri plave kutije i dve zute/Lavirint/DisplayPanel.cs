@@ -48,7 +48,7 @@ namespace Lavirint
             visited[state.markI, state.markJ] = true;
         }
 
-        //TODO OnPaint function
+        //TODO 3.1: Prosiriti metodu tako da se napravi novi Color objekat npr: Color.MediumBlue
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -115,10 +115,10 @@ namespace Lavirint
                             cc2 = Color.FromArgb(100, Color.Red);
                             break;
                         case 4:
-                            cc2 = Color.FromArgb(100, Color.MediumBlue);
+                            cc2 = Color.FromArgb(100, Color.Blue);
                             break;
                         case 5:
-                            cc2 = Color.FromArgb(100, Color.Orange);
+                            cc2 = Color.FromArgb(100, Color.Yellow);
                             break;
                     }
                     String ttS = lavirintPoruke[i][j];
@@ -159,7 +159,7 @@ namespace Lavirint
             }
         }
 
-        //TODO OnMouseDown funkcija
+        //TODO 3.2: Prosiriti metodu 
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
@@ -197,6 +197,7 @@ namespace Lavirint
             }                    
 
             State.lavirint[i,j] = tt;
+          
             InvalidateAdv(i, j);
         }
 
