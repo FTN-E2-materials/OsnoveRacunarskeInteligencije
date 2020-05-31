@@ -84,6 +84,7 @@ namespace Lavirint
 
         public bool isKrajnjeStanje()
         { //Proveravamo i da li smo pokupili kutiju to je uslov && kutija
+            Console.WriteLine(kutija1 && kutija2);
             return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ && kutija1 && kutija2;
         }
 

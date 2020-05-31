@@ -10,7 +10,10 @@ namespace Lavirint
         State parent;
         public int markI, markJ; //vrsta i kolona
         public double cost;
-        public bool kutija;
+        public bool kutija1;
+        public bool kutija2;
+        public bool skupljeneObeKutije;
+
 
         public State sledeceStanje(int markI, int markJ)
         {
@@ -19,7 +22,9 @@ namespace Lavirint
             rez.markJ = markJ;
             rez.parent = this;
             rez.cost = this.cost + 1;
-            rez.kutija = this.kutija;
+            rez.kutija1 = this.kutija1;
+            rez.kutija2 = this.kutija2;
+            rez.skupljeneObeKutije = this.skupljeneObeKutije;
             return rez;
         }
 
@@ -29,11 +34,24 @@ namespace Lavirint
             //TODO 1: Implementirati metodu tako da odredjuje dozvoljeno kretanje u lavirintu
             //TODO 2: Prosiriti metodu tako da se ne moze prolaziti kroz sive kutije
             List<State> rez = new List<State>();
-
-            if(lavirint[markI, markJ] == 4) //Ovo dodajemo za kutiju
-            {
-                kutija = true;
+     
+            if (lavirint[markI, markJ] == 4 && Main.brojSkupljenihPlavihKutija == 0){
+                 kutija1 = true;
+                 Main.brojSkupljenihPlavihKutija++;
+                 Main.pozicijaIkutije1 = markI;
+                 Main.pozicijaJkutije1 = markJ;
             }
+
+            if (lavirint[markI, markJ] == 4 && kutija1 == true && markI != Main.pozicijaIkutije1 && markJ != Main.pozicijaJkutije1)
+            {
+                kutija2 = true;
+
+            }
+
+            if (kutija1 && kutija2) {
+                skupljeneObeKutije = true;
+            }
+      
 
             if ((markJ > 0) && (lavirint[markI, markJ - 1] != 1))
             {
@@ -61,12 +79,26 @@ namespace Lavirint
         public override int GetHashCode()
         {
             int code = 10 * markI + markJ; //Ako nemamo kutiju ti ce nam biti od 0-200
-            return kutija ? code + 1000 : code; //Ako imamo kutiju taj kod nam ide dalje 
+            if (this.kutija1 == true)
+            {
+                code += 1000;
+            }
+            if (this.kutija2 == true)
+            {
+                code += 2000;
+            }
+            if(skupljeneObeKutije == true)
+            {
+                code += 3000;
+            }
+            return code;
+
+
         }
 
         public bool isKrajnjeStanje()
         {  //Za skupljanje kutije smo dodali uslov "&& kutija"
-            return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ && kutija;
+            return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ && skupljeneObeKutije;
         }
 
         public List<State> path()

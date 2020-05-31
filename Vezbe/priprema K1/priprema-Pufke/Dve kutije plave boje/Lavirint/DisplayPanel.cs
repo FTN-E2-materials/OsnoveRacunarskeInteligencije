@@ -191,6 +191,7 @@ namespace Lavirint
             }                    
 
             State.lavirint[i,j] = tt;
+          
             InvalidateAdv(i, j);
         }
 

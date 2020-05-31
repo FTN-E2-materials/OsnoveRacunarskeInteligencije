@@ -17,6 +17,9 @@ namespace Lavirint
     {
         public static int brojVrsta = 10, brojKolona = 10;
         public static List<State> allSearchStates;
+        public static int brojSkupljenihPlavihKutija = 0;
+        public static int pozicijaIkutije1;
+        public static int pozicijaJkutije1;
         public Main()
         {
             InitializeComponent();
@@ -66,6 +69,7 @@ namespace Lavirint
 
 
         private void inicijalizacijaPretrage() {
+            brojSkupljenihPlavihKutija = 0;
             displayPanel1.resetLavirintPoruke();
             displayPanel1.resetLavirintPoseceno();
             allSearchStates = new List<State>();
