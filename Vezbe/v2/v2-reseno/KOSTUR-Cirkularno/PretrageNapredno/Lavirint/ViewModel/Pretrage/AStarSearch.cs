@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Collections;
+using System.Net;
+using System.Collections.Specialized;
 
 namespace Lavirint
 {
@@ -11,21 +13,34 @@ namespace Lavirint
         {
             // TODO 5.1: Implementirati algoritam vodjene pretrage A*
             List<State> stanjaNaObradi = new List<State>();
+            OrderedDictionary predjeniPut = new OrderedDictionary();
             stanjaNaObradi.Add(pocetnoStanje);
             while (stanjaNaObradi.Count > 0)
             {
                 State naObradi = getBest(stanjaNaObradi);
 
-                if (!naObradi.cirkularnaPutanja())
+                if (!predjeniPut.Contains(naObradi))
                 {
+                    predjeniPut.Add(naObradi, null);
                     Main.allSearchStates.Add(naObradi);
                     if (naObradi.isKrajnjeStanje())
                     {
                         return naObradi;
                     }
-                    List<State> mogucaSledecaStanja = naObradi.mogucaSledecaStanja();
+                    List<State> mogucaSledecaStanja = naObradi.getMogucaSledecaStanja();
                     stanjaNaObradi.AddRange(mogucaSledecaStanja);
                 }
+
+                //if (!naObradi.isCirkularnaPutanja())
+                //{
+                //    Main.allSearchStates.Add(naObradi);
+                //    if (naObradi.isKrajnjeStanje())
+                //    {
+                //        return naObradi;
+                //    }
+                //    List<State> mogucaSledecaStanja = naObradi.getMogucaSledecaStanja();
+                //    stanjaNaObradi.AddRange(mogucaSledecaStanja);
+                //}
                 stanjaNaObradi.Remove(naObradi);
             }
 
@@ -34,8 +49,8 @@ namespace Lavirint
 
         public double heuristicFunction(State s)
         {
-            return Math.Sqrt(Math.Pow(s.node.markI - Main.krajnjiNode.markI, 2)
-                + Math.Pow(s.node.markJ - Main.krajnjiNode.markJ, 2));
+            return Math.Sqrt(Math.Pow(s.trenutniCvor.markI - Main.krajnjiNode.markI, 2)
+                + Math.Pow(s.trenutniCvor.markJ - Main.krajnjiNode.markJ, 2));
         }
 
         public State getBest(List<State> stanja)
@@ -45,7 +60,7 @@ namespace Lavirint
 
             foreach (State s in stanja)
             {
-                double h = heuristicFunction(s)+  s.cost;
+                double h = heuristicFunction(s)+  s.cena;
                 if (h < min)
                 {
                     min = h;

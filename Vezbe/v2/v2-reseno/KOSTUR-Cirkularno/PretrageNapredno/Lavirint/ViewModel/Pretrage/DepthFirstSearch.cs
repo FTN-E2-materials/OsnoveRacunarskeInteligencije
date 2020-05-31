@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Lavirint
 {
-    class BreadthFirstSearch
+    class DepthFirstSearch
     {
         public State search(State pocetnoStanje)
         {
@@ -16,15 +16,15 @@ namespace Lavirint
             {
                 State naObradi = stanjaNaObradi[0];
 
-                if (!naObradi.cirkularnaPutanja())
+                if (!naObradi.isCirkularnaPutanja())
                 {
                     Main.allSearchStates.Add(naObradi);
                     if (naObradi.isKrajnjeStanje())
                     {
                         return naObradi;
                     }
-                    List<State> mogucaSledecaStanja = naObradi.mogucaSledecaStanja();
-                    stanjaNaObradi.AddRange(mogucaSledecaStanja);
+                    List<State> mogucaSledecaStanja = naObradi.getMogucaSledecaStanja();
+                    stanjaNaObradi.InsertRange(0, mogucaSledecaStanja);
                 }
                 stanjaNaObradi.Remove(naObradi);
             }

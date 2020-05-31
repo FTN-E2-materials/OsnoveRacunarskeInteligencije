@@ -7,9 +7,14 @@ namespace Lavirint
 {
     public class Lavirint
     {
+        #region Atributi
+
         public int brojVrsta, brojKolona;
         public int[,] polja;
 
+        #endregion
+
+        #region Konstruktor
 
         public Lavirint(int brojVrsta, int brojKolona)
         {
@@ -18,7 +23,9 @@ namespace Lavirint
 
             this.polja = new int[this.brojVrsta, this.brojKolona];
         }
+        #endregion
 
+        #region Upis/ispis
         public void sacuvajLavirint()
         {
             TextWriter tw = new StreamWriter("../../lavirint.txt");
@@ -50,5 +57,7 @@ namespace Lavirint
             }
             tw.Close();
         }
+
+        #endregion
     }
 }

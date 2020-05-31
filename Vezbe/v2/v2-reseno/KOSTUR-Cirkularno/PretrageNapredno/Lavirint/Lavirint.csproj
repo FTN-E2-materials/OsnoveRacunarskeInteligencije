@@ -49,35 +49,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ADepthSearch.cs" />
-    <Compile Include="AStarSearch.cs" />
-    <Compile Include="BreadthFirstSearch.cs">
+    <Compile Include="ViewModel\Pretrage\ADepthSearch.cs" />
+    <Compile Include="ViewModel\Pretrage\AStarSearch.cs" />
+    <Compile Include="ViewModel\Pretrage\BreadthFirstSearch.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DepthFirstSearch.cs" />
-    <Compile Include="DisplayPanel.cs">
+    <Compile Include="ViewModel\Pretrage\DepthFirstSearch.cs" />
+    <Compile Include="View\DisplayPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DisplayPanel.Designer.cs">
+    <Compile Include="View\DisplayPanel.Designer.cs">
       <DependentUpon>DisplayPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="IterativeDepthFirstSearch.cs" />
+    <Compile Include="ViewModel\Pretrage\IterativeDepthFirstSearch.cs" />
     <Compile Include="Lavirint.cs" />
-    <Compile Include="Main.cs">
+    <Compile Include="View\Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
+    <Compile Include="View\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="MinMaxSearch.cs" />
-    <Compile Include="Node.cs" />
+    <Compile Include="ViewModel\Pretrage\MinMaxSearch.cs" />
+    <Compile Include="ViewModel\Node.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="DisplayPanel.resx">
+    <EmbeddedResource Include="View\DisplayPanel.resx">
       <DependentUpon>DisplayPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
+    <EmbeddedResource Include="View\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -100,7 +100,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="State.cs" />
+    <Compile Include="ViewModel\State.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\1268732402_search.png" />
@@ -108,6 +108,7 @@
   <ItemGroup>
     <None Include="Resources\1268747762_my_computer.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

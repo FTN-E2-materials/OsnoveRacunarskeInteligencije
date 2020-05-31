@@ -51,7 +51,7 @@ namespace Lavirint
 
         public void poseceno(State state)
         {
-            visited[state.node.markI, state.node.markJ] = true;
+            visited[state.trenutniCvor.markI, state.trenutniCvor.markJ] = true;
         }
 
         public void resetAgents()
@@ -128,6 +128,9 @@ namespace Lavirint
                         case 4:// dodavanje jos jedne boje
                             cc2 = Color.FromArgb(100, Color.MediumBlue);
                             break;
+                        case 5:
+                            cc2 = Color.FromArgb(100, Color.Orange);
+                            break;
                     }
                     String ttS = lavirintPoruke[i][j];
                     gr.FillRectangle(new SolidBrush(cc2), r);
@@ -203,6 +206,9 @@ namespace Lavirint
                     tt = 4;
                     break;
                 case 4:
+                    tt = 5;
+                    break;
+                case 5:
                     tt = 0;
                     break;
             }                    

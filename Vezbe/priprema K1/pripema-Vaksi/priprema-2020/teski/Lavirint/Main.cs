@@ -197,7 +197,7 @@ namespace Lavirint
                 }
                 displayPanel1.moveIcon(state.markI - displayPanel1.iconI, state.markJ - displayPanel1.iconJ);
                 displayPanel1.Refresh();
-                Thread.Sleep(500);
+                Thread.Sleep(50);
             }
         }
     }

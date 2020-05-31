@@ -22,14 +22,14 @@ namespace Lavirint
                     if (naObradi.level > level)
                         continue;
 
-                    if (!naObradi.cirkularnaPutanja())
+                    if (!naObradi.isCirkularnaPutanja())
                     {
                         Main.allSearchStates.Add(naObradi);
                         if (naObradi.isKrajnjeStanje())
                         {
                             return naObradi;
                         }
-                        List<State> mogucaSledecaStanja = naObradi.mogucaSledecaStanja();
+                        List<State> mogucaSledecaStanja = naObradi.getMogucaSledecaStanja();
                         stanjaNaObradi.InsertRange(0, mogucaSledecaStanja);
                     }
                     

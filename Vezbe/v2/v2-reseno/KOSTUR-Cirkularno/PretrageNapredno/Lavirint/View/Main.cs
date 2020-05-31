@@ -61,21 +61,13 @@ namespace Lavirint
                     int tt = lavirint.polja[i,j];
                     if (tt == 2) { // POCETNO STANJE
                         pocetnoStanje = new State();
-                        pocetnoStanje.node = new Node(i, j);
+                        pocetnoStanje.trenutniCvor = new Node(i, j);
                         manualRobotPozicija = new Node(i, j);
                         displayPanel1.iconI = i;
                         displayPanel1.iconJ = j;
                     }else if (tt == 3)
                     { // KRAJNJE STANJE
                         krajnjiNode = new Node(i, j);
-                    }
-                    else if (tt == 4 && multipleAgents)
-                    {
-                        // pocetne pozicije za min-max agente
-                        State minMaxAgent = new State();
-                        minMaxAgent.node = new Node(i, j);
-                        displayPanel1.agentPositions.Add(new List<int>() { i,j });
-                        minimaxAgentiPocetno.Add(minMaxAgent);
                     }
                 }
             }
@@ -92,7 +84,7 @@ namespace Lavirint
             int i = 0;
             foreach (State r in resenje)
             {
-                displayPanel1.lavirintPoruke[r.node.markI][r.node.markJ] += " " + i;
+                displayPanel1.lavirintPoruke[r.trenutniCvor.markI][r.trenutniCvor.markJ] += " " + i;
                 i++;
             }
             displayPanel1.Refresh();
@@ -106,7 +98,7 @@ namespace Lavirint
             State solution = dfs.search(sp);
             if (solution != null)
             {
-                resenje = solution.path();
+                resenje = solution.getPutanja();
             }
             displayPanel1.Refresh();
         }
@@ -119,7 +111,7 @@ namespace Lavirint
             State solution = bfs.search(sp);
             if (solution != null)
             {
-                resenje = solution.path();
+                resenje = solution.getPutanja();
             }
             displayPanel1.Refresh();
         }
@@ -135,7 +127,7 @@ namespace Lavirint
                 State solution = id.search(s, i);
                 if (solution != null)
                 {
-                    resenje = solution.path();
+                    resenje = solution.getPutanja();
                     displayPanel1.Refresh();
                     return;
                 }
@@ -153,7 +145,7 @@ namespace Lavirint
             State solution = astar.search(sp);
             if (solution != null)
             {
-                resenje = solution.path();
+                resenje = solution.getPutanja();
             }
             displayPanel1.Refresh();
         }
@@ -175,7 +167,7 @@ namespace Lavirint
             State solution = minmax.search(sp);
             if (solution != null)
             {
-                resenje = solution.path();
+                resenje = solution.getPutanja();
             }
             displayPanel1.Refresh();
         }
@@ -188,12 +180,12 @@ namespace Lavirint
                 displayPanel1.resetLavirintPoruke();
                 displayPanel1.poseceno(state);
                 int i = 0;
-                foreach (State r in state.path())
+                foreach (State r in state.getPutanja())
                 {
-                    displayPanel1.lavirintPoruke[r.node.markI][r.node.markJ] += " " + i;
+                    displayPanel1.lavirintPoruke[r.trenutniCvor.markI][r.trenutniCvor.markJ] += " " + i;
                     i++;
                 }
-                displayPanel1.moveIcon(state.node.markI - displayPanel1.iconI, state.node.markJ - displayPanel1.iconJ);
+                displayPanel1.moveIcon(state.trenutniCvor.markI - displayPanel1.iconI, state.trenutniCvor.markJ - displayPanel1.iconJ);
                 displayPanel1.Refresh();
                 Thread.Sleep(50);
             }
@@ -266,14 +258,14 @@ namespace Lavirint
                         {
                             try
                             {
-                                List<State> putanja = solution.path();
+                                List<State> putanja = solution.getPutanja();
                                 State sledeciPotez = putanja[1];
-                                sledeciPotez.parent = null;
+                                sledeciPotez.roditeljskoStanje = null;
 
-                                displayPanel1.moveAgentIcon(agentIndex, sledeciPotez.node.markI - displayPanel1.agentPositions[agentIndex][0], sledeciPotez.node.markJ - displayPanel1.agentPositions[agentIndex][1]);
+                                displayPanel1.moveAgentIcon(agentIndex, sledeciPotez.trenutniCvor.markI - displayPanel1.agentPositions[agentIndex][0], sledeciPotez.trenutniCvor.markJ - displayPanel1.agentPositions[agentIndex][1]);
                                 // sledeca pretraga ce krenuti od novog stanja
                                 minimaxAgentiPocetno[agentIndex] = sledeciPotez;
-                                if (Main.manualRobotPozicija.markI == sledeciPotez.node.markI && Main.manualRobotPozicija.markJ == sledeciPotez.node.markJ)
+                                if (Main.manualRobotPozicija.markI == sledeciPotez.trenutniCvor.markI && Main.manualRobotPozicija.markJ == sledeciPotez.trenutniCvor.markJ)
                                 {
                                     gameFinished = true;
                                     lblStatus.Text = "Protivnik je pobedio. :( Vise srece drugi put.";
