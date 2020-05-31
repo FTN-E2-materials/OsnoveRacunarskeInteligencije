@@ -42,6 +42,10 @@ namespace Lavirint
                         stanjaZaObradu.Add(s);
                     }
                 }
+                //else
+                //{
+                //    MessageBox.Show(naObradi.GetHashCode().ToString());    
+                //}
                 // kada ga obradim, uklonim ga iz liste stanja za obradu
                 stanjaZaObradu.Remove(naObradi);
             }

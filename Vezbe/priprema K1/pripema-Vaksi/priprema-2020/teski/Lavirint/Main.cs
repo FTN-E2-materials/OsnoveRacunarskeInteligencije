@@ -191,12 +191,13 @@ namespace Lavirint
                 int i = 0;
                 foreach (State r in state.path())
                 {
+                    //displayPanel1.BackColor = Color.Red;
                     displayPanel1.lavirintPoruke[r.markI][r.markJ] += " " + i;
                     i++;
                 }
                 displayPanel1.moveIcon(state.markI - displayPanel1.iconI, state.markJ - displayPanel1.iconJ);
                 displayPanel1.Refresh();
-                Thread.Sleep(50);
+                Thread.Sleep(500);
             }
         }
     }
