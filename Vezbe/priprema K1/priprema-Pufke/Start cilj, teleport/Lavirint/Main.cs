@@ -64,9 +64,10 @@ namespace Lavirint
         public static State pocetnoStanje = null;
         public static State krajnjeStanje = null;
         //Lista teleportova
-        public static List<State> teleport = new List<State>();
+        public static List<State> teleport;
 
         private void inicijalizacijaPretrage() {
+            teleport = new List<State>();
             displayPanel1.resetLavirintPoruke();
             displayPanel1.resetLavirintPoseceno();
             allSearchStates = new List<State>();

@@ -47,7 +47,7 @@ namespace Lavirint
                 rez.Add(sledeceStanje(markI + 1, markJ));
             }
             //Kretnja dole desno
-            if ((markI < Main.brojVrsta - 1) && (lavirint[markI + 1, markJ +1] != 1) && (markJ < Main.brojKolona - 1))
+            if ((markI < Main.brojVrsta - 1) && (markJ < Main.brojKolona - 1) && (lavirint[markI + 1, markJ + 1] != 1))
             {
                 rez.Add(sledeceStanje(markI + 1, markJ+1));
             }
@@ -57,12 +57,12 @@ namespace Lavirint
                 rez.Add(sledeceStanje(markI - 1, markJ - 1));
             }
             //Kretanje gore desno (MarkI smanjivati, markJ povecavati)
-            if ((markI > 0) && (lavirint[markI - 1, markJ +1] != 1) && (markJ < Main.brojKolona - 1))
+            if ((markI > 0) && (markJ < Main.brojKolona - 1) && (lavirint[markI - 1, markJ + 1] != 1))
             {
                 rez.Add(sledeceStanje(markI - 1, markJ +1));
             }
             //Kretnja dole levo (MarkI povecavati, MarkJ smanjivati)
-            if ((markI < Main.brojVrsta - 1) && (lavirint[markI + 1, markJ - 1] != 1) && (markJ > 0))
+            if ((markI < Main.brojVrsta - 1) && (markJ > 0) && (lavirint[markI + 1, markJ - 1] != 1))
             {
                 rez.Add(sledeceStanje(markI + 1, markJ-1));
             }

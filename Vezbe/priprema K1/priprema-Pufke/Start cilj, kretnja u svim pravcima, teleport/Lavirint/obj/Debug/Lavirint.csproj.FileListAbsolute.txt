@@ -25,3 +25,12 @@ C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-
 C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Start cilj, kretnja u svim pravcima\Lavirint\obj\Debug\Lavirint.csproj.GenerateResource.cache
 C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Start cilj, kretnja u svim pravcima\Lavirint\obj\Debug\Lavirint.exe
 C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Start cilj, kretnja u svim pravcima\Lavirint\obj\Debug\Lavirint.pdb
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Start cilj, kretnja u svim pravcima, teleport\Lavirint\bin\Debug\Lavirint.exe
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Start cilj, kretnja u svim pravcima, teleport\Lavirint\bin\Debug\Lavirint.pdb
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Start cilj, kretnja u svim pravcima, teleport\Lavirint\obj\Debug\Lavirint.csprojAssemblyReference.cache
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Start cilj, kretnja u svim pravcima, teleport\Lavirint\obj\Debug\Lavirint.DisplayPanel.resources
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Start cilj, kretnja u svim pravcima, teleport\Lavirint\obj\Debug\Lavirint.Main.resources
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Start cilj, kretnja u svim pravcima, teleport\Lavirint\obj\Debug\Lavirint.Properties.Resources.resources
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Start cilj, kretnja u svim pravcima, teleport\Lavirint\obj\Debug\Lavirint.csproj.GenerateResource.cache
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Start cilj, kretnja u svim pravcima, teleport\Lavirint\obj\Debug\Lavirint.exe
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Start cilj, kretnja u svim pravcima, teleport\Lavirint\obj\Debug\Lavirint.pdb
