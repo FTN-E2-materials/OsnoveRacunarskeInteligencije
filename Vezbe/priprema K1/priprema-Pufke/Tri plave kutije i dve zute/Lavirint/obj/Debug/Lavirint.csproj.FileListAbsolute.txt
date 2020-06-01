@@ -25,3 +25,12 @@ C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-
 C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Dve kutije plave boje - копија\Lavirint\obj\Debug\Lavirint.pdb
 C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Dve kutije plave boje - копија\Lavirint\bin\Debug\Lavirint.exe
 C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Dve kutije plave boje - копија\Lavirint\bin\Debug\Lavirint.pdb
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Tri plave kutije i dve zute\Lavirint\bin\Debug\Lavirint.exe
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Tri plave kutije i dve zute\Lavirint\bin\Debug\Lavirint.pdb
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Tri plave kutije i dve zute\Lavirint\obj\Debug\Lavirint.csprojAssemblyReference.cache
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Tri plave kutije i dve zute\Lavirint\obj\Debug\Lavirint.DisplayPanel.resources
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Tri plave kutije i dve zute\Lavirint\obj\Debug\Lavirint.Main.resources
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Tri plave kutije i dve zute\Lavirint\obj\Debug\Lavirint.Properties.Resources.resources
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Tri plave kutije i dve zute\Lavirint\obj\Debug\Lavirint.csproj.GenerateResource.cache
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Tri plave kutije i dve zute\Lavirint\obj\Debug\Lavirint.exe
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\priprema K1\priprema-Pufke\Tri plave kutije i dve zute\Lavirint\obj\Debug\Lavirint.pdb

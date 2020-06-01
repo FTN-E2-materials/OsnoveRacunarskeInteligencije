@@ -1,1 +1,1 @@
-### Robot skuplja jednu plavu kutiju pre nego sto dodje do cilja.
+### Robot skuplja jednu plavu kutiju pre nego sto dodje do cilja, na polju se nalaze polja vatre i cilj je da robot ide sto dalje od vatre ka cilju.

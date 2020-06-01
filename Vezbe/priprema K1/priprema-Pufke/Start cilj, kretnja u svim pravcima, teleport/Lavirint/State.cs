@@ -52,7 +52,7 @@ namespace Lavirint
                 rez.Add(sledeceStanje(markI + 1, markJ+1));
             }
             //Kretnja gore levo
-            if ((markI > 0) && (lavirint[markI - 1, markJ - 1] != 1) && (markJ > 0))
+            if ((markI > 0) && (markJ > 0) && (lavirint[markI - 1, markJ - 1] != 1))
             {
                 rez.Add(sledeceStanje(markI - 1, markJ - 1));
             }

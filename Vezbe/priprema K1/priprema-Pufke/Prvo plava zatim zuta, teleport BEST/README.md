@@ -1,1 +1,1 @@
-### kupljenje prvo plave pa zute kutije (po redosledu) ali tako da na tabli budu portali, odnosno polja kroz koja robot moze da se teleportuje na NAJBLIZI TELEPORT CILJU nakon skupljanja plave i zute kutije (teleport je crne boje)
+### kupljenje prvo plavu pa zutu kutiju (po redosledu) ali tako da na tabli budu portali, odnosno polja kroz koja robot moze da se teleportuje na NAJBLIZI TELEPORT CILJU nakon skupljanja plave i zute kutije (teleport je crne boje)

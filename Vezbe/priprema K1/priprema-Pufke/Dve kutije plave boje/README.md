@@ -1,1 +1,1 @@
-### Robot skuplja jednu plavu kutiju pre nego sto dodje do cilja.
+### Robot skuplja dve plave kutije pre nego sto dodje do cilja.

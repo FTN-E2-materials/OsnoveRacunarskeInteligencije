@@ -36,21 +36,21 @@ namespace Lavirint
             return rez;
         }
 
-        
+
         public List<State> mogucaSledecaStanja()
         {
             //TODO 1: Implementirati metodu tako da odredjuje dozvoljeno kretanje u lavirintu
             //TODO 2: Prosiriti metodu tako da se ne moze prolaziti kroz sive kutije
             List<State> rez = new List<State>();
-     
-            if (lavirint[markI, markJ] == 4 && Main.brojSkupljenihPlavihKutija == 0){
-                 kutija1 = true;
-                 Main.brojSkupljenihPlavihKutija++;
-                 Main.pozicijaIkutije1 = markI;
-                 Main.pozicijaJkutije1 = markJ;
+
+            if (lavirint[markI, markJ] == 4 && Main.brojSkupljenihPlavihKutija == 0) {
+                kutija1 = true;
+                Main.brojSkupljenihPlavihKutija++;
+                Main.pozicijaIkutije1 = markI;
+                Main.pozicijaJkutije1 = markJ;
             }
 
-            if (lavirint[markI, markJ] == 4 && kutija1 && markI != Main.pozicijaIkutije1 && markJ != Main.pozicijaJkutije1 &&  Main.brojSkupljenihPlavihKutija == 1)
+            if (lavirint[markI, markJ] == 4 && kutija1 && (markI != Main.pozicijaIkutije1 || markJ != Main.pozicijaJkutije1) &&  Main.brojSkupljenihPlavihKutija == 1)
             {
                 kutija2 = true;
                 Main.brojSkupljenihPlavihKutija++;
@@ -59,7 +59,7 @@ namespace Lavirint
 
             }
 
-            if (lavirint[markI, markJ] == 4 && kutija1 && kutija2 && markI != Main.pozicijaIkutije1 && markJ != Main.pozicijaJkutije1 && markI != Main.pozicijaIkutije2 && markJ != Main.pozicijaJkutije2 )
+            if (lavirint[markI, markJ] == 4 && kutija1 && kutija2 && (markI != Main.pozicijaIkutije1 || markJ != Main.pozicijaJkutije1) && (markI != Main.pozicijaIkutije2 || markJ != Main.pozicijaJkutije2) )
             {
                 Main.brojSkupljenihPlavihKutija++;
                 kutija3 = true;
@@ -79,7 +79,7 @@ namespace Lavirint
                 Main.pozicijaJZutekutije1 = markJ;
             }
 
-            if (lavirint[markI, markJ] == 5 && zutaKutija1  && markI != Main.pozicijaIZutekutije1 && markJ != Main.pozicijaJZutekutije1 && skupljeneSvePlave)
+            if (lavirint[markI, markJ] == 5 && zutaKutija1  && (markI != Main.pozicijaIZutekutije1 || markJ != Main.pozicijaJZutekutije1) && skupljeneSvePlave)
             {
                 zutaKutija2 = true;
                 Main.brojSkupljenihZutihKutija++;
