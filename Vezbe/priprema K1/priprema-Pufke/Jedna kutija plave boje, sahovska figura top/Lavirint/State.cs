@@ -26,8 +26,8 @@ namespace Lavirint
 
         public List<State> mogucaSledecaStanja()
         {
-            //TODO 1: Implementirati metodu tako da odredjuje dozvoljeno kretanje u lavirintu
-            //TODO 2: Prosiriti metodu tako da se ne moze prolaziti kroz sive kutije
+            //TODO : mogucaSledecaStanja()
+           
             List<State> rez = new List<State>();
 
             //Dodajemo za PLAVU kutiju
@@ -36,88 +36,86 @@ namespace Lavirint
                 kutija = true;
             }
 
-            //Kretanje u pravcu goredesno 
-            for (int i = 1, j = 1; i <= Main.brojVrsta ; i += 1, j += 1)
+            //Kretanje u pravcu dole
+            for (int i = 1; i <= Main.brojVrsta ; i += 1)
             {
                 int newMarkI = markI + i;
-                int newMarkJ = markJ + j;
+     
 
                 if (newMarkI >= 0 && newMarkI < Main.brojVrsta)
                 {
-                    if (newMarkJ >= 0 && newMarkJ < Main.brojKolona)
+                    if (markJ >= 0 && markJ < Main.brojKolona)
                     {
-                        if (lavirint[newMarkI, newMarkJ] == 1)
+                        if (lavirint[newMarkI, markJ] == 1)
                         {
                             break;
                         }
-                        if (lavirint[newMarkI, newMarkJ] != 1)
+                        if (lavirint[newMarkI, markJ] != 1)
                         {
-                            State novo = sledeceStanje(newMarkI, newMarkJ);
+                            State novo = sledeceStanje(newMarkI, markJ);
                             rez.Add(novo);
                         }
                     }
                 }
             }
 
-            for (int i = 1, j = 1; i <= Main.brojVrsta; i += 1, j += 1)
+            for (int j = 1; j <= Main.brojVrsta; j += 1)
             {
-                int newMarkI = markI + i;
                 int newMarkJ = markJ - j;
 
-                if (newMarkI >= 0 && newMarkI < Main.brojVrsta)
+                if (markI >= 0 && markI < Main.brojVrsta)
                 {
                     if (newMarkJ >= 0 && newMarkJ < Main.brojKolona)
                     {
-                        if (lavirint[newMarkI, newMarkJ] == 1)
+                        if (lavirint[markI, newMarkJ] == 1)
                         {
                             break;
                         }
-                        if (lavirint[newMarkI, newMarkJ] != 1)
+                        if (lavirint[markI, newMarkJ] != 1)
                         {
-                            State novo = sledeceStanje(newMarkI, newMarkJ);
+                            State novo = sledeceStanje(markI, newMarkJ);
                             rez.Add(novo);
                         }
                     }
                 }
             }
 
-            for (int i = 1, j = 1; i <= Main.brojVrsta; i += 1, j += 1)
+            for (int i = 1; i <= Main.brojVrsta; i += 1)
             {
                 int newMarkI = markI - i;
+
+                if (newMarkI >= 0 && newMarkI < Main.brojVrsta)
+                {
+                    if (markJ >= 0 && markJ < Main.brojKolona)
+                    {
+                        if (lavirint[newMarkI, markJ] == 1){
+                            break;
+                        }
+                        if (lavirint[newMarkI, markJ] != 1)
+                        {
+                            State novo = sledeceStanje(newMarkI, markJ);
+                            rez.Add(novo);
+                        }
+                    }
+                }
+            }
+
+            for (int j = 1; j <= Main.brojVrsta; j += 1)
+            {
+
                 int newMarkJ = markJ + j;
 
-                if (newMarkI >= 0 && newMarkI < Main.brojVrsta)
+                if (markI >= 0 && markI < Main.brojVrsta)
                 {
                     if (newMarkJ >= 0 && newMarkJ < Main.brojKolona)
                     {
-                        if (lavirint[newMarkI, newMarkJ] == 1){
-                            break;
-                        }
-                        if (lavirint[newMarkI, newMarkJ] != 1)
-                        {
-                            State novo = sledeceStanje(newMarkI, newMarkJ);
-                            rez.Add(novo);
-                        }
-                    }
-                }
-            }
-
-            for (int i = 1, j = 1; i <= Main.brojVrsta; i += 1, j += 1)
-            {
-                int newMarkI = markI - i;
-                int newMarkJ = markJ - j;
-
-                if (newMarkI >= 0 && newMarkI < Main.brojVrsta)
-                {
-                    if (newMarkJ >= 0 && newMarkJ < Main.brojKolona)
-                    {
-                        if (lavirint[newMarkI, newMarkJ] == 1)
+                        if (lavirint[markI, newMarkJ] == 1)
                         {
                             break;
                         }
-                        if (lavirint[newMarkI, newMarkJ] != 1)
+                        if (lavirint[markI, newMarkJ] != 1)
                         {
-                            State novo = sledeceStanje(newMarkI, newMarkJ);
+                            State novo = sledeceStanje(markI, newMarkJ);
                             rez.Add(novo);
                         }
                     }

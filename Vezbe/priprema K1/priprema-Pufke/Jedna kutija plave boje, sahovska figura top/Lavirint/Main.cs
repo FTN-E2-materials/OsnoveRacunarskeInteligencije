@@ -172,7 +172,7 @@ namespace Lavirint
             inicijalizacijaPretrage();
             ADepthSearch aDepth = new ADepthSearch();
             State sp = pocetnoStanje;
-            //TODO 6: Pozvati odgovarajuce metode ADepthSearch klase
+          
             State solution = aDepth.searchCombined(sp);
             if (solution != null)
             {

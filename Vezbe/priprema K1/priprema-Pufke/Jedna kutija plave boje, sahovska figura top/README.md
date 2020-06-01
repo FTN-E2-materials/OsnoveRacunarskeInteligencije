@@ -1,1 +1,1 @@
-### Robot skuplja jednu plavu kutiju pre nego sto dodje do cilja, uz to krece se kao sahovska figura lovac, i nije mu dozvoljeno da preskace zidove
+### Robot skuplja jednu plavu kutiju pre nego sto dodje do cilja, uz to krece se kao sahovska figura top, i nije mu dozvoljeno da preskace zidove

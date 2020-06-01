@@ -7,7 +7,7 @@ namespace Lavirint
 {
     class ADepthSearch
     {
-        //TODO 5: Implementirati klasu koja kombinuje algoritme Prvi u dubinu i A*
+
         public State searchCombined(State pocetnoStanje)
         {
             List<State> stanjaNaObradi = new List<State>();

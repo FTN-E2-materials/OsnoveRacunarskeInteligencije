@@ -48,7 +48,7 @@ namespace Lavirint
             visited[state.markI, state.markJ] = true;
         }
 
-        //TODO 3.1: Prosiriti metodu tako da se napravi novi Color objekat npr: Color.MediumBlue
+        //TODO: OnPaint()
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -156,7 +156,7 @@ namespace Lavirint
             }
         }
 
-        //TODO 3.2: Prosiriti metodu 
+        //TODO: OnMouseDown()
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
