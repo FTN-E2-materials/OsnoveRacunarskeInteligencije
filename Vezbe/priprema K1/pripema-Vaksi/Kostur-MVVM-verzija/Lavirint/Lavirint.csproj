@@ -65,7 +65,7 @@
     <Compile Include="View\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\Program.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="View\DisplayPanel.resx">
       <DependentUpon>DisplayPanel.cs</DependentUpon>

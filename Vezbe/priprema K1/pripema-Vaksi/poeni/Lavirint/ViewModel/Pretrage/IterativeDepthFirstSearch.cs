@@ -8,7 +8,6 @@ namespace Lavirint
 {
     class IterativeDeepFirstSeach
     {
-        // Implementirati iteraivnu prvi u dubinu pretragu - IterativeDFS
         /*
          * Pretrazi se prosledjuje pocetno stanje i maksimalna dubina do koje 
          * zelimo da pretraga ide.

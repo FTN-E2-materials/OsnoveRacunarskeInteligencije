@@ -8,7 +8,6 @@ namespace Lavirint
 {
     class BreadthFirstSearch
     {   
-        // Implementirati pretragu prvi u sirinu - BFS
         /*
          * Slepa pretraga koja daje optimalno resenje.
          * Koristicemo strukturu FIFO[first in, first out],

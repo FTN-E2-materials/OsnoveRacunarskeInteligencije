@@ -63,6 +63,8 @@ namespace Lavirint
 
         public static State pocetnoStanje = null;
         public static State krajnjeStanje = null;
+        // TODO: Ovde dodajem ako hocu neku recimo listu portala, vatri da cuvam
+        // odnosno unapred znam gde su pa ih onda ovde i inicijalizujem
 
 
         private void inicijalizacijaPretrage() {
@@ -172,7 +174,7 @@ namespace Lavirint
             inicijalizacijaPretrage();
             ADepthSearch aDepth = new ADepthSearch();
             State sp = pocetnoStanje;
-            // Pozvati odgovarajuce metode ADepthSearch klase
+            //TODO: Pozivanje odgovarajuce metode ADepthSearch klase
             State solution = aDepth.searchCombined(sp);
             if (solution != null)
             {

@@ -7,7 +7,6 @@ namespace Lavirint
 {
     class AStarSearch
     {
-        // Implementirati A* pretragu
         /*
          * Vodjena pretraga koja uzima najbolja resenje po heuristici.
          * Za pamcenje stanja opet koristimo Hastable

@@ -8,7 +8,6 @@ namespace Lavirint
 {
     class DepthFirstSearch
     {
-        // Implementirati pretragu prvi u dubinu - DFS
         /*
          * Slepa pretraga
          * Pretraga se koristi kada znamo da je resenje daleko od pocetnog stanja 

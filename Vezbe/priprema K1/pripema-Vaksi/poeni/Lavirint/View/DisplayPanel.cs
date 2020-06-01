@@ -48,7 +48,7 @@ namespace Lavirint
             visited[state.markI, state.markJ] = true;
         }
 
-        // Prosiriti metodu tako da se napravi novi Color objekat npr: Color.MediumBlue
+        //TODO: Ovde prosirujemo metodu ako zelimo da se napravi novi Color objekat npr: Color.MediumBlue
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -114,11 +114,11 @@ namespace Lavirint
                         case 3:
                             cc2 = Color.FromArgb(100, Color.Red);
                             break;
-                        case 4:// TODO 1.1: Prosiriti metodu novim bojama.
-                            cc2 = Color.FromArgb(200, Color.MediumBlue);
+                        case 4:// TODO: Ispod ovoga dodajemo novu boju za kutije 
+                            cc2 = Color.FromArgb(100, Color.MediumBlue);
                             break;
                         case 5:
-                            cc2 = Color.FromArgb(200, Color.Yellow);
+                            cc2 = Color.FromArgb(100, Color.Orange);
                             break;
                     }
                     String ttS = lavirintPoruke[i][j];
@@ -159,7 +159,7 @@ namespace Lavirint
             }
         }
 
-        // Prosiriti metodu 
+        //TODO: Ovde menjamo da na klik zapravo promeni boju polja 
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
@@ -185,7 +185,7 @@ namespace Lavirint
                 case 2:
                     tt = 3;
                     break;
-                case 3: // TODO 1.2: Prosirenje za kutiju
+                case 3: // TODO: Ovde dodajemo za prosirenja novih boja/kutija
                     tt = 4;
                     break;
                 case 4:
