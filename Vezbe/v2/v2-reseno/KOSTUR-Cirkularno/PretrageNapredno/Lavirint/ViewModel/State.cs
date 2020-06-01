@@ -35,34 +35,15 @@ namespace Lavirint
             sledeceStanje.cena = this.cena + 1;
             sledeceStanje.level = this.level + 1;
             
-            if(Main.lavirint.polja[cvorNaObradi.markI, cvorNaObradi.markJ] == 4)
+            if(Main.lavirint.polja[cvorNaObradi.kordinataI, cvorNaObradi.kordinataJ] == 4 && !sledeceStanje.trenutniCvor.hesPokupljenihPlavih.Contains(100 * cvorNaObradi.kordinataI + cvorNaObradi.kordinataJ))
             {
-                sledeceStanje.trenutniCvor.kutija = true;
-                sledeceStanje.cena = -1000;
+                sledeceStanje.trenutniCvor.pokupljenaPlava = true;
+                sledeceStanje.trenutniCvor.hesPokupljenihPlavih.Add(100 * cvorNaObradi.kordinataI + cvorNaObradi.kordinataJ);
+                sledeceStanje.cena = -1000;                         // ne utice previse ali garantuje
+                // da kad je u blizini plave kutije, onda je i pokupi
             }
+
             return sledeceStanje;
-        }
-
-        #endregion
-
-        #region Provera cirkularnosti
-
-        public bool isCirkularnaPutanja()
-        {
-            // TODO: Mozda ovo resiti preko Dictionarija kako bi bilo brze
-
-            // TODO 3: proveriti da li trenutno stanje odgovara poziciji koja je vec vidjena u grani pretrazivanja
-            State trenutnoStanje = this.roditeljskoStanje;
-
-            while (trenutnoStanje != null)
-            {
-                if (this.trenutniCvor.Equals(trenutnoStanje.trenutniCvor))
-                {
-                    return true;
-                }
-                trenutnoStanje = trenutnoStanje.roditeljskoStanje;
-            }
-            return false;
         }
 
         #endregion
@@ -87,7 +68,7 @@ namespace Lavirint
         public bool isKrajnjeStanje()
         {
             //return this.trenutniCvor.Equals(Main.krajnjiNode) && this.trenutniCvor.kutija;
-            return Main.krajnjiNode.Equals(this.trenutniCvor);
+            return Main.krajnjiNode.Equals(this.trenutniCvor) && this.trenutniCvor.pokupljenaPlava;
         }
 
         #endregion

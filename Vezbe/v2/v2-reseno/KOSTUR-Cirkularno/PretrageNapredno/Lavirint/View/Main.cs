@@ -61,13 +61,13 @@ namespace Lavirint
                     int tt = lavirint.polja[i,j];
                     if (tt == 2) { // POCETNO STANJE
                         pocetnoStanje = new State();
-                        pocetnoStanje.trenutniCvor = new Node(i, j);
-                        manualRobotPozicija = new Node(i, j);
+                        pocetnoStanje.trenutniCvor = new Node(i, j, new List<int>());
+                        manualRobotPozicija = new Node(i, j, new List<int>());
                         displayPanel1.iconI = i;
                         displayPanel1.iconJ = j;
                     }else if (tt == 3)
                     { // KRAJNJE STANJE
-                        krajnjiNode = new Node(i, j);
+                        krajnjiNode = new Node(i, j, new List<int>());
                     }
                 }
             }
@@ -84,7 +84,7 @@ namespace Lavirint
             int i = 0;
             foreach (State r in resenje)
             {
-                displayPanel1.lavirintPoruke[r.trenutniCvor.markI][r.trenutniCvor.markJ] += " " + i;
+                displayPanel1.lavirintPoruke[r.trenutniCvor.kordinataI][r.trenutniCvor.kordinataJ] += " " + i;
                 i++;
             }
             displayPanel1.Refresh();
@@ -182,10 +182,10 @@ namespace Lavirint
                 int i = 0;
                 foreach (State r in state.getPutanja())
                 {
-                    displayPanel1.lavirintPoruke[r.trenutniCvor.markI][r.trenutniCvor.markJ] += " " + i;
+                    displayPanel1.lavirintPoruke[r.trenutniCvor.kordinataI][r.trenutniCvor.kordinataJ] += " " + i;
                     i++;
                 }
-                displayPanel1.moveIcon(state.trenutniCvor.markI - displayPanel1.iconI, state.trenutniCvor.markJ - displayPanel1.iconJ);
+                displayPanel1.moveIcon(state.trenutniCvor.kordinataI - displayPanel1.iconI, state.trenutniCvor.kordinataJ - displayPanel1.iconJ);
                 displayPanel1.Refresh();
                 Thread.Sleep(50);
             }
@@ -262,10 +262,10 @@ namespace Lavirint
                                 State sledeciPotez = putanja[1];
                                 sledeciPotez.roditeljskoStanje = null;
 
-                                displayPanel1.moveAgentIcon(agentIndex, sledeciPotez.trenutniCvor.markI - displayPanel1.agentPositions[agentIndex][0], sledeciPotez.trenutniCvor.markJ - displayPanel1.agentPositions[agentIndex][1]);
+                                displayPanel1.moveAgentIcon(agentIndex, sledeciPotez.trenutniCvor.kordinataI - displayPanel1.agentPositions[agentIndex][0], sledeciPotez.trenutniCvor.kordinataJ - displayPanel1.agentPositions[agentIndex][1]);
                                 // sledeca pretraga ce krenuti od novog stanja
                                 minimaxAgentiPocetno[agentIndex] = sledeciPotez;
-                                if (Main.manualRobotPozicija.markI == sledeciPotez.trenutniCvor.markI && Main.manualRobotPozicija.markJ == sledeciPotez.trenutniCvor.markJ)
+                                if (Main.manualRobotPozicija.kordinataI == sledeciPotez.trenutniCvor.kordinataI && Main.manualRobotPozicija.kordinataJ == sledeciPotez.trenutniCvor.kordinataJ)
                                 {
                                     gameFinished = true;
                                     lblStatus.Text = "Protivnik je pobedio. :( Vise srece drugi put.";
@@ -277,7 +277,7 @@ namespace Lavirint
                         }
                     }
 
-                    if (Main.manualRobotPozicija.markI == ciljManualRobotica.markI && Main.manualRobotPozicija.markJ == ciljManualRobotica.markJ && gameSpeedTimer.Enabled)
+                    if (Main.manualRobotPozicija.kordinataI == ciljManualRobotica.kordinataI && Main.manualRobotPozicija.kordinataJ == ciljManualRobotica.kordinataJ && gameSpeedTimer.Enabled)
                     {
                         gameSpeedTimer.Enabled = false;
                         displayPanel1.Refresh();
