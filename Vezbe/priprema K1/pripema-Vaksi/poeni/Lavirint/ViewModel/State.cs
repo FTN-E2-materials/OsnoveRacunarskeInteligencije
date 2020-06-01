@@ -109,12 +109,13 @@ namespace Lavirint
 
             for(int i = 0; i < koraci.GetLength(0); i++)
             {
-                int brojKoroka = 1;                                 // inicijalni broj koraka koji figura obavlja
+                int brojKoraka = 1;                                 // inicijalni broj koraka koji figura obavlja
                 while (true)
                 {
-                    ++brojKoroka;
-                    int novoI = markI + koraci[i, 0];
-                    int novoJ = markJ + koraci[i, 1];
+                    
+                    int novoI = markI + brojKoraka * koraci[i, 0];
+                    int novoJ = markJ + brojKoraka * koraci[i, 1];
+                    ++brojKoraka;
 
                     // Ako kordinate nisu validne zavrsavamo istrazivanje za ovo stanje
                     if (!validneKordinate(novoI, novoJ))            
@@ -127,7 +128,7 @@ namespace Lavirint
                         break;
 
                     // Ako je u pitanju kretanje topa i broj koraka je veci/jednak od 2, tu zavrsavamo potez [ takvo pravilo igre - top samo 2 poteza moze ]
-                    if (!kretanjeKonja && brojKoroka >= 2)
+                    if (!kretanjeKonja && brojKoraka >= 2)
                         break;
                 }
 
