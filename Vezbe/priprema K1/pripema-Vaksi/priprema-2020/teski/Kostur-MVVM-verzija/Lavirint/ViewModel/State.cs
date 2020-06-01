@@ -47,6 +47,11 @@ namespace Lavirint
                 
             }
 
+            if(lavirint[markI, markJ] == 6)
+            {
+                rez.cost = 1000000;
+            }
+
 
 
             return rez;

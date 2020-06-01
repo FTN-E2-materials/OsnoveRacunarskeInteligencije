@@ -65,12 +65,15 @@ namespace Lavirint
         public static State krajnjeStanje = null;
         // TODO: Ovde dodajem ako hocu neku recimo listu portala, vatri da cuvam
         // odnosno unapred znam gde su pa ih onda ovde i inicijalizujem
-
+        public static List<Point> pozicijeVatri = null;
 
         private void inicijalizacijaPretrage() {
             displayPanel1.resetLavirintPoruke();
             displayPanel1.resetLavirintPoseceno();
             allSearchStates = new List<State>();
+
+            pozicijeVatri = new List<Point>();
+
             for (int i = 0; i < Main.brojVrsta; i++)
             {
                 for (int j = 0; j < Main.brojKolona; j++)
@@ -87,6 +90,9 @@ namespace Lavirint
                         krajnjeStanje = new State();
                         krajnjeStanje.markI = i;
                         krajnjeStanje.markJ = j;
+                    }else if(tt == 6)
+                    {
+                        pozicijeVatri.Add(new Point(i, j));
                     }
                 }
             }
