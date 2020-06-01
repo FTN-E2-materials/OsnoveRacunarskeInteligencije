@@ -14,7 +14,19 @@ namespace Lavirint
 
         // TODO: Ovde odredjujem/dodajem atribute za moguce korake, atribute da li su kutije pokupljene i slicno.
         //public bool kutijaPokupljena;
-        private static int [,] koraci = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
+        //private static int [,] koraci = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
+        private static int[,] konj = { { -1, -2 }, { -2, -1 }, { -2, 1 }, { -1, 2 }, { 1, 2 }, { 2, 1 }, { 2, -1 }, { 1, -2 } };
+        private static int[,] kraljica = { { 1, 1 }, { -1, 1 }, { 1, -1 }, { -1, -1 }, { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+        private List<int> sakupljeneKutije = new List<int>();
+        private int osvojenoBodova = 0;
+
+        public static int bodoviZaPlavu = 1;
+        public static int bodoviZaZutu = 1;
+        public static int bodoviZaLjubicastu = 1;
+
+        private int pokupljenoZaredomZutih = 0;
+        private int pokupljenoZaredomPlavih = 0;
+        
 
         // TODO: Ovde govorimo sta sledece stanje ima i sta nosi sa sobom
         // voditi da racuna da ono preuzme sve od prethodnog sto treba !
@@ -28,6 +40,59 @@ namespace Lavirint
             rez.level = this.level + 1;
             // TODO: Ovde recimo mozemo dodati da li je kutija pokupljena
             // Pa ako jeste onda atribut za indikaciju pokupljenosti kutije za ovo stanje stavimo na true
+
+            rez.sakupljeneKutije.AddRange(this.sakupljeneKutije);
+            rez.osvojenoBodova = this.osvojenoBodova;
+            rez.pokupljenoZaredomZutih = this.pokupljenoZaredomZutih;
+            rez.pokupljenoZaredomPlavih = this.pokupljenoZaredomPlavih;
+
+            // PLAVA
+            if(lavirint[markI, markJ] == 4 && !this.sakupljeneKutije.Contains(10 * markI + markJ))
+            {
+                rez.sakupljeneKutije.Add(10 * markI + markJ);
+                rez.osvojenoBodova += bodoviZaPlavu;
+                
+                rez.pokupljenoZaredomZutih = 0;
+                if (this.pokupljenoZaredomZutih >= 2)
+                {
+                    rez.cost -= 2;                      // stimulisem da se kupi plava
+                }
+
+                if(this.pokupljenoZaredomPlavih >= 1)
+                {
+                    rez.osvojenoBodova += 1;            //dodatni poen jer je i prethodna bila plava
+                }
+
+                rez.pokupljenoZaredomPlavih++;
+            }
+
+            // ZUTA
+            if (lavirint[markI, markJ] == 5 && !this.sakupljeneKutije.Contains(10 * markI + markJ) && (this.pokupljenoZaredomZutih < 2))
+            {   
+                // napomena: da bi pokupili ovu kutiju mora biti manje od 2 prethodno pokupljenih zaredom zutih kutija
+                rez.sakupljeneKutije.Add(10 * markI + markJ);
+                rez.osvojenoBodova += bodoviZaZutu;
+                rez.pokupljenoZaredomZutih++;
+
+                rez.pokupljenoZaredomPlavih = 0;
+            }
+
+            // LJUBICASTA
+            if(lavirint[markI, markJ] == 6 && !this.sakupljeneKutije.Contains(10 * markI + markJ))
+            {
+                rez.sakupljeneKutije.Add(10 * markI + markJ);
+                rez.osvojenoBodova += bodoviZaLjubicastu;
+                rez.pokupljenoZaredomZutih = 0;
+                rez.pokupljenoZaredomPlavih = 0;
+
+                if (this.pokupljenoZaredomZutih >= 1)
+                {
+                    rez.osvojenoBodova += 2;            // nagrada jer je prethodno bila zuta [ ukupno 3 boda ]
+                }
+
+            }
+
+
 
             return rez;
         }
@@ -62,17 +127,37 @@ namespace Lavirint
         public List<State> mogucaSledecaStanja()
         {
             List<State> validnaSledecaStanja = new List<State>();
+            int[,] koraci = null;
+            bool kretanjeKonja;
+            if(this.osvojenoBodova < 5)
+            {
+                koraci = kraljica;
+                kretanjeKonja = false;
+            }
+            else
+            {
+                koraci = konj;
+                kretanjeKonja = true;
+            }
 
             for(int i = 0; i < koraci.GetLength(0); i++)
             {
-                int novoI = markI + koraci[i, 0];
-                int novoJ = markJ + koraci[i, 1];
-
-                if (validneKordinate(novoI, novoJ))
+                int brojKoraka = 1;
+                while (true)
                 {
-                    validnaSledecaStanja.Add(sledeceStanje(novoI, novoJ));
-                }
+                    
+                    int novoI = markI + brojKoraka * koraci[i, 0];
+                    int novoJ = markJ + brojKoraka * koraci[i, 1];
+                    ++brojKoraka;
 
+                    if (!validneKordinate(novoI, novoJ))
+                        break;
+
+                    validnaSledecaStanja.Add(sledeceStanje(novoI, novoJ));
+
+                    if (kretanjeKonja)
+                        break;
+                }
             }
             return validnaSledecaStanja;
         }
@@ -81,13 +166,23 @@ namespace Lavirint
         public override int GetHashCode()
         {
             int hash = 10 * markI + markJ;
+            int nivoFrekvencije = 100;
+            foreach (int hashPokupljeneKutije in this.sakupljeneKutije)
+            {
+                hash += nivoFrekvencije + hashPokupljeneKutije;
+                nivoFrekvencije += 100;
+            }
             return hash;
         }
 
         // TODO: Ovde menjamo kada se krajnje stanje uslovljava i zavisi od necega
         public bool isKrajnjeStanje()
         {
-            //return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ && kutijaPokupljena;
+            if(this.osvojenoBodova < 5)
+            {
+                return false;
+            }
+
             return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ;
         }
 
