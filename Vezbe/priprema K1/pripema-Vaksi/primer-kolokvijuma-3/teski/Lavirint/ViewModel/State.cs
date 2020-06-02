@@ -16,6 +16,7 @@ namespace Lavirint
         // TODO: Ovde odredjujem/dodajem atribute za moguce korake, atribute da li su kutije pokupljene i slicno.
         //public bool kutijaPokupljena;
         private static int[,] top = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
+        int[,] kraljica = { { 1, 1 }, { -1, 1 }, { 1, -1 }, { -1, -1 }, { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
 
         private List<int> pokupljeneKutije = new List<int>();
         private bool pokupljenaZastavica = false;
@@ -143,10 +144,10 @@ namespace Lavirint
         {
             List<State> validnaSledecaStanja = new List<State>();
             int[,] koraci = null;
-            bool jednoPoteznaFigura = true;                     // u zavisnosti mogucnosti kretanja figure, podesavam ovaj parametar
+            bool jednoPoteznaFigura = false;                     // u zavisnosti mogucnosti kretanja figure, podesavam ovaj parametar
 
             //TODO: U zavisnosti od uslova menjam korake
-            koraci = top;
+            koraci = kraljica;
 
             for(int i = 0; i < koraci.GetLength(0); i++)
             {
