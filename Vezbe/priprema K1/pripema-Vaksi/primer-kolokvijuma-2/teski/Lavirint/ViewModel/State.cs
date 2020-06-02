@@ -14,8 +14,12 @@ namespace Lavirint
 
         // TODO: Ovde odredjujem/dodajem atribute za moguce korake, atribute da li su kutije pokupljene i slicno.
         //public bool kutijaPokupljena;
-        private static int[,] top = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
+        private static int[,] kraljica = { { 1, 1 }, { -1, 1 }, { 1, -1 }, { -1, -1 }, { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+        private static int[,] kralj = { { 1, 1 }, { -1, 1 }, { 1, -1 }, { -1, -1 }, { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
 
+        private List<int> pokupljeneKutije = new List<int>();
+        private int pokupljenoPlavih = 0;
+        private int pokupljenoZutih = 0;
 
 
         // TODO: Ovde govorimo sta sledece stanje ima i sta nosi sa sobom
@@ -30,7 +34,43 @@ namespace Lavirint
             rez.level = this.level + 1;
             // TODO: Ovde recimo mozemo dodati da li je kutija pokupljena
             // Pa ako jeste onda atribut za indikaciju pokupljenosti kutije za ovo stanje stavimo na true
+            rez.pokupljeneKutije.AddRange(this.pokupljeneKutije);
+            rez.pokupljenoPlavih = this.pokupljenoPlavih;
+            rez.pokupljenoZutih = this.pokupljenoZutih;
 
+            if(lavirint[markI, markJ] == 4 && !this.pokupljeneKutije.Contains(10 * markI + markJ))
+            {
+                // Dozvola kupljenja samo za razliku manju/jednaku od 1, tj kako se ne bi desilo da imamo 2 i onda dodamo
+                // pa imamo 3 vise plave [ zabranjeno po pravilu igre ]
+                // sada razlika moze otici max na 2 [ sto je trazeno u pravilu igre ]
+                if( (rez.pokupljenoPlavih - rez.pokupljenoZutih) <= 1)
+                {
+                    rez.pokupljeneKutije.Add(10 * markI + markJ);
+                    rez.pokupljenoPlavih++;
+                }
+                else
+                {
+                    return null;
+                }
+                
+            }
+
+            if (lavirint[markI, markJ] == 5 && !this.pokupljeneKutije.Contains(10 * markI + markJ))
+            {
+                // Dozvola kupljenja samo u slucaju kada je razlika veca jednaka 2
+                // jer se onda razlika smanjuje na 1 posto kupimo zutu
+                if ((rez.pokupljenoPlavih - rez.pokupljenoZutih) >= 2)
+                {
+                    rez.pokupljeneKutije.Add(10 * markI + markJ);
+                    rez.pokupljenoZutih++;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            
             return rez;
         }
 
@@ -41,9 +81,19 @@ namespace Lavirint
         {
             List<State> validnaSledecaStanja = new List<State>();
             int[,] koraci = null;
+            bool jednoPoteznaFigura = false;
 
             //TODO: U zavisnosti od uslova menjam korake
-            koraci = top;
+            if (this.pokupljenoZutih >= 1)
+            {
+                koraci = kralj;
+                jednoPoteznaFigura = true;
+            }
+            else
+            {
+                koraci = kraljica;
+            }
+            
 
             for(int i = 0; i < koraci.GetLength(0); i++)
             {
@@ -60,13 +110,20 @@ namespace Lavirint
                     // Odma prekidam istrazivanje ako su kordinate nevalidne
                     if (!validneKordinate(novoI, novoJ))
                         break;
-                    
-                    // U suprotnosti ih dodajem kao sledeca validna stanja
-                    validnaSledecaStanja.Add(sledeceStanje(novoI, novoJ));
 
-                    // Ovde obicno prekidam istrazivanja u odnosu na mogucnosti odredjene figure
-                    // sada cisto radi brze pretrage HC stavljam samo na 2 moguca poteza[moc pomeraja ka jednoj strani za 2]
-                    if (brojKoraka >= 2)
+                    // U suprotnosti ih dodajem kao sledeca validna stanja
+                    State validnoStanje = new State();
+                    validnoStanje = sledeceStanje(novoI, novoJ);
+
+                    // Kako bih obisao zapravo samo ona na koja mogu stati
+                    // voditi racuna o ovome !
+                    if (!(validnoStanje is null))
+                        validnaSledecaStanja.Add(validnoStanje);
+                    else
+                        break;
+
+                    // Kraj igre kada je u pitanju samo jedno potezna figura
+                    if (jednoPoteznaFigura)
                         break;
 
                 }
@@ -79,12 +136,31 @@ namespace Lavirint
         public override int GetHashCode()
         {
             int hash = 10 * markI + markJ;
+            int nivoFrekvencije = 100;
+            foreach (int hashPokupljeneKutije in this.pokupljeneKutije)
+            {
+                hash += nivoFrekvencije + hashPokupljeneKutije;
+                nivoFrekvencije += 1000;
+            }
             return hash;
         }
 
         // TODO: Ovde menjamo kada se krajnje stanje uslovljava i zavisi od necega
         public bool isKrajnjeStanje()
         {
+            // Ako imam vise zutih ili jednako to nije definitivno valjano stanje za kraj
+            // razlika mora biti bar 1 da bi bio kraj
+            if((this.pokupljenoPlavih - this.pokupljenoZutih) <= 0)
+            {
+                return false;
+            }
+
+            // Bar jedna zuta mora biti da bi bilo true
+            if(this.pokupljenoZutih <= 0)
+            {
+                return false;
+            }
+
             return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ;
         }
 
