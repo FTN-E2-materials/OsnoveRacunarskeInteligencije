@@ -22,6 +22,35 @@ namespace Lavirint
 
         private int pokupljenoPlavih = 0;                               // plava kutija predstavlja municiju
 
+        private List<Senzor> mojiProtivnici;
+        
+        private List<Senzor> postaviMojeProtivnike()
+        {
+            List<Senzor> protivnici = new List<Senzor>();
+            foreach (Senzor protivnik in Main.protivnici)
+            {
+                Senzor noviProtivnik = new Senzor(protivnik.KordinataX, protivnik.KordinataY, true, 2);
+                protivnici.Add(noviProtivnik);
+
+            }
+            return protivnici;
+
+        }
+
+        private List<Senzor> preuzmiMojePrethodneProtivnike()
+        {
+            List<Senzor> protivnici = new List<Senzor>();
+            if (this.mojiProtivnici is null)
+                return null;
+            foreach (Senzor protivnik in this.mojiProtivnici)
+            {
+                Senzor noviProtivnik = new Senzor(protivnik.KordinataX, protivnik.KordinataY, protivnik.Aktivan, protivnik.ReonSenzora);
+                protivnici.Add(noviProtivnik);
+
+            }
+            return protivnici;
+
+        }
 
         // TODO: Ovde govorimo sta sledece stanje ima i sta nosi sa sobom
         // voditi da racuna da ono preuzme sve od prethodnog sto treba !
@@ -38,9 +67,16 @@ namespace Lavirint
             rez.pokupljeneKutije.AddRange(this.pokupljeneKutije);
             rez.pokupljenaZastavica = this.pokupljenaZastavica;
             rez.pokupljenoPlavih = this.pokupljenoPlavih;
+            rez.mojiProtivnici = postaviMojeProtivnike();
+            if(!(preuzmiMojePrethodneProtivnike() is null))
+                rez.mojiProtivnici = preuzmiMojePrethodneProtivnike();
 
-            foreach (Senzor protivnik in Main.protivnici)
+            foreach (Senzor protivnik in rez.mojiProtivnici)
             {
+                // Samo su bitni aktivirani senzori(zivi neprijatelji)
+                if (!protivnik.Aktivan)
+                    continue;
+
                 List<int> poljaPodSenzorom = protivnik.getPoljaPodSenzorom();
                 if(poljaPodSenzorom.Contains(10*markI + markJ))
                 {   // ovo stanje ne moze biti u opticaju jer se nalazi u reonu senzora !
@@ -49,6 +85,10 @@ namespace Lavirint
                 
             }
 
+            /*
+             * Da bih ubio neprijatelja, moram imati bar jednu plavu
+             * i mora mi biti na dijagonali, vertikali, horizontali
+             */
 
             // ZASTAVICA
             if(lavirint[markI, markJ] == 3 && !this.pokupljeneKutije.Contains(10 * markI + markJ))
@@ -57,23 +97,43 @@ namespace Lavirint
                 rez.pokupljenaZastavica = true;
             }
 
-            //MUNICIJA
+            // MUNICIJA
             if (lavirint[markI, markJ] == 4 && !this.pokupljeneKutije.Contains(10 * markI + markJ))
             {
                 rez.pokupljeneKutije.Add(10 * markI + markJ);
                 rez.pokupljenoPlavih++;
             }
 
+            // Atentat
+            if (rez.pokupljenoPlavih >= 1 && neprijateljNaNisanu())
+            {
+                foreach (Senzor protivnik in rez.mojiProtivnici)
+                {
+                    // TODO: Ovde optimizovati koga ce da ubije
+                    // TODO: Ovde resiti kad sme da puca
+                    // odnosno ko mu najvise smeta do cilja
+                    protivnik.Aktivan = false;
+                    break;
+                }
+                rez.pokupljenoPlavih--;
+                pucaj(markI, markI);
+            }
+
 
             return rez;
         }
 
-        private static void pucaj(int markI, int markJ)
+        private void pucaj(int i, int j)
         {
             Console.WriteLine("\n------- BAM --------");
             Console.WriteLine("\nPuc puc, ozezi ozezi");
-            Console.WriteLine("Pucao sa kordinata: " + "(" + markI + ", " + markJ + ")");
+            Console.WriteLine("Pucao sa kordinata: " + "(" + i + ", " + j + ")");
             Console.WriteLine("\n------- Dead -------\n");
+        }
+
+        private bool neprijateljNaNisanu()
+        {
+            return true;
         }
 
 
@@ -168,6 +228,7 @@ namespace Lavirint
 
             return true;
         }
+
 
 
         public List<State> path()

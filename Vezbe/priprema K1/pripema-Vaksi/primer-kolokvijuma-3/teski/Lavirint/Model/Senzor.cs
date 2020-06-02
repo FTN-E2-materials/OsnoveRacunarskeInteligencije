@@ -11,11 +11,30 @@ namespace Lavirint.Model
     public class Senzor
     {
         #region Atributi + property
-        private static int reonSenzora = 2;
-        private int kordinataX;
-        private int kordinataY;
 
+        private int _reonSenzora;
+        private int _kordinataX;
+        private int _kordinataY;
         private bool _aktivan;
+
+
+        public int ReonSenzora
+        {
+            get { return _reonSenzora; }
+            set { _reonSenzora = value; }
+        }
+
+        public int KordinataX
+        {
+            get { return _kordinataX; }
+            set { _kordinataX = value; }
+        }
+
+        public int KordinataY
+        {
+            get { return _kordinataY; }
+            set { _kordinataY = value; }
+        }
 
         public bool Aktivan
         {
@@ -28,17 +47,35 @@ namespace Lavirint.Model
         #region Konstruktori
         public Senzor(int x, int y)
         {
-            this.kordinataX = x;
-            this.kordinataY = y;
+            ReonSenzora = 2;
+            KordinataX = x;
+            KordinataY = y;
+            Aktivan = false;
+        }
+        public Senzor(int x, int y, int reonSenzora)
+        {
+            ReonSenzora = reonSenzora;
+            KordinataX = x;
+            KordinataY = y;
             Aktivan = false;
         }
 
         public Senzor(int x, int y, bool statusAktivacije)
         {
-            this.kordinataX = x;
-            this.kordinataY = y;
+            ReonSenzora = 2;
+            KordinataX = x;
+            KordinataY = y;
             Aktivan = statusAktivacije;
         }
+
+        public Senzor(int x, int y, bool statusAktivacije, int reonSenzora)
+        {
+            ReonSenzora = reonSenzora;
+            KordinataX = x;
+            KordinataY = y;
+            Aktivan = statusAktivacije;
+        }
+
         #endregion
 
         /// <summary>
@@ -49,17 +86,17 @@ namespace Lavirint.Model
         {
             List<int> poljaPodSenzorom = new List<int>();
 
-            for (int i = -reonSenzora; i <= reonSenzora; ++i)
+            for (int i = -ReonSenzora; i <= ReonSenzora; ++i)
             {
-                int novoX = kordinataX + i;
+                int novoX = KordinataX + i;
 
                 //Provera da li je x kordinata u reonu table citave igre
                 if (novoX < 0 || novoX >= Main.brojVrsta)
                     continue;
 
-                for (int j = -reonSenzora; j <= reonSenzora; ++j)
+                for (int j = -ReonSenzora; j <= ReonSenzora; ++j)
                 {
-                    int novoY = kordinataY + j;
+                    int novoY = KordinataY + j;
 
                     //Provera da li je y kordinata u reonu table citave igre
                     if (novoY < 0 || novoY >= Main.brojKolona)
