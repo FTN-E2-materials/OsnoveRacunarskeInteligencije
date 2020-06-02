@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Senzor.cs" />
     <Compile Include="ViewModel\Pretrage\ADepthSearch.cs" />
     <Compile Include="ViewModel\Pretrage\AStarSearch.cs" />
     <Compile Include="ViewModel\Pretrage\BreadthFirstSearch.cs">
