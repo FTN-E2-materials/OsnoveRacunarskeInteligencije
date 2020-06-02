@@ -41,6 +41,7 @@ namespace Lavirint
         {
             List<State> validnaSledecaStanja = new List<State>();
             int[,] koraci = null;
+            bool jednoPoteznaFigura = true;                     // u zavisnosti mogucnosti kretanja figure, podesavam ovaj parametar
 
             //TODO: U zavisnosti od uslova menjam korake
             koraci = top;
@@ -64,9 +65,8 @@ namespace Lavirint
                     // U suprotnosti ih dodajem kao sledeca validna stanja
                     validnaSledecaStanja.Add(sledeceStanje(novoI, novoJ));
 
-                    // Ovde obicno prekidam istrazivanja u odnosu na mogucnosti odredjene figure
-                    // sada cisto radi brze pretrage HC stavljam samo na 2 moguca poteza[moc pomeraja ka jednoj strani za 2]
-                    if (brojKoraka >= 2)
+                    // Restrikcija kretanja na jedan potez samo [za jedno potezne figure]
+                    if (jednoPoteznaFigura)
                         break;
 
                 }
