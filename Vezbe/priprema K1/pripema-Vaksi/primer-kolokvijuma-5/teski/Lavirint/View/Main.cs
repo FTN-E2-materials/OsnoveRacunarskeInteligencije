@@ -10,6 +10,7 @@ using System.Xml.Serialization;
 using System.Collections;
 using System.Diagnostics;
 using System.Threading;
+using Lavirint.Model;
 
 namespace Lavirint
 {
@@ -65,12 +66,15 @@ namespace Lavirint
         public static State krajnjeStanje = null;
         // TODO: Ovde dodajem ako hocu neku recimo listu portala, vatri da cuvam
         // odnosno unapred znam gde su pa ih onda ovde i inicijalizujem
-
+        public static List<Senzor> senzori = null;
 
         private void inicijalizacijaPretrage() {
             displayPanel1.resetLavirintPoruke();
             displayPanel1.resetLavirintPoseceno();
             allSearchStates = new List<State>();
+
+            senzori = new List<Senzor>();
+
             for (int i = 0; i < Main.brojVrsta; i++)
             {
                 for (int j = 0; j < Main.brojKolona; j++)
@@ -87,6 +91,10 @@ namespace Lavirint
                         krajnjeStanje = new State();
                         krajnjeStanje.markI = i;
                         krajnjeStanje.markJ = j;
+                    }else if(tt == 6)
+                    {
+                        Senzor noviSenzor = new Senzor(i, j, true, 2);
+                        senzori.Add(noviSenzor);
                     }
                 }
             }
@@ -198,7 +206,7 @@ namespace Lavirint
                 }
                 displayPanel1.moveIcon(state.markI - displayPanel1.iconI, state.markJ - displayPanel1.iconJ);
                 displayPanel1.Refresh();
-                Thread.Sleep(50);
+                Thread.Sleep(30);
             }
         }
     }
