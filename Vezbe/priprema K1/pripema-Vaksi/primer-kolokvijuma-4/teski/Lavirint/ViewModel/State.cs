@@ -14,7 +14,13 @@ namespace Lavirint
 
         // TODO: Ovde odredjujem/dodajem atribute za moguce korake, atribute da li su kutije pokupljene i slicno.
         //public bool kutijaPokupljena;
-        private static int[,] top = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
+        private static int[,] konj = { { -1, -2 }, { -2, -1 }, { -2, 1 }, { -1, 2 }, { 1, 2 }, { 2, 1 }, { 2, -1 }, { 1, -2 } };
+        private static int[,] kraljica = { { 1, 1 }, { -1, 1 }, { 1, -1 }, { -1, -1 }, { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+
+        private List<int> pokupljeneKutije = new List<int>();
+        private bool pokupljenaZuta;
+
+        private int obidjenoZivogPeskaZaredom = 0;
 
 
 
@@ -30,6 +36,36 @@ namespace Lavirint
             rez.level = this.level + 1;
             // TODO: Ovde recimo mozemo dodati da li je kutija pokupljena
             // Pa ako jeste onda atribut za indikaciju pokupljenosti kutije za ovo stanje stavimo na true
+            rez.pokupljeneKutije.AddRange(this.pokupljeneKutije);
+            rez.pokupljenaZuta = this.pokupljenaZuta;
+            rez.obidjenoZivogPeskaZaredom = this.obidjenoZivogPeskaZaredom;
+
+
+            // Zuta kutija za kupljenje
+            if(lavirint[markI, markJ] == 5 && !this.pokupljeneKutije.Contains(10 * markI + markJ))
+            {
+                rez.pokupljeneKutije.Add(10 * markI + markJ);
+                rez.pokupljenaZuta = true;
+                rez.obidjenoZivogPeskaZaredom = 0;
+            }
+
+
+            // Zivi pesak
+            if(lavirint[markI, markJ] == 7)
+            {
+                if (rez.obidjenoZivogPeskaZaredom >= 2)
+                    return null;
+
+                rez.obidjenoZivogPeskaZaredom++;
+            }
+
+            // Plave kutije
+            if (lavirint[markI, markJ] == 4 && !this.pokupljeneKutije.Contains(10 * markI + markJ))
+            {
+                rez.pokupljeneKutije.Add(10 * markI + markJ);
+                rez.obidjenoZivogPeskaZaredom--;
+                
+            }
 
             return rez;
         }
@@ -44,7 +80,16 @@ namespace Lavirint
             bool jednoPoteznaFigura = true;                     // u zavisnosti mogucnosti kretanja figure, podesavam ovaj parametar
 
             //TODO: U zavisnosti od uslova menjam korake
-            koraci = top;
+            if (!this.pokupljenaZuta)
+            {
+                koraci = konj;
+            }
+            else
+            {
+                koraci = kraljica;
+                jednoPoteznaFigura = false;
+            }
+            
 
             for(int i = 0; i < koraci.GetLength(0); i++)
             {
@@ -61,9 +106,16 @@ namespace Lavirint
                     // Odma prekidam istrazivanje ako su kordinate nevalidne
                     if (!validneKordinate(novoI, novoJ))
                         break;
-                    
-                    // U suprotnosti ih dodajem kao sledeca validna stanja
-                    validnaSledecaStanja.Add(sledeceStanje(novoI, novoJ));
+
+                    State validnoStanje = new State();
+                    validnoStanje = sledeceStanje(novoI, novoJ);
+
+                    // Kako bih obisao zapravo samo ona na koja mogu stati
+                    // voditi racuna o ovome !
+                    if (!(validnoStanje is null))
+                        validnaSledecaStanja.Add(validnoStanje);
+                    else
+                        break;
 
                     // Restrikcija kretanja na jedan potez samo [za jedno potezne figure]
                     if (jednoPoteznaFigura)
@@ -79,12 +131,21 @@ namespace Lavirint
         public override int GetHashCode()
         {
             int hash = 10 * markI + markJ;
+            int nivoFrekvencije = 100;
+            foreach (int hashPokupljeneKutije in this.pokupljeneKutije)
+            {
+                hash += nivoFrekvencije + hashPokupljeneKutije;
+                nivoFrekvencije += 100;
+            }
             return hash;
         }
 
         // TODO: Ovde menjamo kada se krajnje stanje uslovljava i zavisi od necega
         public bool isKrajnjeStanje()
         {
+            if (!this.pokupljenaZuta)
+                return false;
+
             return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ;
         }
 
