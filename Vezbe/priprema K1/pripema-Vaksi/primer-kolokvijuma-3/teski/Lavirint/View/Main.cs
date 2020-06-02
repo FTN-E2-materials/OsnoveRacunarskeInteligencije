@@ -10,6 +10,7 @@ using System.Xml.Serialization;
 using System.Collections;
 using System.Diagnostics;
 using System.Threading;
+using Lavirint.Model;
 
 namespace Lavirint
 {
@@ -66,30 +67,43 @@ namespace Lavirint
         // TODO: Ovde dodajem ako hocu neku recimo listu portala, vatri da cuvam
         // odnosno unapred znam gde su pa ih onda ovde i inicijalizujem
 
+        public static List<Senzor> protivnici = null;
 
         private void inicijalizacijaPretrage() {
             displayPanel1.resetLavirintPoruke();
             displayPanel1.resetLavirintPoseceno();
             allSearchStates = new List<State>();
+
+            protivnici = new List<Senzor>();
+
             for (int i = 0; i < Main.brojVrsta; i++)
             {
                 for (int j = 0; j < Main.brojKolona; j++)
                 {
                     int tt = State.lavirint[i,j];
                     if (tt == 2) { // POCETNO STANJE
+                        // Zelena je pocetno stanje
                         pocetnoStanje = new State();
                         pocetnoStanje.markI = i;
                         pocetnoStanje.markJ = j;
-                        displayPanel1.iconI = i;
-                        displayPanel1.iconJ = j;
-                    }else if (tt == 3)
-                    { // KRAJNJE STANJE
+
+                        // Zelena je i krajnje stanje
                         krajnjeStanje = new State();
                         krajnjeStanje.markI = i;
                         krajnjeStanje.markJ = j;
+
+                        displayPanel1.iconI = i;
+                        displayPanel1.iconJ = j;
+                    }else if(tt == 5) { // neprijatelj
+
+                        Senzor senzor = new Senzor(i, j, true);
+                        protivnici.Add(senzor);
+
                     }
+                   
                 }
             }
+
         }
 
         List<State> resenje = new List<State>();

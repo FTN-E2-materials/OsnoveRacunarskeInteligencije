@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lavirint.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -16,6 +17,10 @@ namespace Lavirint
         //public bool kutijaPokupljena;
         private static int[,] top = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
 
+        private List<int> pokupljeneKutije = new List<int>();
+        private bool pokupljenaZastavica = false;
+
+        private int pokupljenoPlavih = 0;                               // plava kutija predstavlja municiju
 
 
         // TODO: Ovde govorimo sta sledece stanje ima i sta nosi sa sobom
@@ -30,17 +35,55 @@ namespace Lavirint
             rez.level = this.level + 1;
             // TODO: Ovde recimo mozemo dodati da li je kutija pokupljena
             // Pa ako jeste onda atribut za indikaciju pokupljenosti kutije za ovo stanje stavimo na true
+            rez.pokupljeneKutije.AddRange(this.pokupljeneKutije);
+            rez.pokupljenaZastavica = this.pokupljenaZastavica;
+            rez.pokupljenoPlavih = this.pokupljenoPlavih;
+
+            foreach (Senzor protivnik in Main.protivnici)
+            {
+                List<int> poljaPodSenzorom = protivnik.getPoljaPodSenzorom();
+                if(poljaPodSenzorom.Contains(10*markI + markJ))
+                {   // ovo stanje ne moze biti u opticaju jer se nalazi u reonu senzora !
+                    return null;            // zbog toga vracam null
+                }
+                
+            }
+
+
+            // ZASTAVICA
+            if(lavirint[markI, markJ] == 3 && !this.pokupljeneKutije.Contains(10 * markI + markJ))
+            {
+                rez.pokupljeneKutije.Add(10 * markI + markJ);
+                rez.pokupljenaZastavica = true;
+            }
+
+            //MUNICIJA
+            if (lavirint[markI, markJ] == 4 && !this.pokupljeneKutije.Contains(10 * markI + markJ))
+            {
+                rez.pokupljeneKutije.Add(10 * markI + markJ);
+                rez.pokupljenoPlavih++;
+            }
+
 
             return rez;
         }
 
-        
+        private static void pucaj(int markI, int markJ)
+        {
+            Console.WriteLine("\n------- BAM --------");
+            Console.WriteLine("\nPuc puc, ozezi ozezi");
+            Console.WriteLine("Pucao sa kordinata: " + "(" + markI + ", " + markJ + ")");
+            Console.WriteLine("\n------- Dead -------\n");
+        }
+
+
         // TODO: Ovde odredjujemo moguca sledeca kretanja
         // Ako se nista posebno ne trazi, ovo je dovoljno.
         public List<State> mogucaSledecaStanja()
         {
             List<State> validnaSledecaStanja = new List<State>();
             int[,] koraci = null;
+            bool jednoPoteznaFigura = true;                     // u zavisnosti mogucnosti kretanja figure, podesavam ovaj parametar
 
             //TODO: U zavisnosti od uslova menjam korake
             koraci = top;
@@ -60,13 +103,20 @@ namespace Lavirint
                     // Odma prekidam istrazivanje ako su kordinate nevalidne
                     if (!validneKordinate(novoI, novoJ))
                         break;
-                    
-                    // U suprotnosti ih dodajem kao sledeca validna stanja
-                    validnaSledecaStanja.Add(sledeceStanje(novoI, novoJ));
 
-                    // Ovde obicno prekidam istrazivanja u odnosu na mogucnosti odredjene figure
-                    // sada cisto radi brze pretrage HC stavljam samo na 2 moguca poteza[moc pomeraja ka jednoj strani za 2]
-                    if (brojKoraka >= 2)
+                    // U suprotnosti ih dodajem kao sledeca validna stanja
+                    State validnoStanje = new State();
+                    validnoStanje = sledeceStanje(novoI, novoJ);
+
+                    // Kako bih obisao zapravo samo ona na koja mogu stati
+                    // voditi racuna o ovome !
+                    if (!(validnoStanje is null))
+                        validnaSledecaStanja.Add(validnoStanje);
+                    else
+                        break;
+
+                    // Restrikcija kretanja na jedan potez samo [za jedno potezne figure]
+                    if (jednoPoteznaFigura)
                         break;
 
                 }
@@ -79,12 +129,21 @@ namespace Lavirint
         public override int GetHashCode()
         {
             int hash = 10 * markI + markJ;
+            int nivoFrekvencije = 100;
+            foreach (int hashPokupljeneKutije in this.pokupljeneKutije)
+            {
+                hash += nivoFrekvencije + hashPokupljeneKutije;
+                nivoFrekvencije += 100;
+            }
             return hash;
         }
 
         // TODO: Ovde menjamo kada se krajnje stanje uslovljava i zavisi od necega
         public bool isKrajnjeStanje()
         {
+            if (!this.pokupljenaZastavica) { 
+                return false;
+            }
             return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ;
         }
 
@@ -109,6 +168,7 @@ namespace Lavirint
 
             return true;
         }
+
 
         public List<State> path()
         {
