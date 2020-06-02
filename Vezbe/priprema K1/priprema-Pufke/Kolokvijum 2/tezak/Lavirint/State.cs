@@ -263,10 +263,11 @@ namespace Lavirint
         public override int GetHashCode()
         {
             int code = 10 * markI + markJ;
-         
+            int m = 100;
             foreach (int codeSakupljenogPolja in this.listaSakupljenihKutija)
             {
                 code += codeSakupljenogPolja;
+              
             }
             return code;
         }

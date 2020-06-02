@@ -47,38 +47,28 @@ namespace Lavirint
             }
 
             if (skupljenBrojPoena < 20) {//Kretnja kao TOP
-                  for (int i = 1; i <= Main.brojVrsta; i += 1)
-                {
+                  for (int i = 1; i <= Main.brojVrsta; i += 1) {
                     int newMarkI = markI + i;
 
-
-                    if (newMarkI >= 0 && newMarkI < Main.brojVrsta)
-                    {
-                        if (markJ >= 0 && markJ < Main.brojKolona)
-                        {
-                            if (lavirint[newMarkI, markJ] == 1)
-                            {
+                    if (newMarkI >= 0 && newMarkI < Main.brojVrsta){
+                        if (markJ >= 0 && markJ < Main.brojKolona){
+                            if (lavirint[newMarkI, markJ] == 1){
                                 break;
                             }
-                            if (lavirint[newMarkI, markJ] != 1)
-                            {
+                            if (lavirint[newMarkI, markJ] != 1) {
                                 State novo = sledeceStanje(newMarkI, markJ);
                                 rez.Add(novo);
                             }
                         }
                     }
-                }
+                  }
 
-                for (int j = 1; j <= Main.brojVrsta; j += 1)
-                {
+                 for (int j = 1; j <= Main.brojVrsta; j += 1){
                     int newMarkJ = markJ - j;
-
-                    if (markI >= 0 && markI < Main.brojVrsta)
-                    {
-                        if (newMarkJ >= 0 && newMarkJ < Main.brojKolona)
-                        {
-                            if (lavirint[markI, newMarkJ] == 1)
-                            {
+                    
+                    if (markI >= 0 && markI < Main.brojVrsta){
+                        if (newMarkJ >= 0 && newMarkJ < Main.brojKolona) {
+                            if (lavirint[markI, newMarkJ] == 1){
                                 break;
                             }
                             if (lavirint[markI, newMarkJ] != 1)
@@ -90,20 +80,15 @@ namespace Lavirint
                     }
                 }
 
-                for (int i = 1; i <= Main.brojVrsta; i += 1)
-                {
+                for (int i = 1; i <= Main.brojVrsta; i += 1){
                     int newMarkI = markI - i;
 
-                    if (newMarkI >= 0 && newMarkI < Main.brojVrsta)
-                    {
-                        if (markJ >= 0 && markJ < Main.brojKolona)
-                        {
-                            if (lavirint[newMarkI, markJ] == 1)
-                            {
+                    if (newMarkI >= 0 && newMarkI < Main.brojVrsta){
+                        if (markJ >= 0 && markJ < Main.brojKolona){
+                            if (lavirint[newMarkI, markJ] == 1){
                                 break;
                             }
-                            if (lavirint[newMarkI, markJ] != 1)
-                            {
+                            if (lavirint[newMarkI, markJ] != 1){
                                 State novo = sledeceStanje(newMarkI, markJ);
                                 rez.Add(novo);
                             }
@@ -116,16 +101,12 @@ namespace Lavirint
 
                     int newMarkJ = markJ + j;
 
-                    if (markI >= 0 && markI < Main.brojVrsta)
-                    {
-                        if (newMarkJ >= 0 && newMarkJ < Main.brojKolona)
-                        {
-                            if (lavirint[markI, newMarkJ] == 1)
-                            {
+                    if (markI >= 0 && markI < Main.brojVrsta){
+                        if (newMarkJ >= 0 && newMarkJ < Main.brojKolona){
+                            if (lavirint[markI, newMarkJ] == 1) {
                                 break;
                             }
-                            if (lavirint[markI, newMarkJ] != 1)
-                            {
+                            if (lavirint[markI, newMarkJ] != 1){
                                 State novo = sledeceStanje(markI, newMarkJ);
                                 rez.Add(novo);
                             }
@@ -164,10 +145,11 @@ namespace Lavirint
         public override int GetHashCode()
         {
             int code = 10 * markI + markJ;
-         
+           
             foreach (int codeSakupljenogPolja in this.listaSakupljenihKutija)
             {
                 code += codeSakupljenogPolja;
+             
             }
             return code;
         }
