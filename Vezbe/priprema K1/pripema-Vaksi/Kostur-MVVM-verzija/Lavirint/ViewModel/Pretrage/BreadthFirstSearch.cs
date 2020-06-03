@@ -6,34 +6,36 @@ using System.Windows.Forms;
 
 namespace Lavirint
 {
+    /// <summary>
+    /// Klasa predstavnica slepe pretrage koja nam daje OPTIMALNO resenje.
+    /// 
+    /// FIFO princip
+    /// </summary>
     class BreadthFirstSearch
     {   
-        /*
-         * Slepa pretraga koja daje optimalno resenje.
-         * Koristicemo strukturu FIFO[first in, first out],
-         * odnosno skdamo sa pocetka i dodajemo na kraj.
-         */
         public State search(State pocetnoStanje)
         {
-            List<State> stanjaNaObradi = new List<State>();                     // simuliramo FIFO
-            Hashtable predjeniPut = new Hashtable();                            // za pamcenje stanja u kojima je robot bio
+            List<State> stanjaNaObradi = new List<State>();                     
+            Hashtable vecPosecenaStanja = new Hashtable();   
+            
             stanjaNaObradi.Add(pocetnoStanje);
+
             while (stanjaNaObradi.Count > 0)
             {
                 State naObradi = stanjaNaObradi[0];
 
-                if (!predjeniPut.ContainsKey(naObradi.GetHashCode()))           // obradjujemo samo ne posecena stanja
+                if (!vecPosecenaStanja.ContainsKey(naObradi.GetHashCode()))           
                 {
-                    Main.allSearchStates.Add(naObradi);                         // sluzi za prikaz u debug rezimu
-                    if (naObradi.isKrajnjeStanje())                             // zavrsavamo ako je stanje krajnje
+                    Main.allSearchStates.Add(naObradi);                         
+                    if (naObradi.isKrajnjeStanje())                            
                     {
                         return naObradi;
                     }
-                    predjeniPut.Add(naObradi.GetHashCode(), null);              // belezimo da smo obisli ovo stanje
+                    vecPosecenaStanja.Add(naObradi.GetHashCode(), null);              
                     List<State> mogucaSledecaStanja = naObradi.mogucaSledecaStanja();
-                    stanjaNaObradi.AddRange(mogucaSledecaStanja);               // sva moguca sledeca stanja se dodaju na
-                }                                                               // pocetak liste
-                stanjaNaObradi.Remove(naObradi);                                // uklanjamo trenutno stanje.
+                    stanjaNaObradi.AddRange(mogucaSledecaStanja);               
+                }                                                               
+                stanjaNaObradi.Remove(naObradi);                                
             }
             return null;
         }

@@ -5,30 +5,30 @@ using System.Collections;
 
 namespace Lavirint
 {
+    /// <summary>
+    /// Klasa predstavnica vodjene pretrage koja daje najbolja resenja po heuristici
+    /// </summary>
     class AStarSearch
     {
-        /*
-         * Vodjena pretraga koja uzima najbolja resenje po heuristici.
-         * Za pamcenje stanja opet koristimo Hastable
-         */
         public State search(State pocetnoStanje)
         {
             List<State> stanjaZaObradu = new List<State>();
-            Hashtable predjeniPut = new Hashtable();
+            Hashtable vecPosecenaStanja = new Hashtable();
+
             stanjaZaObradu.Add(pocetnoStanje);
 
             while (stanjaZaObradu.Count > 0)
             {
                 State naObradi = getBest(stanjaZaObradu);
 
-                if (!predjeniPut.ContainsKey(naObradi.GetHashCode()))
+                if (!vecPosecenaStanja.ContainsKey(naObradi.GetHashCode()))
                 {
                     Main.allSearchStates.Add(naObradi);
                     if (naObradi.isKrajnjeStanje())
                     {
                         return naObradi;
                     }
-                    predjeniPut.Add(naObradi.GetHashCode(),null);
+                    vecPosecenaStanja.Add(naObradi.GetHashCode(),null);
                     List<State> sledecaStanja = naObradi.mogucaSledecaStanja();
 
                     foreach (State s in sledecaStanja)

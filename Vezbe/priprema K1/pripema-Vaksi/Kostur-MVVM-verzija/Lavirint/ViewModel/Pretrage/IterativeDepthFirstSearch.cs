@@ -6,18 +6,15 @@ using System.Windows.Forms;
 
 namespace Lavirint
 {
+    /// <summary>
+    /// Klasa predstavnica DFS-a, samo dekomponovana po nivoima.
+    /// </summary>
     class IterativeDeepFirstSeach
     {
-        /*
-         * Pretrazi se prosledjuje pocetno stanje i maksimalna dubina do koje 
-         * zelimo da pretraga ide.
-         * 
-         * Pretrazujemo nivo po nivo.
-         */
         public State search(State pocetnoStanje, int maxDepth)
         {
-            //Pretrazuje se nivo po nivo -> stanja u istom nivou imaju jednak put do sebe
-            for (int level = 0; level < maxDepth; ++level) // i - trenutni nivo koji se pretrazuje
+
+            for (int level = 0; level < maxDepth; ++level) 
             {
                 List<State> stanjaZaObradu = new List<State>();
                 stanjaZaObradu.Add(pocetnoStanje);
@@ -27,17 +24,17 @@ namespace Lavirint
                     State trenutnoStanje = stanjaZaObradu[0];
                     stanjaZaObradu.Remove(trenutnoStanje);
 
-                    if (trenutnoStanje.cost < level) //ako je na manjem nivou dubine, razvija se
+                    if (trenutnoStanje.cost < level) 
                     {
                         stanjaZaObradu.InsertRange(0, trenutnoStanje.mogucaSledecaStanja());
                     }
-                    else if (trenutnoStanje.cost > level) //ako je na vecem nivou dubine, odbacuje se
+                    else if (trenutnoStanje.cost > level)
                     {
                         continue;
                     }
-                    else if (trenutnoStanje.cost == 1)//ako je na nivou i, proverava se
+                    else if (trenutnoStanje.cost == 1)
                     {
-                        Main.allSearchStates.Add(trenutnoStanje); //za prikaz u debug
+                        Main.allSearchStates.Add(trenutnoStanje); 
                         if (trenutnoStanje.isKrajnjeStanje() == true)
                         {
                             return trenutnoStanje;
