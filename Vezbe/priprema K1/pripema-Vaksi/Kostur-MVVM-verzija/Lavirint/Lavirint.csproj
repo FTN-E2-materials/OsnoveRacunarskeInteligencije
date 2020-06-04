@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Kretanje\Kretanje.cs" />
+    <Compile Include="Model\Kretanje\SahovskeFigure\Kralj.cs" />
+    <Compile Include="Model\Kretanje\SahovskeFigure\Kraljica.cs" />
+    <Compile Include="Model\Kretanje\SahovskeFigure\Lovac.cs" />
+    <Compile Include="Model\Kretanje\SahovskeFigure\Skakac.cs" />
+    <Compile Include="Model\Kretanje\SahovskeFigure\Top.cs" />
     <Compile Include="Model\Senzor.cs" />
     <Compile Include="ViewModel\Pretrage\ADepthSearch.cs" />
     <Compile Include="ViewModel\Pretrage\AStarSearch.cs" />
@@ -103,6 +109,7 @@
   <ItemGroup>
     <None Include="Resources\1268747762_my_computer.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

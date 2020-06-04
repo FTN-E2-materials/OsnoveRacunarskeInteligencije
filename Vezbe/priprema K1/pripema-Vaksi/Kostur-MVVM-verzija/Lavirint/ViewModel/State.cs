@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lavirint.Model.Kretanje.SahovskeFigure;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,10 +13,23 @@ namespace Lavirint
         public double cost;
         public int level;
 
-        // TODO: Ovde odredjujem/dodajem atribute za moguce korake, atribute da li su kutije pokupljene i slicno.
-        //public bool kutijaPokupljena;
-        private static int[,] top = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
+        private static Top sahovskaFiguraTop = new Top();
+        private static Kralj sahovskaFiguraKralj = new Kralj();
+        private static Kraljica sahovskaFiguraKraljica = new Kraljica();
+        private static Skakac sahovskaFiguraSkakac = new Skakac();
+        private static Lovac sahovskaFiguraLovac = new Lovac();
 
+        private static int[,] kretanjeTopa = sahovskaFiguraTop.getKretanjeFigure();
+        private static int[,] kretanjeKralja = sahovskaFiguraKralj.getKretanjeFigure();
+        private static int[,] kretanjeKraljice = sahovskaFiguraKraljica.getKretanjeFigure();
+        private static int[,] kretanjeSkakaca = sahovskaFiguraSkakac.getKretanjeFigure();
+        private static int[,] kretanjeLovca = sahovskaFiguraLovac.getKretanjeFigure();
+
+        private static int[,] koraciRobota = null;
+        private static bool jednoPoteznaFigura = false;
+
+        
+        
 
 
         // TODO: Ovde govorimo sta sledece stanje ima i sta nosi sa sobom
@@ -40,30 +54,35 @@ namespace Lavirint
         public List<State> mogucaSledecaStanja()
         {
             List<State> validnaSledecaStanja = new List<State>();
-            int[,] koraci = null;
-            bool jednoPoteznaFigura = true;                     // u zavisnosti mogucnosti kretanja figure, podesavam ovaj parametar
 
-            //TODO: U zavisnosti od uslova menjam korake
-            koraci = top;
+            podesiKretanjaFigure();
 
-            for(int i = 0; i < koraci.GetLength(0); i++)
+            for(int i = 0; i < koraciRobota.GetLength(0); i++)
             {
                 // Broj koraka koji ima odredjena figura u ovom potezu
                 int brojKoraka = 1;
 
                 while (true)
                 {
-                    int novoI = markI + brojKoraka * koraci[i, 0];
-                    int novoJ = markJ + brojKoraka * koraci[i, 1];
+                    int novoI = markI + brojKoraka * koraciRobota[i, 0];
+                    int novoJ = markJ + brojKoraka * koraciRobota[i, 1];
 
                     ++brojKoraka;
 
                     // Odma prekidam istrazivanje ako su kordinate nevalidne
                     if (!validneKordinate(novoI, novoJ))
                         break;
-                    
-                    // U suprotnosti ih dodajem kao sledeca validna stanja
-                    validnaSledecaStanja.Add(sledeceStanje(novoI, novoJ));
+
+                    // U suprotnosti cu ih dodati kao sledeca validna stanja 
+                    State validnoStanje = new State();
+                    validnoStanje = sledeceStanje(novoI, novoJ);
+
+                    // Kako bih obisao zapravo samo ona na koja mogu stati
+                    // voditi racuna o ovome !
+                    if (!(validnoStanje is null))
+                        validnaSledecaStanja.Add(validnoStanje);
+                    else
+                        break;
 
                     // Restrikcija kretanja na jedan potez samo [za jedno potezne figure]
                     if (jednoPoteznaFigura)
@@ -88,6 +107,21 @@ namespace Lavirint
             return Main.krajnjeStanje.markI == markI && Main.krajnjeStanje.markJ == markJ;
         }
 
+        /// <summary>
+        /// Odredjivanje kretanja figure sa indikatorom jednog poteza
+        /// koji predstavlja koliko moze odredjena figura da se krece
+        /// po pravilu igre
+        /// </summary>
+        private void podesiKretanjaFigure()
+        {
+            // Ovde kad dobijes neko uslovljeno pravilo, podesavas razne uslove
+            // i onda kazes koje korake ima robot i da li je jedno potezna figura
+            // recimo kretanjeTopa i jedno potezna figura na true nam daje
+            // kretanje cik cak, tkd ovde moze biti raznih kombinacija
+
+            koraciRobota = kretanjeKralja;
+            jednoPoteznaFigura = true;
+        }
 
         // TODO: Ovde odredjujemo validne kordinate
         private bool validneKordinate(int kordI, int kordJ)
