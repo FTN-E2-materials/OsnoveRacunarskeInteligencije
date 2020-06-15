@@ -10,7 +10,7 @@ C:\Users\Pufke\Downloads\vežbe_export (2)\v6\ComputationalGraph_reseno\Computat
 C:\Users\Pufke\Downloads\vežbe_export (2)\v6\ComputationalGraph_reseno\ComputationalGraph\ComputationalGraph\obj\x86\Debug\ComputationalGraph.pdb
 C:\Users\Vaxi\Desktop\6-semestar\OsnoveRacunarskeInteligencije\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Vaxi\Teski-kostur\ComputationalGraph\bin\Debug\ComputationalGraph.exe
 C:\Users\Vaxi\Desktop\6-semestar\OsnoveRacunarskeInteligencije\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Vaxi\Teski-kostur\ComputationalGraph\bin\Debug\ComputationalGraph.pdb
-C:\Users\Vaxi\Desktop\6-semestar\OsnoveRacunarskeInteligencije\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Vaxi\Teski-kostur\ComputationalGraph\obj\x86\Debug\ComputationalGraph.csprojAssemblyReference.cache
 C:\Users\Vaxi\Desktop\6-semestar\OsnoveRacunarskeInteligencije\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Vaxi\Teski-kostur\ComputationalGraph\obj\x86\Debug\ComputationalGraph.csproj.CoreCompileInputs.cache
 C:\Users\Vaxi\Desktop\6-semestar\OsnoveRacunarskeInteligencije\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Vaxi\Teski-kostur\ComputationalGraph\obj\x86\Debug\ComputationalGraph.exe
 C:\Users\Vaxi\Desktop\6-semestar\OsnoveRacunarskeInteligencije\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Vaxi\Teski-kostur\ComputationalGraph\obj\x86\Debug\ComputationalGraph.pdb
+C:\Users\Vaxi\Desktop\6-semestar\OsnoveRacunarskeInteligencije\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Vaxi\Teski-kostur\ComputationalGraph\obj\x86\Debug\ComputationalGraph.csprojAssemblyReference.cache

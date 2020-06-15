@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComputationalGraph.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,6 +14,10 @@ namespace ComputationalGraph
     {
         static void Main(string[] args)
         {
+            FileDAO fileDAO = new FileDAO();
+            // fileDAO.imaKategorickihAtributa
+            // fileDAO.getKategorickeAtribute
+
             #region Kreiranje neuronske mreze
 
             NeuralNetwork network = new NeuralNetwork();

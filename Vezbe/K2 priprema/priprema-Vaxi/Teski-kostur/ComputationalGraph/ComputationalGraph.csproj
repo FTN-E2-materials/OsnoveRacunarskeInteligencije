@@ -46,16 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\FileDAO.cs" />
     <Compile Include="Nodes\MultiplyNode.cs" />
-    <Compile Include="NeuralLayer.cs" />
-    <Compile Include="NeuralNetwork.cs" />
-    <Compile Include="NeuronNode.cs" />
+    <Compile Include="NetworkArchitecture\NeuralLayer.cs" />
+    <Compile Include="NetworkArchitecture\NeuralNetwork.cs" />
+    <Compile Include="NetworkArchitecture\NeuronNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomGaussian.cs" />
+    <Compile Include="Utilities\RandomGaussian.cs" />
     <Compile Include="Nodes\SigmoidNode.cs" />
     <Compile Include="Nodes\SumNode.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
