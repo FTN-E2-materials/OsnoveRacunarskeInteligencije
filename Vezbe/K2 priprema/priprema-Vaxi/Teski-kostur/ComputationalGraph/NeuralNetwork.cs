@@ -57,6 +57,14 @@ namespace ComputationalGraph
             return this.forward(x);
         }
 
+        /// <summary>
+        /// Kreiranje modela nase neuronske mreze, odnosno obucavanje neuronske mreze.
+        /// </summary>
+        /// <param name="X"></param>
+        /// <param name="Y"></param>
+        /// <param name="learningRate"> alfa </param>
+        /// <param name="momentum">  </param>
+        /// <param name="nb_epochs"> Broj epoha </param>
         public void fit(List<List<double>> X, List<List<double>> Y, double learningRate, double momentum, int nb_epochs)
         {
             double total_loss = 0.0;

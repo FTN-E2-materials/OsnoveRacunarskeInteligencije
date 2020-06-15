@@ -2,9 +2,24 @@
 
 namespace ComputationalGraph
 {
+    /// <summary>
+    /// Aktivaciona funkcija Sigmoid.
+    /// 
+    /// Slika: http://prntscr.com/t07r2d
+    /// </summary>
     public class SigmoidNode
     {
+        /// <summary>
+        /// Inputi (ulazi)
+        /// </summary>
         private double x;
+
+
+        public SigmoidNode()
+        {
+            this.x = 0;
+        }
+
         /// <summary>
         /// Sigmoid funkcija 1/1+e^-x
         /// </summary>
@@ -16,10 +31,7 @@ namespace ComputationalGraph
             return 1.0 / (1 + Math.Exp(-x));
         }
 
-        public SigmoidNode()
-        {
-            this.x = 0;
-        }
+        
 
         /// <summary>
         /// Na dobijeno x pozvati sigmoid funkciju

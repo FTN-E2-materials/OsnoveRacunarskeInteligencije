@@ -23,7 +23,7 @@ namespace ComputationalGraph
         /// provuce se kroz aktivacionu funkciju
         /// </summary>
         /// <param name="n_inputs"></param>
-        /// <param name="activation"></param>
+        /// <param name="activation"> String naziv aktivacione funkcije </param>
         public NeuronNode(int n_inputs, string activation)
         {
             this.n_inputs = n_inputs;
@@ -51,6 +51,10 @@ namespace ComputationalGraph
             this.multiplyNodes.Add(mulNode);
             previous_deltas.Add(0.0);
 
+            // TODO: Ovde dodajem ako dodajem neku drugu aktivacionu funkciju
+            /*
+             * if else(activation.Equals("TangesHiperbolic").....
+             */
             if (activation.Equals("sigmoid"))
                 this.activation_node = new SigmoidNode();
             else
@@ -67,23 +71,32 @@ namespace ComputationalGraph
         /// <returns></returns>
         public double forward(List<double> x)
         {
-            List<double> inputs = new List<double>(x);
-            inputs.Add(1.0); //bias
+            List<double> ulazi = new List<double>(x);
+            
+            // Ubacimo prvo bijas 
+            double bias = 1.0;
+            ulazi.Add(bias); 
 
-            List<double> forSum = new List<double>();
+            List<double> rezultatSvihMnozaca = new List<double>();
             //TODO 6: Izracunati vrednost na izlazu vestackog neurona
-            for (int i = 0; i < inputs.Count; i++)
+            for (int i = 0; i < ulazi.Count; i++)
             {
-                double[] inp_d = { inputs[i], this.multiplyNodes[i].x[1] };
+                // posto x[1] daje tezinu
+                double prethodnaTezina = this.multiplyNodes[i].x[1];
 
-                forSum.Add(this.multiplyNodes[i].forward(inp_d.ToList()));
+                double[] inputZaMnozac = { ulazi[i], prethodnaTezina};
+
+
+                double proizvodUlazaITezine = this.multiplyNodes[i].forward(inputZaMnozac.ToList());
+                rezultatSvihMnozaca.Add(proizvodUlazaITezine);
             }
 
-            double summed = this.sumNode.forward(forSum);
+            double sumaMnozaca = this.sumNode.forward(rezultatSvihMnozaca);
 
             // dobijena vrednost se propusti kroz aktivacionu funkciju
-            double summed_act = this.activation_node.forward(summed);
-            return summed_act;
+            double izlazAktivacioneFunkcije = this.activation_node.forward(sumaMnozaca);
+            
+            return izlazAktivacioneFunkcije;    // izlaz aktivacione funkcije predstavlja i izlaz neurona
         }
 
         /// <summary>
@@ -95,25 +108,29 @@ namespace ComputationalGraph
         public List<double> backward(List<double> dz)
         {
             //greska svakog ulaza
-            List<double> dw = new List<double>();
-            List<double> dx = new List<double>();
+            List<double> dw = new List<double>();   // w - tezine
+            List<double> dx = new List<double>();   // x - inicijalni ulazi u neuron
             double backward_signal = dz.Sum();
 
             //TODO 7: Izvrsiti propagaciju signala u nazad, prvo kroz aktivacionu funkciju,
             //        onda kroz sabirac pa kroz svaki pojedinacan mnozac
             backward_signal = this.activation_node.backward(backward_signal);
 
-            List<double> dSum = this.sumNode.backward(backward_signal);
+            List<double> inputiSabiraca = this.sumNode.backward(backward_signal);
 
-            for (int i = 0; i < dSum.Count; i++)
+            // sad je potrebno i za svaki taj input da uradimo backward pass
+            for (int i = 0; i < inputiSabiraca.Count; i++)
             {
-                dw.Add(this.multiplyNodes[i].backward(dSum[i])[1]);
-                dx.Add(this.multiplyNodes[i].backward(dSum[i])[0]);
+                dw.Add(this.multiplyNodes[i].backward(inputiSabiraca[i])[1]);   // 1 - ti element predstavlja tezinu
+                dx.Add(this.multiplyNodes[i].backward(inputiSabiraca[i])[0]);   // 0 - ti element predstavlja input
             }
 
-
-            //https://en.wikipedia.org/wiki/Gradient_descent
-            //df/dx1, df/dx2...
+            /*
+             * Punimo matricu gradijenata za batch
+             * 
+             * link: https://en.wikipedia.org/wiki/Gradient_descent
+             * df/dx1, df/dx2...
+             */
             this.gradients.Add(dw);
 
             return dx;

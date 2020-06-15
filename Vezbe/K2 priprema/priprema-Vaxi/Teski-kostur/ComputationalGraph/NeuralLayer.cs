@@ -10,6 +10,12 @@ namespace ComputationalGraph
         public string activation;
         public List<NeuronNode> neurons;
 
+        /// <summary>
+        /// Jedan sloj neuronske mreze
+        /// </summary>
+        /// <param name="n_inputs"> Broj ulaza </param>
+        /// <param name="n_neurons"> Broj neurona </param>
+        /// <param name="activation"> String naziv aktivacione funkcije </param>
         public NeuralLayer(int n_inputs, int n_neurons, string activation)
         {
             this.n_inputs = n_inputs;

@@ -46,15 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MultiplyNode.cs" />
+    <Compile Include="Nodes\MultiplyNode.cs" />
     <Compile Include="NeuralLayer.cs" />
     <Compile Include="NeuralNetwork.cs" />
     <Compile Include="NeuronNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomGaussian.cs" />
-    <Compile Include="SigmoidNode.cs" />
-    <Compile Include="SumNode.cs" />
+    <Compile Include="Nodes\SigmoidNode.cs" />
+    <Compile Include="Nodes\SumNode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
