@@ -8,29 +8,40 @@ namespace ComputationalGraph
     {
         static void Main(string[] args)
         {
+            DataManipulation dm = new DataManipulation();
+            dm.readDataFromDataSet();
+
             NeuralNetwork network = new NeuralNetwork();
-            network.Add(new NeuralLayer(2, 2, "sigmoid"));
+            network.Add(new NeuralLayer(6, 3, "sigmoid"));
+            network.Add(new NeuralLayer(3, 2, "sigmoid"));
             network.Add(new NeuralLayer(2, 1, "sigmoid"));
-           
-            
-            double[] x1 = { 0.0, 0.0 };
-            double[] x2 = { 0.0, 1.0 };
-            double[] x3 = { 1.0, 0.0 };
-            double[] x4 = { 1.0, 1.0 };
-            List<List<double>> X = new List<List<double>>() { x1.ToList(), x2.ToList(), x3.ToList(),x4.ToList()};
 
-            double[] y1 = { 0.0 };
-            double[] y2 = { 1.0 };
-            double[] y3 = { 1.0 };
-            double[] y4 = { 0.0 };
-            List<List<double>> Y = new List<List<double>>() { y1.ToList(), y2.ToList(), y3.ToList(), y4.ToList() };
 
-            network.fit(X, Y, 0.1, 0.9, 10000);
+            Console.WriteLine("Obuka pocela.");
+            network.fit(dm.train, dm.trainY, 0.1, 0.9, 500);
+            Console.WriteLine("Kraj obuke.");
 
-            Console.WriteLine(network.predict(x1.ToList())[0]);
-            Console.WriteLine(network.predict(x2.ToList())[0]);
-            Console.WriteLine(network.predict(x3.ToList())[0]);
-            Console.WriteLine(network.predict(x4.ToList())[0]);
+            int pogodak = 0;
+            for (int i = 0; i < dm.test.Count; ++i)
+            {
+                List<Double> prediction = network.predict(dm.test[i]);
+                double alive = 0;
+                if (prediction[0] > 0.5)
+                {
+                    alive = 1;
+                }
+
+                Console.WriteLine("Real result:{0}, Predicted result {1}", dm.testY[i][0], prediction[0]);
+
+                if (alive == dm.testY[i][0])
+                {
+                    ++pogodak;
+                }
+
+            }
+
+            Console.Write("Pogodjeno {0} od {1} ", pogodak, dm.testY.Count);
+            Console.Write("Tacnost {0} %", pogodak * 100 / dm.testY.Count);
             Console.ReadLine();
         }
     }

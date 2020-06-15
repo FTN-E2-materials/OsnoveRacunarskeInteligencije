@@ -70,6 +70,7 @@ namespace ComputationalGraph
             List<double> inputs = new List<double>(x);
             inputs.Add(1.0); //bias
 
+            //Lista svih outputa mnozaca
             List<double> forSum = new List<double>();
             //TODO 6: Izracunati vrednost na izlazu vestackog neurona
             for (int i = 0; i < inputs.Count; i++)

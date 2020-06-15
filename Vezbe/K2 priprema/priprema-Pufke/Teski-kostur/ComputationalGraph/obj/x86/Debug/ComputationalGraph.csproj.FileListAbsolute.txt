@@ -8,3 +8,8 @@ C:\Users\Pufke\Downloads\vežbe_export (2)\v6\ComputationalGraph_reseno\Computat
 C:\Users\Pufke\Downloads\vežbe_export (2)\v6\ComputationalGraph_reseno\ComputationalGraph\ComputationalGraph\obj\x86\Debug\ComputationalGraph.csprojAssemblyReference.cache
 C:\Users\Pufke\Downloads\vežbe_export (2)\v6\ComputationalGraph_reseno\ComputationalGraph\ComputationalGraph\obj\x86\Debug\ComputationalGraph.exe
 C:\Users\Pufke\Downloads\vežbe_export (2)\v6\ComputationalGraph_reseno\ComputationalGraph\ComputationalGraph\obj\x86\Debug\ComputationalGraph.pdb
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Teski-kostur\ComputationalGraph\obj\x86\Debug\ComputationalGraph.csprojAssemblyReference.cache
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Teski-kostur\ComputationalGraph\obj\x86\Debug\ComputationalGraph.exe
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Teski-kostur\ComputationalGraph\obj\x86\Debug\ComputationalGraph.pdb
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Teski-kostur\ComputationalGraph\bin\Debug\ComputationalGraph.exe
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Teski-kostur\ComputationalGraph\bin\Debug\ComputationalGraph.pdb

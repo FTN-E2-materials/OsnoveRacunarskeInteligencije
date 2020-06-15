@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataManipulation.cs" />
     <Compile Include="MultiplyNode.cs" />
     <Compile Include="NeuralLayer.cs" />
     <Compile Include="NeuralNetwork.cs" />

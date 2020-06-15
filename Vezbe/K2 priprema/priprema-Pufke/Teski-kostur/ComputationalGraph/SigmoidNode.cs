@@ -1,7 +1,8 @@
 ﻿using System;
 
 namespace ComputationalGraph
-{
+{//Kaze moze da dodje i tangens hiperbolicni ali to retko daju, i dace formulu
+    //po kojoj treba da implementiramo forward i backward
     public class SigmoidNode
     {
         private double x;
