@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace ComputationalGraph.Utilities
@@ -23,6 +24,14 @@ namespace ComputationalGraph.Utilities
         /// </summary>
         private int _indeksKategorickihAtributa;
 
+        /// <summary>
+        /// Key: "ime tipa"
+        /// value: njegova uniq vrednost
+        /// </summary>
+        private Dictionary<String,int> _kategorickiAtributi;
+
+
+
         #endregion
 
         #region Propertiji 
@@ -39,14 +48,27 @@ namespace ComputationalGraph.Utilities
             set { _indeksKategorickihAtributa = value; }
         }
 
+
+        public Dictionary<String, int> KategorickiAtributi
+        {
+            get { return _kategorickiAtributi; }
+            set { _kategorickiAtributi = value; }
+        }
         #endregion
 
-        public DataReader()
+        /// <summary>
+        /// Proslediti naziv fajla koji iscitavamo i dobijamo onda rukovanje
+        /// tim fajlom
+        /// </summary>
+        /// <param name="nazivFajlaZaCitanje"></param>
+        public DataReader(String nazivFajlaZaCitanje)
         {
-            UcitaniRedovi = File.ReadAllLines(@"./../../data/gotdata.csv");
+            String path = "./../../data/" + nazivFajlaZaCitanje;
+            UcitaniRedovi = File.ReadAllLines(path);
             UcitaniRedovi = UcitaniRedovi.Skip(1).ToArray(); // skip header row (State, Lat, Mort, Ocean, Long)
 
             IndeksKategorickihAtributa = 0;                 // krecem od 0 indeksiranje kategorickih atributa, inc na svaku pojavu jedno kategorickog atributa
+            KategorickiAtributi = new Dictionary<string, int>();
         }
 
         #region Ucitavanje podataka
@@ -95,7 +117,12 @@ namespace ComputationalGraph.Utilities
         private Double transformisiUBroj(String text)
         {
             //TODO: Resiti ovo, ovo sad samo svakom stringu poveca vrednost za 1, kao enumeracija
-            return IndeksKategorickihAtributa += 1;
+            if (!KategorickiAtributi.ContainsKey(text))
+            {
+                IndeksKategorickihAtributa += 1;
+                KategorickiAtributi[text] = IndeksKategorickihAtributa;
+            }
+            return IndeksKategorickihAtributa;
         }
 
         #endregion

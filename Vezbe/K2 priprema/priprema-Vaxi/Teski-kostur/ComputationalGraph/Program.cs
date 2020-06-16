@@ -53,8 +53,8 @@ namespace ComputationalGraph
             #region Kreiranje neuronske mreze
 
             NeuralNetwork network = new NeuralNetwork();
-            network.Add(new NeuralLayer(indeksKolonaInputa.Count, 3, "sigmoid"));
-            network.Add(new NeuralLayer(3, 2, "sigmoid"));
+            network.Add(new NeuralLayer(indeksKolonaInputa.Count, 4, "sigmoid"));
+            network.Add(new NeuralLayer(4, 2, "sigmoid"));
             network.Add(new NeuralLayer(2, 1, "sigmoid"));
 
             #endregion
@@ -107,6 +107,7 @@ namespace ComputationalGraph
             Console.ReadLine();
 
             #endregion
+
         }
     }
 }

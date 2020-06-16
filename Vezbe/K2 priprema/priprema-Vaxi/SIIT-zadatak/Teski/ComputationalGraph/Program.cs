@@ -19,32 +19,17 @@ namespace ComputationalGraph
 
             List<int> indeksKolonaInputa = new List<int>();
             
-            // ulazi za pojavljivanje u knjigama
-            indeksKolonaInputa.Add(16);
-            indeksKolonaInputa.Add(17);
-            indeksKolonaInputa.Add(18);
-            indeksKolonaInputa.Add(19);
-            indeksKolonaInputa.Add(20);
-
-            // muski ili zensko ulaz
-            indeksKolonaInputa.Add(7);
-            // popularnost ulaz
-            indeksKolonaInputa.Add(31);
-
-            // plemicko poreklo ulaz
-            indeksKolonaInputa.Add(26);
-
-            // num dead relations ulaz
-            indeksKolonaInputa.Add(28);
-
-            // porodica kojoj pripada
-            indeksKolonaInputa.Add(14);
+            // ulazi od col_1 do col_5
+            indeksKolonaInputa.Add(1);
+            indeksKolonaInputa.Add(2);
+            indeksKolonaInputa.Add(3);
+            indeksKolonaInputa.Add(4);
 
             List<int> indeksKolonaOutputa = new List<int>();
-            // isAlive ulaz
-            indeksKolonaOutputa.Add(32);
+            // col_5 izlaz
+            indeksKolonaOutputa.Add(5);
 
-            FileDAO fileDAO = new FileDAO(indeksKolonaInputa, indeksKolonaOutputa, 20);
+            FileDAO fileDAO = new FileDAO(indeksKolonaInputa, indeksKolonaOutputa, 0);
             // fileDAO.imaKategorickihAtributa
             // fileDAO.getKategorickeAtribute
 
@@ -53,8 +38,8 @@ namespace ComputationalGraph
             #region Kreiranje neuronske mreze
 
             NeuralNetwork network = new NeuralNetwork();
-            network.Add(new NeuralLayer(indeksKolonaInputa.Count, 3, "sigmoid"));
-            network.Add(new NeuralLayer(3, 2, "sigmoid"));
+            network.Add(new NeuralLayer(indeksKolonaInputa.Count, 2, "sigmoid"));
+            //network.Add(new NeuralLayer(3, 2, "sigmoid"));
             network.Add(new NeuralLayer(2, 1, "sigmoid"));
 
             #endregion
@@ -76,34 +61,42 @@ namespace ComputationalGraph
             #region Fitovanje
 
             Console.WriteLine("Obuka pocela.");
-            network.fit(X, Y, 0.1, 0.9, 500);
+            network.fit(X, Y, 0.1, 0.9, 3000);
             Console.WriteLine("Kraj obuke.");
 
             #endregion
 
             #region Predikcija
 
-            int pogodak = 0;
+            int ukupnoPogodjenih = 0;
             for (int i = 0; i < fileDAO.XTest.Count; ++i)
             {
                 List<Double> prediction = network.predict(fileDAO.XTest[i]);
-                double alive = 0;
-                if (prediction[0] > 0.5)
+
+                Console.WriteLine("Pravi rezultat u test podacima je: {0}, Po proracunu i predikciji dobijam {1}", fileDAO.YTest[i][0], prediction[0]);
+                // pravi rezultat mi moze biti 0, 0.5 ili 1 pa onda ove sto sam dobio, moram pretvoriti u tip
+                // i proveriti da li su odgovarajuceg tipa 
+
+                double tip = -1;
+                if(prediction[0] <= 0.33)
                 {
-                    alive = 1;
+                    tip = 0;
+                }else if(prediction[0] > 0.33 && prediction[0] <= 0.66)
+                {
+                    tip = 0.5;
+                }
+                else
+                {
+                    tip = 1;
                 }
 
-                Console.WriteLine("Real result:{0}, Predicted result {1}", fileDAO.YTest[i][0], prediction[0]);
-
-                if (alive == fileDAO.YTest[i][0])
-                {
-                    ++pogodak;
-                }
+                if (fileDAO.YTest[i][0] == tip)
+                    ++ukupnoPogodjenih;
 
             }
 
-            Console.Write("Pogodjeno {0} od {1} ", pogodak, fileDAO.YTest.Count);
-            Console.Write("Tacnost {0} %", pogodak * 100 / fileDAO.YTest.Count);
+            Console.Write("Pogodjeno {0} od {1} ", ukupnoPogodjenih, fileDAO.YTest.Count);
+            Console.Write("Tacnost {0} %", ukupnoPogodjenih * 100 / fileDAO.YTest.Count);
             Console.ReadLine();
 
             #endregion

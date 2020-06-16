@@ -53,18 +53,36 @@ namespace ComputationalGraph.DAO
         /// 
         /// Kolone koje predstavljaju labele ulaznih atributa !
         /// </summary>
-        private List<List<double>> _ulazneKolone;
+        private List<List<double>> _ulazneKoloneTrainSeta;
 
         /// <summary>
         /// Predstavlja listu ucitanih kolona izlaznog atributa,
         /// ne Y nego samo listu kolona izlaznih atributa.
         /// </summary>
-        private List<List<double>> _izlazneKolone;
+        private List<List<double>> _izlazneKoloneTrainSeta;
+
+        /// <summary>
+        /// Predstavlja listu kolona koje smo ucitali iz test seta
+        /// 
+        /// Kolone koje predstavljaju labele ulaznih atributa !
+        /// </summary>
+        private List<List<double>> _ulazneKoloneTestSeta;
+
+        /// <summary>
+        /// Predstavlja listu ucitanih kolona izlaznog atributa,
+        /// ne YTest nego samo listu kolona izlaznih atributa koje smo ucitali
+        /// </summary>
+        private List<List<double>> _izlazneKoloneTestSeta;
 
         /// <summary>
         /// Iscitavanje podataka iz csv fajla zadatom u citacu.
         /// </summary>
         private DataReader _citacPodataka;
+
+        /// <summary>
+        /// Citac test podataka ukoliko imam zaseban fajl za test podatke
+        /// </summary>
+        private DataReader _citacTestPodataka;
 
         /// <summary>
         /// Svi INPUTI koji se dovode na ulaz mreze
@@ -87,7 +105,7 @@ namespace ComputationalGraph.DAO
         /// Outputi koje cuvamo samo za testiranje modela.
         /// Isto kao i XTest
         /// </summary>
-        private List<List<double>> _Ytrain;
+        private List<List<double>> _Ytest;
 
 
         #endregion
@@ -106,22 +124,40 @@ namespace ComputationalGraph.DAO
             set { _normalizacija = value; }
         }
 
-        public List<List<double>> UlazneKolone
+        public List<List<double>> UlazneKoloneTrainSeta
         {
-            get { return _ulazneKolone; }
-            set { _ulazneKolone = value; }
+            get { return _ulazneKoloneTrainSeta; }
+            set { _ulazneKoloneTrainSeta = value; }
         }
 
-        public List<List<double>> IzlazneKolone
+        public List<List<double>> IzlazneKoloneTrainSeta
         {
-            get { return _izlazneKolone; }
-            set { _izlazneKolone = value; }
+            get { return _izlazneKoloneTrainSeta; }
+            set { _izlazneKoloneTrainSeta = value; }
         }
 
-        public DataReader CitacPodataka
+        public List<List<double>> IzlazneKoloneTestSeta
+        {
+            get { return _izlazneKoloneTestSeta; }
+            set { _izlazneKoloneTestSeta = value; }
+        }
+
+        public List<List<double>> UlazneKoloneTestSeta
+        {
+            get { return _ulazneKoloneTestSeta; }
+            set { _ulazneKoloneTestSeta = value; }
+        }
+
+        public DataReader CitacTrainPodataka
         {
             get { return _citacPodataka; }
             set { _citacPodataka = value; }
+        }
+
+        public DataReader CitacTestPodataka
+        {
+            get { return _citacTestPodataka; }
+            set { _citacTestPodataka = value; }
         }
 
         public List<List<double>> X
@@ -138,8 +174,8 @@ namespace ComputationalGraph.DAO
 
         public List<List<double>> YTest
         {
-            get { return _Ytrain; }
-            set { _Ytrain = value; }
+            get { return _Ytest; }
+            set { _Ytest = value; }
         }
 
         public List<List<double>> XTest
@@ -154,6 +190,9 @@ namespace ComputationalGraph.DAO
         /// Proslediti indekse kolona za ucitavanje kako bi setovali X inpute,
         /// a proslediti indekse kolona koje predstavljaju izlaze kako bi setovali Y odnosno
         /// OUTPUT-e mreze.
+        /// 
+        /// NAPOMENA: Ukoliko su train i test set odvojeni fajlovi, procenat test podataka treba da bude 0 !!!
+        /// Da ne bi dosli u situaciju da iz train seta uzimamo podatke i cuvamo ih kao ulaze/izlaze u test setu.
         /// </summary>
         /// <param name="indeksiKolonaZaUcitavanjeInputa"> indeksi kolona koje zelimo ucitati iz data seta ( a predstavljaju ulazne atribute u mrezu ) </param>
         /// <param name="indeksiKolonaZaUcitavanjeOutputa"> indeksi kolona koje zelimo ucitati iz data seta (a predstavljaju izlazne atribute iz mreze) </param>
@@ -161,11 +200,16 @@ namespace ComputationalGraph.DAO
         public FileDAO(List<int> indeksiKolonaZaUcitavanjeInputa, List<int> indeksiKolonaZaUcitavanjeOutputa, int procenatTestPodataka)
         {
 
-            UlazneKolone = new List<List<double>>();
-            IzlazneKolone = new List<List<double>>();
+            UlazneKoloneTrainSeta = new List<List<double>>();
+            IzlazneKoloneTrainSeta = new List<List<double>>();
+            UlazneKoloneTestSeta = new List<List<double>>();
+            IzlazneKoloneTestSeta = new List<List<double>>();
+
 
             Normalizacija = new NormalizatorPodataka();
-            CitacPodataka = new DataReader();
+            CitacTrainPodataka = new DataReader("train.csv");
+            CitacTestPodataka = new DataReader("test.csv");
+
 
             X = new List<List<double>>();
             Y = new List<List<double>>();
@@ -173,15 +217,24 @@ namespace ComputationalGraph.DAO
             XTest = new List<List<double>>();
             YTest = new List<List<double>>();
 
-            ucitajUlazneKolone(indeksiKolonaZaUcitavanjeInputa);
+
+            // TRAIN podaci
+            UlazneKoloneTrainSeta = ucitajUlazneKolone(indeksiKolonaZaUcitavanjeInputa, CitacTrainPodataka);
             odrediInpute(procenatTestPodataka);
 
-            ucitajIzlazneKolone(indeksiKolonaZaUcitavanjeOutputa);
+            IzlazneKoloneTrainSeta = ucitajIzlazneKolone(indeksiKolonaZaUcitavanjeOutputa, CitacTrainPodataka);
             odrediOutpute(procenatTestPodataka);
+
+            // TEST podaci 
+            UlazneKoloneTestSeta = ucitajUlazneKolone(indeksiKolonaZaUcitavanjeInputa, CitacTestPodataka);
+            odrediInputeTestSeta();
+
+            IzlazneKoloneTestSeta = ucitajIzlazneKolone(indeksiKolonaZaUcitavanjeOutputa, CitacTestPodataka);
+            odrediOutputeTestSeta();
 
         }
 
-        
+
         #region Ucitavanje svih kolona
 
         /// <summary>
@@ -189,15 +242,21 @@ namespace ComputationalGraph.DAO
         /// tih kolona u tabeli.
         /// </summary>
         /// <param name="brojKolonaZaUcitavanjeInputa"></param>
-        private void ucitajUlazneKolone(List<int> brojKolonaZaUcitavanjeInputa)
+        /// <param name="citacPodataka"> citac koji moze biti citac train seta podataka, test seta podataka, ako nam je sve u jednom, onda prosledjujemo citac kao train set</param>
+        /// <returns></returns>
+        private List<List<double>> ucitajUlazneKolone(List<int> brojKolonaZaUcitavanjeInputa, DataReader citacPodataka)
         {
+            List<List<double>> ulazneKolone = new List<List<double>>();
+
             foreach (int kolona in brojKolonaZaUcitavanjeInputa)
             {
-                List<double> podaciKolone = CitacPodataka.ucitajPodatkeIzKolone(kolona);
+                List<double> podaciKolone = citacPodataka.ucitajPodatkeIzKolone(kolona);
                 podaciKolone = Normalizacija.normalizujPodatke(podaciKolone);
 
-                UlazneKolone.Add(podaciKolone);
+                ulazneKolone.Add(podaciKolone);
             }
+
+            return ulazneKolone;
         }
 
 
@@ -206,15 +265,19 @@ namespace ComputationalGraph.DAO
         /// sa prosledjenim indeksima tih kolona u tabeli
         /// </summary>
         /// <param name="brojKolonaZaUcitanjeOutputa"></param>
-        private void ucitajIzlazneKolone(List<int> brojKolonaZaUcitanjeOutputa)
+        private List<List<double>> ucitajIzlazneKolone(List<int> brojKolonaZaUcitanjeOutputa, DataReader citacPodataka)
         {
+            List<List<double>> izlazne = new List<List<double>>();
+
             foreach (int kolona in brojKolonaZaUcitanjeOutputa)
             {
-                List<double> podaciKolone = CitacPodataka.ucitajPodatkeIzKolone(kolona);
+                List<double> podaciKolone = citacPodataka.ucitajPodatkeIzKolone(kolona);
                 podaciKolone = Normalizacija.normalizujPodatke(podaciKolone);
 
-                IzlazneKolone.Add(podaciKolone);
+                izlazne.Add(podaciKolone);
             }
+
+            return izlazne;
         }
         #endregion
 
@@ -233,18 +296,18 @@ namespace ComputationalGraph.DAO
         /// <param name="procenatTestPodataka"> Procenat koliko zelimo da bude test podataka iz data seta </param>
         private void odrediInpute(int procenatTestPodataka)
         {
-            int ukupnoEntitetaSistema = CitacPodataka.UcitaniRedovi.Length;
+            int ukupnoEntitetaSistema = CitacTrainPodataka.UcitaniRedovi.Length;
             int indeksPocetkaTestPodataka = ukupnoEntitetaSistema * procenatTestPodataka / 100;
 
             // CitacPodataka.UcitaniRedovi.Length; jer za svaki input imam jednu kolonu, te to predstavlja dimenziju X [inputa]
             for (int indeksReda = 0; indeksReda < ukupnoEntitetaSistema; indeksReda++)
             {
                 List<double> sample = new List<double>();           // jedan sample/ kombinacija INPUTA u mrezu
-                foreach (List<double> kolona in UlazneKolone)
+                foreach (List<double> kolona in UlazneKoloneTrainSeta)
                 {
                     sample.Add(kolona[indeksReda]);
                 }
-                if(indeksReda <= indeksPocetkaTestPodataka)
+                if(indeksReda < indeksPocetkaTestPodataka)
                 {
                     // Nakon sto prodjem kroz jedan red/sample, dodam ga u listu TRAIN INPUTA
                     XTest.Add(sample);
@@ -273,18 +336,18 @@ namespace ComputationalGraph.DAO
         /// <param name="procenatTestPodataka"> Procenat koliko zelimo da bude test podataka iz data seta </param>
         private void odrediOutpute(int procenatTestPodataka)
         {
-            int ukupnoEntitetaSistema = CitacPodataka.UcitaniRedovi.Length;
+            int ukupnoEntitetaSistema = CitacTrainPodataka.UcitaniRedovi.Length;
             int indeksPocetkaTestPodataka = ukupnoEntitetaSistema * procenatTestPodataka / 100;
 
-            for (int indeksReda = 0; indeksReda < CitacPodataka.UcitaniRedovi.Length; indeksReda++)
+            for (int indeksReda = 0; indeksReda < CitacTrainPodataka.UcitaniRedovi.Length; indeksReda++)
             {
                 List<double> sample = new List<double>();           // jedan sample/ kombinacija OUTPUT-a na izlazu mreze
-                foreach (List<double> kolona in IzlazneKolone)
+                foreach (List<double> kolona in IzlazneKoloneTrainSeta)
                 {
                     sample.Add(kolona[indeksReda]);
                 }
 
-                if(indeksReda <= indeksPocetkaTestPodataka)
+                if(indeksReda < indeksPocetkaTestPodataka)
                 {
                     // Nakon sto prodjem kroz jedan red/sample, dodam ga u listu kombinacija OUTPUTA
                     YTest.Add(sample);
@@ -300,6 +363,57 @@ namespace ComputationalGraph.DAO
             }
         }
 
+
+        #endregion
+
+        #region Odredjivanje inputa test podataka na osnovu ucitanih ulaznih kolona iz TEST fajla
+
+        /// <summary>
+        /// Odredjivanje X inputa testa kada imamo zasebno test fajla 
+        /// </summary>
+        private void odrediInputeTestSeta()
+        {
+
+            // CitacPodataka.UcitaniRedovi.Length; jer za svaki input imam jednu kolonu, te to predstavlja dimenziju X [inputa]
+            for (int indeksReda = 0; indeksReda < CitacTestPodataka.UcitaniRedovi.Length; indeksReda++)
+            {
+                List<double> sample = new List<double>();           // jedan sample/ kombinacija INPUTA u mrezu
+                foreach (List<double> kolona in UlazneKoloneTestSeta)
+                {
+                    sample.Add(kolona[indeksReda]);
+                }
+
+                // Nakon sto prodjem kroz jedan red/sample, dodam ga u listu TEST INPUTA
+                XTest.Add(sample);
+
+            }
+        }
+
+        #endregion
+
+        #region Odredjivanje outputa TEST podataka na osnovu ucitanih izlaznih kolona iz TEST fajla
+
+        /// <summary>
+        /// Odredjivanje output-a odnosno YTesta.
+        /// 
+        /// Posto znam da odredjujem outpute test seta samo je potrebno
+        /// dodati taj sample u YTest
+        /// </summary>
+        private void odrediOutputeTestSeta()
+        {
+
+            for (int indeksReda = 0; indeksReda < CitacTestPodataka.UcitaniRedovi.Length; indeksReda++)
+            {
+                List<double> sample = new List<double>();           // jedan sample/ kombinacija OUTPUT-a na izlazu mreze
+                foreach (List<double> kolona in IzlazneKoloneTestSeta)
+                {
+                    sample.Add(kolona[indeksReda]);
+                }
+                
+                YTest.Add(sample);
+
+            }
+        }
 
         #endregion
     }
