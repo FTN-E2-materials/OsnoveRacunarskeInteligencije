@@ -69,7 +69,7 @@ namespace ComputationalGraph
         /// <param name="learningRate"></param>
         /// <param name="momentum"></param>
         public void updateWeights(double learningRate, double momentum)
-        {   //TODO 8: koriguj tezine svih neurona
+        {   //TODO: Korigovanje tezina svih neurona
             neuroniSloja.ForEach(neuron => neuron.updateWeights(learningRate, momentum));
         }
     }

@@ -23,7 +23,6 @@ namespace ComputationalGraph
         public double forward(List<double> ulazniParametriSabiraca)
         {
             this.x = ulazniParametriSabiraca;
-            //TODO 1: implementirati forward funckiju za sum node
 
             // sabirac vraca samo sumu 
             return ulazniParametriSabiraca.Sum();
@@ -44,7 +43,6 @@ namespace ComputationalGraph
         /// </returns>
         public List<double> backward(double dz)
         {
-            //TODO 2: implementirati backward funkciju za sum node
 
             /*
              * Isto kao da smo trcali kroz x.size() i za svaki

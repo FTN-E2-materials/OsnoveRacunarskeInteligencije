@@ -82,7 +82,8 @@ namespace ComputationalGraph
             ulazi.Add(bias); 
 
             List<double> rezultatSvihMnozaca = new List<double>();
-            //TODO 6: Izracunati vrednost na izlazu vestackog neurona
+
+            // TODO: Izracunavanje vrednosti na izlazu vestackog neurona
             for (int i = 0; i < ulazi.Count; i++)
             {
                 // posto x[1] daje tezinu
@@ -116,7 +117,7 @@ namespace ComputationalGraph
             List<double> dx = new List<double>();   // x - inicijalni ulazi u neuron
             double backward_signal = dz.Sum();
 
-            //TODO 7: Izvrsiti propagaciju signala u nazad, prvo kroz aktivacionu funkciju,
+            //TODO: Izvrsiti propagaciju signala u nazad, prvo kroz aktivacionu funkciju,
             //        onda kroz sabirac pa kroz svaki pojedinacan mnozac
             backward_signal = this.activation_node.backward(backward_signal);
 

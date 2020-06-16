@@ -30,7 +30,7 @@ namespace ComputationalGraph
         public double forward(List<double> x)
         {
             this.x = x;
-            //TODO 3: implementirati forward funkciju za multiply node
+
             double input = this.x[0];
             double tezina = this.x[1];
             return input * tezina;
@@ -48,7 +48,6 @@ namespace ComputationalGraph
         /// <returns>[dx, dy]</returns>
         public List<double> backward(double dz)
         {
-            //TODO 4: implementirati backward funkciju za multiply node
             double[] retval = { dz * this.x[1], dz * this.x[0] };
             return retval.ToList();
         }

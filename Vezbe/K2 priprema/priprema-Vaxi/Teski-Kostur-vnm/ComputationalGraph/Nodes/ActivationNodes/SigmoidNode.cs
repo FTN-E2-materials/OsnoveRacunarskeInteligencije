@@ -28,7 +28,6 @@ namespace ComputationalGraph
         /// <returns></returns>
         private double sigmoid(double x)
         {
-            // TODO 5.1: Implementirati forward korak sigmoidnog cvora
             return 1.0 / (1 + Math.Exp(-x));
         }
 
@@ -54,7 +53,6 @@ namespace ComputationalGraph
         /// <returns></returns>
         public double backward(double dz)
         {
-            // TODO 5.2: Implementirati backward korak sigmoidog cvora
             return dz * this.sigmoid(this.x) * (1.0 - this.sigmoid(this.x));
         }
 
