@@ -1,0 +1,10 @@
+C:\Users\Miroslav\Desktop\ori-2018-e2\vezbe\v7 - Graf izracunavanja -VNM\ComputationalGraph\ComputationalGraph\bin\Debug\ComputationalGraph.exe
+C:\Users\Miroslav\Desktop\ori-2018-e2\vezbe\v7 - Graf izracunavanja -VNM\ComputationalGraph\ComputationalGraph\bin\Debug\ComputationalGraph.pdb
+C:\Users\Miroslav\Desktop\ori-2018-e2\vezbe\v7 - Graf izracunavanja -VNM\ComputationalGraph\ComputationalGraph\obj\x86\Debug\ComputationalGraph.csprojResolveAssemblyReference.cache
+C:\Users\Miroslav\Desktop\ori-2018-e2\vezbe\v7 - Graf izracunavanja -VNM\ComputationalGraph\ComputationalGraph\obj\x86\Debug\ComputationalGraph.exe
+C:\Users\Miroslav\Desktop\ori-2018-e2\vezbe\v7 - Graf izracunavanja -VNM\ComputationalGraph\ComputationalGraph\obj\x86\Debug\ComputationalGraph.pdb
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Neighbourhood\ComputationalGraph\obj\x86\Debug\ComputationalGraph.exe
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Neighbourhood\ComputationalGraph\obj\x86\Debug\ComputationalGraph.pdb
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Neighbourhood\ComputationalGraph\bin\Debug\ComputationalGraph.exe
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Neighbourhood\ComputationalGraph\bin\Debug\ComputationalGraph.pdb
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Neighbourhood\ComputationalGraph\obj\x86\Debug\ComputationalGraph.csprojAssemblyReference.cache
