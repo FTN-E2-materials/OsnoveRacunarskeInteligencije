@@ -1,0 +1,1 @@
+Kreirati neuronsku mrezu koja na osnovu podataka od col_1 do col_4 predvidja col_5
