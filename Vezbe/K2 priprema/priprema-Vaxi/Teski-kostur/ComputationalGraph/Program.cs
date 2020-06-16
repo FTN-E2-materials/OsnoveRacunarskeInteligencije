@@ -1,6 +1,7 @@
 ﻿using ComputationalGraph.DAO;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace ComputationalGraph
@@ -14,55 +15,95 @@ namespace ComputationalGraph
     {
         static void Main(string[] args)
         {
-            FileDAO fileDAO = new FileDAO();
+            #region Ucitavanje data seta
+
+            List<int> indeksKolonaInputa = new List<int>();
+            
+            // ulazi za pojavljivanje u knjigama
+            indeksKolonaInputa.Add(16);
+            indeksKolonaInputa.Add(17);
+            indeksKolonaInputa.Add(18);
+            indeksKolonaInputa.Add(19);
+            indeksKolonaInputa.Add(20);
+
+            // muski ili zensko ulaz
+            indeksKolonaInputa.Add(7);
+            // popularnost ulaz
+            indeksKolonaInputa.Add(31);
+
+            // plemicko poreklo ulaz
+            indeksKolonaInputa.Add(26);
+
+            // num dead relations ulaz
+            indeksKolonaInputa.Add(28);
+
+            // porodica kojoj pripada
+            indeksKolonaInputa.Add(14);
+
+            List<int> indeksKolonaOutputa = new List<int>();
+            // isAlive ulaz
+            indeksKolonaOutputa.Add(32);
+
+            FileDAO fileDAO = new FileDAO(indeksKolonaInputa, indeksKolonaOutputa, 20);
             // fileDAO.imaKategorickihAtributa
             // fileDAO.getKategorickeAtribute
+
+            #endregion
 
             #region Kreiranje neuronske mreze
 
             NeuralNetwork network = new NeuralNetwork();
-            network.Add(new NeuralLayer(2, 2, "sigmoid"));
+            network.Add(new NeuralLayer(indeksKolonaInputa.Count, 3, "sigmoid"));
+            network.Add(new NeuralLayer(3, 2, "sigmoid"));
             network.Add(new NeuralLayer(2, 1, "sigmoid"));
 
             #endregion
 
             #region Vektori za inpute
 
-            double[] x1 = { 0.0, 0.0 };
-            double[] x2 = { 0.0, 1.0 };
-            double[] x3 = { 1.0, 0.0 };
-            double[] x4 = { 1.0, 1.0 };
-            List<List<double>> X = new List<List<double>>() { x1.ToList(), x2.ToList(), x3.ToList(),x4.ToList()};
+            List<List<double>> X = new List<List<double>>();
+            X = fileDAO.X;
 
             #endregion
 
             #region Vektori za outpute
 
-            double[] y1 = { 0.0 };
-            double[] y2 = { 1.0 };
-            double[] y3 = { 1.0 };
-            double[] y4 = { 0.0 };
-            List<List<double>> Y = new List<List<double>>() { y1.ToList(), y2.ToList(), y3.ToList(), y4.ToList() };
+            List<List<double>> Y = new List<List<double>>();
+            Y = fileDAO.Y;
 
             #endregion
 
             #region Fitovanje
 
-            network.fit(X, Y, 0.1, 0.9, 10000);
+            Console.WriteLine("Obuka pocela.");
+            network.fit(X, Y, 0.1, 0.9, 500);
+            Console.WriteLine("Kraj obuke.");
 
             #endregion
 
             #region Predikcija
 
+            int pogodak = 0;
+            for (int i = 0; i < fileDAO.XTest.Count; ++i)
+            {
+                List<Double> prediction = network.predict(fileDAO.XTest[i]);
+                double alive = 0;
+                if (prediction[0] > 0.5)
+                {
+                    alive = 1;
+                }
 
-            /*
-             * Posto imamo samo jedan izlaz, predict ce nam vratiti vektor od jednog elementa,
-             * da imamo vise izlaza, uzimali bi koji nam treba izlaz tj. [brojIzlaza]
-             */
-            Console.WriteLine(network.predict(x1.ToList())[0]);
-            Console.WriteLine(network.predict(x2.ToList())[0]);
-            Console.WriteLine(network.predict(x3.ToList())[0]);
-            Console.WriteLine(network.predict(x4.ToList())[0]);
+                Console.WriteLine("Real result:{0}, Predicted result {1}", fileDAO.YTest[i][0], prediction[0]);
+
+                if (alive == fileDAO.YTest[i][0])
+                {
+                    ++pogodak;
+                }
+
+            }
+
+            Console.Write("Pogodjeno {0} od {1} ", pogodak, fileDAO.YTest.Count);
+            Console.Write("Tacnost {0} %", pogodak * 100 / fileDAO.YTest.Count);
             Console.ReadLine();
 
             #endregion

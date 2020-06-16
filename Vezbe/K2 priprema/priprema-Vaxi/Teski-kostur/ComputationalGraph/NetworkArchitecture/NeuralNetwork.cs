@@ -57,10 +57,28 @@ namespace ComputationalGraph
             return this.forward(x);
         }
 
+        #region Fitovanje
+
         /// <summary>
         /// Kreiranje modela nase neuronske mreze, odnosno obucavanje neuronske mreze.
         /// </summary>
-        /// <param name="X"></param>
+        /// <param name="X"> Lista listi inputa 
+        /// {
+        ///     "atibut visina" : {
+        ///                         128,
+        ///                         201,
+        ///                         202,
+        ///                         ...
+        ///                       }
+        ///     "atribut obim struka" :
+        ///                       {
+        ///                         68,
+        ///                         22,
+        ///                         31,
+        ///                         ..
+        ///                       }
+        /// 
+        /// }</param>
         /// <param name="Y"></param>
         /// <param name="learningRate"> alfa </param>
         /// <param name="momentum">  </param>
@@ -92,5 +110,7 @@ namespace ComputationalGraph
                 }
             }
         }
+
+        #endregion
     }
 }

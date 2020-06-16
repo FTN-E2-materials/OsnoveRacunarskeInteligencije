@@ -8,10 +8,14 @@ namespace ComputationalGraph
         public int n_inputs;
         public int n_neurons;
         public string activation;
-        public List<NeuronNode> neurons;
+        public List<NeuronNode> neuroniSloja;
 
         /// <summary>
         /// Jedan sloj neuronske mreze
+        /// 
+        /// NAPOMENA: broj ulaza u SLOJ je nama ovde jednak i broju ulaza u NEURON,
+        /// takodje su aktivacione funkcije jednake, odnosno SLOJ i NEURON imaju
+        /// korespondentan broj ulaza i aktivacionu funkciju.
         /// </summary>
         /// <param name="n_inputs"> Broj ulaza </param>
         /// <param name="n_neurons"> Broj neurona </param>
@@ -21,12 +25,12 @@ namespace ComputationalGraph
             this.n_inputs = n_inputs;
             this.n_neurons = n_neurons;
             this.activation = activation;
-            this.neurons = new List<NeuronNode>();
+            this.neuroniSloja = new List<NeuronNode>();
 
             for (int i = 0; i < n_neurons; i++)
             {
                 NeuronNode neuron = new NeuronNode(n_inputs, activation);
-                this.neurons.Add(neuron);
+                this.neuroniSloja.Add(neuron);
 
             }
         }
@@ -34,7 +38,7 @@ namespace ComputationalGraph
         public List<double> forward(List<double> x)
         {
             List<double> layer_output = new List<double>();
-            foreach (var neuron in this.neurons)
+            foreach (var neuron in this.neuroniSloja)
             {
                 double neuron_output = neuron.forward(x);
                 layer_output.Add(neuron_output);
@@ -51,10 +55,10 @@ namespace ComputationalGraph
         public List<List<double>> backward(List<List<double>> dz)
         {
             List<List<double>> backward_signal = new List<List<double>>();
-            for (int i = 0; i < this.neurons.Count; i++)
+            for (int i = 0; i < this.neuroniSloja.Count; i++)
             {
                List<double> neuron_dz = dz.Select(d => d[i]).ToList(); // selekcija i-te vrste u matrici
-               neuron_dz = neurons[i].backward(neuron_dz);
+               neuron_dz = neuroniSloja[i].backward(neuron_dz);
                backward_signal.Add(neuron_dz.Take(neuron_dz.Count - 1).ToList());//sve osim poslednjeg zbog biasa
             }
             return backward_signal;
@@ -66,7 +70,7 @@ namespace ComputationalGraph
         /// <param name="momentum"></param>
         public void updateWeights(double learningRate, double momentum)
         {   //TODO 8: koriguj tezine svih neurona
-            neurons.ForEach(neuron => neuron.updateWeights(learningRate, momentum));
+            neuroniSloja.ForEach(neuron => neuron.updateWeights(learningRate, momentum));
         }
     }
 }
