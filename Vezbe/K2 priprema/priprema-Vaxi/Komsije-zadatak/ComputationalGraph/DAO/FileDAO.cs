@@ -234,6 +234,52 @@ namespace ComputationalGraph.DAO
 
         }
 
+        /// <summary>
+        /// Konstruktor u slucaju Cross Validation-a.
+        /// 
+        /// Npr: Four-Fold Cross Validation uzimamo delove za test podatke 
+        /// 0-25    [ od 25-100 su train podaci ]
+        /// 25-50   [ od 0-25 && 50-100 su train podaci]
+        /// 50-75   [ od 0-50 && 75-100 su train podaci]
+        /// 75-100  [ od 0-75 su train podaci ]
+        /// 
+        /// Predstavlja od kog do kog postotka svih podataka uzimamo nekolicinu da budu test podaci
+        /// </summary>
+        /// <param name="indeksiKolonaZaUcitavanjeInputa"></param>
+        /// <param name="indeksiKolonaZaUcitavanjeOutputa"></param>
+        /// <param name="odProcenta"></param>
+        /// <param name="doProcenta"></param>
+        public FileDAO(List<int> indeksiKolonaZaUcitavanjeInputa, List<int> indeksiKolonaZaUcitavanjeOutputa, int odProcenta, int doProcenta)
+        {
+
+            UlazneKoloneTrainSeta = new List<List<double>>();
+            IzlazneKoloneTrainSeta = new List<List<double>>();
+            UlazneKoloneTestSeta = new List<List<double>>();
+            IzlazneKoloneTestSeta = new List<List<double>>();
+
+
+            Normalizacija = new NormalizatorPodataka();
+            CitacTrainPodataka = new DataReader("train.csv");
+            //CitacTestPodataka = new DataReader("test.csv");
+
+
+            X = new List<List<double>>();
+            Y = new List<List<double>>();
+
+            XTest = new List<List<double>>();
+            YTest = new List<List<double>>();
+
+
+            // TRAIN podaci
+            UlazneKoloneTrainSeta = ucitajUlazneKolone(indeksiKolonaZaUcitavanjeInputa, CitacTrainPodataka);
+            odrediInpute(odProcenta, doProcenta);
+
+            IzlazneKoloneTrainSeta = ucitajIzlazneKolone(indeksiKolonaZaUcitavanjeOutputa, CitacTrainPodataka);
+            odrediOutpute(odProcenta, doProcenta);
+
+
+        }
+
 
         #region Ucitavanje svih kolona
 
@@ -322,6 +368,44 @@ namespace ComputationalGraph.DAO
             }
         }
 
+        /// <summary>
+        /// Odredjivanje INPUTA kada imamo cross validaciju, pa 
+        /// je potrebno reci od kog do kog dela podataka uzimamo
+        /// nekolicinu za test podatke.
+        /// </summary>
+        /// <param name="odProcenta"></param>
+        /// <param name="doProcenta"></param>
+        private void odrediInpute(int odProcenta, int doProcenta)
+        {
+            int ukupnoEntitetaSistema = CitacTrainPodataka.UcitaniRedovi.Length;
+            int indeksPocetkaTestPodataka = ukupnoEntitetaSistema * odProcenta / 100;
+            int indeksKrajaTestPodataka = ukupnoEntitetaSistema * doProcenta / 100;
+
+            // CitacPodataka.UcitaniRedovi.Length; jer za svaki input imam jednu kolonu, te to predstavlja dimenziju X [inputa]
+            for (int indeksReda = 0; indeksReda < ukupnoEntitetaSistema; indeksReda++)
+            {
+                List<double> sample = new List<double>();           // jedan sample/ kombinacija INPUTA u mrezu
+                foreach (List<double> kolona in UlazneKoloneTrainSeta)
+                {
+                    sample.Add(kolona[indeksReda]);
+                }
+
+                // uzimam test podatke samo u tom okviru 
+                if (indeksReda > indeksPocetkaTestPodataka && indeksReda < indeksKrajaTestPodataka)
+                {
+                    // Nakon sto prodjem kroz jedan red/sample, dodam ga u listu TRAIN INPUTA
+                    XTest.Add(sample);
+                }
+                else
+                {
+                    // Nakon sto prodjem kroz jedan red/sample, dodam ga u listu INPUTA
+                    X.Add(sample);
+                }
+
+
+            }
+        }
+
         #endregion
 
         #region Odredjivanje outputa na osnovu ucitanih izlaznih kolona
@@ -363,6 +447,43 @@ namespace ComputationalGraph.DAO
             }
         }
 
+        /// <summary>
+        /// Odredjivanje OUTPUTa kada imamo cross validaciju, pa 
+        /// je potrebno reci od kog do kog dela podataka uzimamo
+        /// nekolicinu za test podatke.
+        /// </summary>
+        /// <param name="odProcenta"></param>
+        /// <param name="doProcenta"></param>
+        private void odrediOutpute(int odProcenta, int doProcenta)
+        {
+            int ukupnoEntitetaSistema = CitacTrainPodataka.UcitaniRedovi.Length;
+            int indeksPocetkaTestPodataka = ukupnoEntitetaSistema * odProcenta / 100;
+            int indeksKrajaTestPodataka = ukupnoEntitetaSistema * doProcenta / 100;
+
+
+            for (int indeksReda = 0; indeksReda < CitacTrainPodataka.UcitaniRedovi.Length; indeksReda++)
+            {
+                List<double> sample = new List<double>();           // jedan sample/ kombinacija OUTPUT-a na izlazu mreze
+                foreach (List<double> kolona in IzlazneKoloneTrainSeta)
+                {
+                    sample.Add(kolona[indeksReda]);
+                }
+
+                if (indeksReda > indeksPocetkaTestPodataka && indeksReda < indeksKrajaTestPodataka)
+                {
+                    // Nakon sto prodjem kroz jedan red/sample, dodam ga u listu kombinacija OUTPUTA
+                    YTest.Add(sample);
+                }
+                else
+                {
+                    // Nakon sto prodjem kroz jedan red/sample, dodam ga u listu kombinacija OUTPUTA
+                    Y.Add(sample);
+                }
+
+
+
+            }
+        }
 
         #endregion
 
