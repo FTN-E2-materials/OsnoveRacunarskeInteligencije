@@ -1,0 +1,9 @@
+Na osnovu lotArea, yearBuilt, listNeighbourhood ,listBldgType prediktovati salePrice.
+
+Indeksi kolona:
+lotArea [4]
+yearBuilt [19]
+Neighborhood [12]
+Bldgtype [15]
+
+SalePrice[81]
