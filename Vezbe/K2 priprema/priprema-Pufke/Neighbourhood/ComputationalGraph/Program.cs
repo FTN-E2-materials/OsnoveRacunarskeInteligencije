@@ -27,8 +27,7 @@ namespace ComputationalGraph
         static void Main(string[] args)
         {
             NeuralNetwork network = new NeuralNetwork();
-            network.Add(new NeuralLayer(4, 3, "sigmoid"));
-            network.Add(new NeuralLayer(3, 2, "sigmoid"));
+            network.Add(new NeuralLayer(4, 2, "sigmoid"));
             network.Add(new NeuralLayer(2, 1, "sigmoid"));
 
             List<int> lotArea = new List<int>();
@@ -99,7 +98,7 @@ namespace ComputationalGraph
             List<List<double>> Y = new List<List<double>>();
 
             // prolazimo kroz sve likove
-            for (int i = 292; i < 1459; i++)
+            for (int i = 0; i < 1167; i++)
             {
                 double[] xTemp = { lotAreaNormalizovani[i], yearBuiltNormalizovani[i], listNeighbourhoodNormalizovani[i], listBldgType[i] };
                 X.Add(xTemp.ToList());
@@ -110,13 +109,15 @@ namespace ComputationalGraph
             }
 
             Console.WriteLine("Obuka pocela");
-            network.fit(X, Y, 0.1, 0.9, 500);
+            network.fit(X, Y, 0.1, 0.9, 250);
 
             Console.WriteLine("Gotova obuka");
 
             int tacnoPrediktovanih = 0;
-            for (int i = 0; i < 292; i++)
+            int brojPrediktovanih = 0;
+            for (int i = 1167; i < 1459; i++)
             {
+                brojPrediktovanih++;
                 double[] x1 = { lotAreaNormalizovani[i], yearBuiltNormalizovani[i], listNeighbourhoodNormalizovani[i], listBldgType[i] };
                 double predictedPrice = network.predict(x1.ToList())[0];
                 double realPrice = salePriceNormalizovani[i];
@@ -128,7 +129,7 @@ namespace ComputationalGraph
                     tacnoPrediktovanih++;
                 }
             }
-            Console.WriteLine("Tacnost: " + (tacnoPrediktovanih * 100) / 292 + "%");
+            Console.WriteLine("Tacnost: " + (tacnoPrediktovanih * 100) / brojPrediktovanih + "%");
             Console.ReadLine();
 
 

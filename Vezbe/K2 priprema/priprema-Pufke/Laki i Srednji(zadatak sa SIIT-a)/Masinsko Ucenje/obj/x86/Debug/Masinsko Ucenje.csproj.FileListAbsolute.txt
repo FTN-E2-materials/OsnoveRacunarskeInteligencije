@@ -1,0 +1,16 @@
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Laki zadatak - kostur\Masinsko Ucenje\bin\Debug\Masinsko Ucenje.exe
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Laki zadatak - kostur\Masinsko Ucenje\bin\Debug\Masinsko Ucenje.pdb
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Laki zadatak - kostur\Masinsko Ucenje\obj\x86\Debug\Masinsko Ucenje.csprojAssemblyReference.cache
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Laki zadatak - kostur\Masinsko Ucenje\obj\x86\Debug\Masinsko_Ucenje.Main.resources
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Laki zadatak - kostur\Masinsko Ucenje\obj\x86\Debug\Masinsko_Ucenje.Properties.Resources.resources
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Laki zadatak - kostur\Masinsko Ucenje\obj\x86\Debug\Masinsko Ucenje.csproj.GenerateResource.cache
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Laki zadatak - kostur\Masinsko Ucenje\obj\x86\Debug\Masinsko Ucenje.exe
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Laki zadatak - kostur\Masinsko Ucenje\obj\x86\Debug\Masinsko Ucenje.pdb
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Laki i Srednji(zadatak sa SIIT-a)\Masinsko Ucenje\bin\Debug\Masinsko Ucenje.exe
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Laki i Srednji(zadatak sa SIIT-a)\Masinsko Ucenje\bin\Debug\Masinsko Ucenje.pdb
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Laki i Srednji(zadatak sa SIIT-a)\Masinsko Ucenje\obj\x86\Debug\Masinsko Ucenje.csprojAssemblyReference.cache
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Laki i Srednji(zadatak sa SIIT-a)\Masinsko Ucenje\obj\x86\Debug\Masinsko_Ucenje.Main.resources
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Laki i Srednji(zadatak sa SIIT-a)\Masinsko Ucenje\obj\x86\Debug\Masinsko_Ucenje.Properties.Resources.resources
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Laki i Srednji(zadatak sa SIIT-a)\Masinsko Ucenje\obj\x86\Debug\Masinsko Ucenje.csproj.GenerateResource.cache
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Laki i Srednji(zadatak sa SIIT-a)\Masinsko Ucenje\obj\x86\Debug\Masinsko Ucenje.exe
+C:\Users\Pufke\Desktop\OsnoveRacunarskeInteligencije\Vezbe\K2 priprema\priprema-Pufke\Laki i Srednji(zadatak sa SIIT-a)\Masinsko Ucenje\obj\x86\Debug\Masinsko Ucenje.pdb

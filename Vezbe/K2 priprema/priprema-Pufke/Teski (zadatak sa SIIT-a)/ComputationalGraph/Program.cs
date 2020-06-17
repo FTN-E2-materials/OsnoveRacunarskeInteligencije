@@ -43,10 +43,10 @@ namespace ComputationalGraph
             foreach (String linija in dataLines)
             {
                 string[] parts = linija.Split(',');
-                col_1.Add(ConvertToDouble(parts[(int)Header.col_1]));
-                col_2.Add(ConvertToDouble(parts[(int)Header.col_2]));
-                col_3.Add(ConvertToDouble(parts[(int)Header.col_3]));
-                col_4.Add(ConvertToDouble(parts[(int)Header.col_4]));
+                col_1.Add(double.Parse(parts[(int)Header.col_1], CultureInfo.InvariantCulture));
+                col_2.Add(double.Parse(parts[(int)Header.col_2], CultureInfo.InvariantCulture));
+                col_3.Add(double.Parse(parts[(int)Header.col_3], CultureInfo.InvariantCulture));
+                col_4.Add(double.Parse(parts[(int)Header.col_4], CultureInfo.InvariantCulture));
                 
                 String type = (parts[(int)Header.col_5]);
                 if (type.Equals("type_1"))
@@ -83,9 +83,9 @@ namespace ComputationalGraph
                 Y.Add(yTemp.ToList());
             }
 
-            Console.WriteLine("Obuka pocela");
+            Console.WriteLine("Training started");
             network.fit(X, Y, 0.1, 0.9, 500);
-            Console.WriteLine("Gotova obuka");
+            Console.WriteLine("Training ended");
 
             // String[] dataLinesTest = File.ReadAllLines(@"./../../test.csv");
             String[] dataLinesTest = File.ReadAllLines(@"./../../test.csv");
@@ -97,11 +97,11 @@ namespace ComputationalGraph
             {
                 string[] parts = linija.Split(',');
 
-                col_1Test.Add(ConvertToDouble(parts[(int)Header.col_1]));
-                col_2Test.Add(ConvertToDouble(parts[(int)Header.col_2]));
-                col_3Test.Add(ConvertToDouble(parts[(int)Header.col_3]));
-                col_4Test.Add(ConvertToDouble(parts[(int)Header.col_4]));
-
+                col_1Test.Add(double.Parse(parts[(int)Header.col_1], CultureInfo.InvariantCulture));
+                col_2Test.Add(double.Parse(parts[(int)Header.col_2], CultureInfo.InvariantCulture));
+                col_3Test.Add(double.Parse(parts[(int)Header.col_3], CultureInfo.InvariantCulture));
+                col_4Test.Add(double.Parse(parts[(int)Header.col_4], CultureInfo.InvariantCulture));
+              //  Console.WriteLine(double.Parse(parts[(int)Header.col_4], CultureInfo.InvariantCulture));
                 String type = (parts[(int)Header.col_5]);
                 if (type.Equals("type_1"))
                 {
@@ -121,8 +121,10 @@ namespace ComputationalGraph
             List<double> col_2TestNormalizovani = normalizacijaInt(col_2Test);
             List<double> col_3TestNormalizovani = normalizacijaInt(col_3Test);
             List<double> col_4TestNormalizovani = normalizacijaInt(col_4Test);
-
-
+          /*  foreach (double d in col_4TestNormalizovani)
+            {
+                Console.WriteLine(d);
+            }*/
             double dobrih = 0;
             double broj = 0;
             for (int i = 0; i < dataLinesTest.Length; i++)
@@ -146,18 +148,15 @@ namespace ComputationalGraph
                     dobrih++;
                  
                 }
-
+                Console.WriteLine("PRediktovana vrednost je " + network.predict(x1.ToList())[0]);
+                Console.WriteLine("Stvarna vrednost je " + col_5Test[i]);
                 broj++;
             }
 
-            Console.WriteLine("Dobrih: " + dobrih + "/"+ broj);
+            Console.WriteLine("Dobro prediktovanih je  " + dobrih + " od "+ broj);
             double procenattacnosti = (dobrih / broj) * 100;
             Console.WriteLine("Tačnost je = " + procenattacnosti + " %");
             Console.ReadLine();
-
-
-
-
 
 
 
@@ -176,38 +175,8 @@ namespace ComputationalGraph
                 }
                 return noramlizovanaLista;
             }
-            double ConvertToDouble(string s)
-            {
-                char systemSeparator = Thread.CurrentThread.CurrentCulture.NumberFormat.CurrencyDecimalSeparator[0];
-                double result = 0;
-                try
-                {
-                    if (s != null)
-                        if (!s.Contains(","))
-                            result = double.Parse(s, CultureInfo.InvariantCulture);
-                        else
-                            result = Convert.ToDouble(s.Replace(".", systemSeparator.ToString()).Replace(",", systemSeparator.ToString()));
-                }
-                catch (Exception e)
-                {
-                    try
-                    {
-                        result = Convert.ToDouble(s);
-                    }
-                    catch
-                    {
-                        try
-                        {
-                            result = Convert.ToDouble(s.Replace(",", ";").Replace(".", ",").Replace(";", "."));
-                        }
-                        catch
-                        {
-                            throw new Exception("Wrong string-to-double format");
-                        }
-                    }
-                }
-                return result;
-            }
+          
+            
         }
     }
 }
