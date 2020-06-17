@@ -88,7 +88,7 @@ namespace ComputationalGraph
 
                     // Podesavam koliko tolerisem da cena ide gore dole [ posto sam u domenu [0-1] normalizovao , 0.1 je 10% , 0.2 je 20 %
                     // voditi racuna da ako stavimo 0.2 da ce on tolerisati i za gore i za dole po 20%, sto je 40 % tolerancije
-                    double tolerancija = 0.2;
+                    double tolerancija = 0.1;
 
                     if (prediction[0] <= fileDAO.YTest[i][0] + tolerancija && prediction[0] >= fileDAO.YTest[i][0] - tolerancija)
                         ++ukupnoPogodjenih;
