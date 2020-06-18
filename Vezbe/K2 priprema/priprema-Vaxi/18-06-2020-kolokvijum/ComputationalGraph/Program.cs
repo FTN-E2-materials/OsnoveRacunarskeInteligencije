@@ -20,17 +20,30 @@ namespace ComputationalGraph
 
             List<int> indeksKolonaInputa = new List<int>();
 
-            // ulazi od col_1 do col_5
+            // Gender
             indeksKolonaInputa.Add(1);
+
+            // Married
             indeksKolonaInputa.Add(2);
-            indeksKolonaInputa.Add(3);
+            
+            // education
             indeksKolonaInputa.Add(4);
 
-            List<int> indeksKolonaOutputa = new List<int>();
-            // col_5 izlaz
-            indeksKolonaOutputa.Add(5);
+            // ApplicantIncome
+            indeksKolonaInputa.Add(6);
 
-            FileDAO fileDAO = new FileDAO(indeksKolonaInputa, indeksKolonaOutputa, 0);
+            //CoapplicantIncome
+            indeksKolonaInputa.Add(7);
+
+            //LoanAmount
+            indeksKolonaInputa.Add(8);
+
+            List<int> indeksKolonaOutputa = new List<int>();
+
+            // Loan_Status
+            indeksKolonaOutputa.Add(12);
+
+            FileDAO fileDAO = new FileDAO(indeksKolonaInputa, indeksKolonaOutputa, 30); // 30 jer toliko zelim za test podatke 
 
             #endregion
 
@@ -51,15 +64,15 @@ namespace ComputationalGraph
             #region Kreiranje neuronske mreze
 
             NeuralNetwork network = new NeuralNetwork();
-            network.Add(new NeuralLayer(X[0].Count, 2, "sigmoid")); // X[0], ali moze i X[bilo koji idx], bitno je da tako dobijem broj ulaza 
-            network.Add(new NeuralLayer(2, 1, "sigmoid"));
+            network.Add(new NeuralLayer(X[0].Count, 2, "tanh")); // X[0], ali moze i X[bilo koji idx], bitno je da tako dobijem broj ulaza 
+            network.Add(new NeuralLayer(2, 1, "tanh"));
 
             #endregion
 
             #region Fitovanje
 
             Console.WriteLine("Obuka pocela.");
-            network.fit(X, Y, 0.1, 0.9, 500);
+            network.fit(X, Y, 0.1, 0.9, 300);
             Console.WriteLine("Kraj obuke.");
 
             #endregion

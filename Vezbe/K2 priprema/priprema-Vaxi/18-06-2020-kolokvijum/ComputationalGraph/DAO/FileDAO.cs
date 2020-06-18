@@ -207,8 +207,8 @@ namespace ComputationalGraph.DAO
 
 
             Normalizacija = new NormalizatorPodataka();
-            CitacTrainPodataka = new DataReader("train.csv");
-            CitacTestPodataka = new DataReader("test.csv");
+            CitacTrainPodataka = new DataReader("loan-prediction.csv");
+            //CitacTestPodataka = new DataReader("test.csv");
 
 
             X = new List<List<double>>();
@@ -225,12 +225,12 @@ namespace ComputationalGraph.DAO
             IzlazneKoloneTrainSeta = ucitajIzlazneKolone(indeksiKolonaZaUcitavanjeOutputa, CitacTrainPodataka);
             odrediOutpute(procenatTestPodataka);
 
-            // TEST podaci 
-            UlazneKoloneTestSeta = ucitajUlazneKolone(indeksiKolonaZaUcitavanjeInputa, CitacTestPodataka);
-            odrediInputeTestSeta();
+            // TEST podaci - OVAJ DEO MI JE BIO DA SMO IMALI 2 ODVOJENA FAJLA
+            //UlazneKoloneTestSeta = ucitajUlazneKolone(indeksiKolonaZaUcitavanjeInputa, CitacTestPodataka);
+            //odrediInputeTestSeta();
 
-            IzlazneKoloneTestSeta = ucitajIzlazneKolone(indeksiKolonaZaUcitavanjeOutputa, CitacTestPodataka);
-            odrediOutputeTestSeta();
+            //IzlazneKoloneTestSeta = ucitajIzlazneKolone(indeksiKolonaZaUcitavanjeOutputa, CitacTestPodataka);
+            //odrediOutputeTestSeta();
 
         }
 
