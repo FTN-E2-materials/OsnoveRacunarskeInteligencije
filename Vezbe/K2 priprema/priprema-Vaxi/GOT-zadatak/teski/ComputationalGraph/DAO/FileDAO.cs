@@ -196,7 +196,24 @@ namespace ComputationalGraph.DAO
                 List<double> podaciKolone = CitacPodataka.ucitajPodatkeIzKolone(kolona);
                 podaciKolone = Normalizacija.normalizujPodatke(podaciKolone);
 
-                UlazneKolone.Add(podaciKolone);
+                if (CitacPodataka.UniqKategorickiAtributi.Count > 0)
+                {
+                    List<List<double>> noveKolone = CitacPodataka.UniqKategorickiAtributi.Values.ToList();
+
+                    /*
+                     * Zbog https://towardsdatascience.com/one-hot-encoding-multicollinearity-and-the-dummy-variable-trap-b5840be3c41a
+                     * izbacujem jednu kolonu kako ne bi upao u zamku koja se krije u one hot encodingu
+                     */
+                    noveKolone.RemoveAt(noveKolone.Count - 1);
+
+                    UlazneKolone.AddRange(noveKolone);
+                }
+                else
+                {
+                    UlazneKolone.Add(podaciKolone);
+                }
+
+                
             }
         }
 

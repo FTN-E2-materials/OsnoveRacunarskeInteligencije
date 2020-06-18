@@ -140,6 +140,7 @@ namespace ComputationalGraph
         {
             for (int i = 0; i < multiplyNodes.Count; i++)
             {
+                
                 List<double> grad = this.gradients.Select(gradient => gradient[i]).ToList();
                 double meanGradient = grad.Sum() / (double) this.gradients.Count;
                 double delta = learning_rate * meanGradient + momentum * this.previous_deltas[i];

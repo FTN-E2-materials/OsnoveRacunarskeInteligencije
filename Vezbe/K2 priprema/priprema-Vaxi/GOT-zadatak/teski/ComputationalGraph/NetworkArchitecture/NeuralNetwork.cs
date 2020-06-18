@@ -86,8 +86,10 @@ namespace ComputationalGraph
         public void fit(List<List<double>> X, List<List<double>> Y, double learningRate, double momentum, int nb_epochs)
         {
             double total_loss = 0.0;
+            
             for (int n = 0; n < nb_epochs; n++)
             {
+                Console.WriteLine("\t pocetak ehohe: " + n);
                 for (int i = 0; i < X.Count; i++)
                 {
                     List<double> x = X[i];
@@ -108,6 +110,7 @@ namespace ComputationalGraph
                     this.backward(gradient);
                     this.updateWeights(learningRate, momentum);
                 }
+                Console.WriteLine("\t kraj ehohe: " + n);
             }
         }
 

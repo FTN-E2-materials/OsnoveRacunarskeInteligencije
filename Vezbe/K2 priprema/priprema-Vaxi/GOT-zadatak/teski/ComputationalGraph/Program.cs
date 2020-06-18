@@ -1,4 +1,5 @@
 ﻿using ComputationalGraph.DAO;
+using ComputationalGraph.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,10 +16,10 @@ namespace ComputationalGraph
     {
         static void Main(string[] args)
         {
-            #region Ucitavanje data seta
+            #region Podesavanja koje cemo kolone ucitavati
 
             List<int> indeksKolonaInputa = new List<int>();
-            
+
             // ulazi za pojavljivanje u knjigama
             indeksKolonaInputa.Add(16);
             indeksKolonaInputa.Add(17);
@@ -50,14 +51,6 @@ namespace ComputationalGraph
 
             #endregion
 
-            #region Kreiranje neuronske mreze
-
-            NeuralNetwork network = new NeuralNetwork();
-            network.Add(new NeuralLayer(indeksKolonaInputa.Count, 4, "sigmoid"));
-            network.Add(new NeuralLayer(4, 2, "sigmoid"));
-            network.Add(new NeuralLayer(2, 1, "sigmoid"));
-
-            #endregion
 
             #region Vektori za inpute
 
@@ -73,41 +66,33 @@ namespace ComputationalGraph
 
             #endregion
 
+            #region Kreiranje neuronske mreze
+
+            NeuralNetwork network = new NeuralNetwork();
+            network.Add(new NeuralLayer(X[0].Count, 4, "sigmoid")); // X[0], ali moze i X[bilo koji idx], bitno je da tako dobijem broj ulaza 
+            network.Add(new NeuralLayer(4, 2, "sigmoid"));
+            network.Add(new NeuralLayer(2, 1, "sigmoid"));
+
+            #endregion
+
             #region Fitovanje
 
             Console.WriteLine("Obuka pocela.");
-            network.fit(X, Y, 0.1, 0.9, 500);
+            network.fit(X, Y, 0.1, 0.9, 10);
             Console.WriteLine("Kraj obuke.");
 
             #endregion
 
             #region Predikcija
 
-            int pogodak = 0;
-            for (int i = 0; i < fileDAO.XTest.Count; ++i)
-            {
-                List<Double> prediction = network.predict(fileDAO.XTest[i]);
-                double alive = 0;
-                if (prediction[0] > 0.5)
-                {
-                    alive = 1;
-                }
+            Score score = new Score();
 
-                Console.WriteLine("Real result:{0}, Predicted result {1}", fileDAO.YTest[i][0], prediction[0]);
-
-                if (alive == fileDAO.YTest[i][0])
-                {
-                    ++pogodak;
-                }
-
-            }
-
-            Console.Write("Pogodjeno {0} od {1} ", pogodak, fileDAO.YTest.Count);
-            Console.Write("Tacnost {0} %", pogodak * 100 / fileDAO.YTest.Count);
-            Console.ReadLine();
+            score.scoreModel(fileDAO, network);
 
             #endregion
 
         }
+
+        
     }
 }

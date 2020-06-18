@@ -58,6 +58,7 @@
     <Compile Include="Utilities\RandomGaussian.cs" />
     <Compile Include="Nodes\SigmoidNode.cs" />
     <Compile Include="Nodes\SumNode.cs" />
+    <Compile Include="Utilities\Score.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

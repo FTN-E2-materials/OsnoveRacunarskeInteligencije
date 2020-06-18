@@ -16,6 +16,9 @@ namespace ComputationalGraph.Utilities
 
         #region Atributi
 
+        /// <summary>
+        /// Niz redova koje smo ucitali iz fajla.
+        /// </summary>
         private string[] _ucitaniRedovi;
 
         /// <summary>
@@ -25,12 +28,45 @@ namespace ComputationalGraph.Utilities
         private int _indeksKategorickihAtributa;
 
         /// <summary>
+        /// Ideja je da imam listu kolona, gde svaka kolona predstavlja atribut za jedan kategoricki atribut
+        /// primer, naidjem na tekstualni atribut, odma pravim kolonu za njega i stavljam 1 na njegov indeks
+        /// njegov indeks predstavlja koji je to po redu kategoricki atribut.
+        /// 
+        /// Tako dobijam one hot. 
+        /// 
+        /// primer: naisao sam na 2 atrbiuta koja su tekstualna
+        /// => pravim 2 kolone gde svaka kolona odgovara jednom atributu
+        /// => postavljam indeks prvog u njegovu kolonu na prvo mesto u koloni
+        /// => postavljam indeks drugog u njegovu kolonu na drugo mesto u koloni
+        /// => dobio sam 2 nova inputa, tj 2 nove kolone koje su u formi isGood i isNoGood 
+        /// 
+        /// 
+        /// </summary>
+        private List<List<double>> _koloneKategorickihAtributa;
+
+        /// <summary>
+        /// Vodim racuna da imamo samo uniq kategoricke atribute ,
+        /// kako ne bih napravio vise kolona za kategoricke atribute nego sto je dovoljno.
+        /// 
+        /// key: naziv kategorickog atributa
+        /// value: nebitan
+        /// </summary>
+        private Dictionary<String, List<double>> _uniqKategoricniAtribut;
+
+        /// <summary>
+        /// Specijalno za ovaj zadatak delim kategorije u tipove.
+        /// 
         /// Key: "ime tipa"
         /// value: njegova uniq vrednost
         /// </summary>
-        private Dictionary<String,int> _kategorickiAtributi;
+        private Dictionary<String, int> _tipovi;
 
 
+        /// <summary>
+        /// Indeks koji je vezan samo za ovaj zadatak
+        /// i predstavlja indeks tipa.
+        /// </summary>
+        private int _indexTipa;
 
         #endregion
 
@@ -48,12 +84,30 @@ namespace ComputationalGraph.Utilities
             set { _indeksKategorickihAtributa = value; }
         }
 
-
-        public Dictionary<String, int> KategorickiAtributi
+        public List<List<double>> KoloneKategorickihAtributa
         {
-            get { return _kategorickiAtributi; }
-            set { _kategorickiAtributi = value; }
+            get { return _koloneKategorickihAtributa; }
+            set { _koloneKategorickihAtributa = value; }
         }
+
+        public Dictionary<String, List<double>> UniqKategorickiAtributi
+        {
+            get { return _uniqKategoricniAtribut; }
+            set { _uniqKategoricniAtribut = value; }
+        }
+
+        public Dictionary<String, int> Tipovi
+        {
+            get { return _tipovi; }
+            set { _tipovi = value; }
+        }
+
+        public int IndexTipa
+        {
+            get { return _indexTipa; }
+            set { _indexTipa = value; }
+        }
+
         #endregion
 
         /// <summary>
@@ -65,10 +119,14 @@ namespace ComputationalGraph.Utilities
         {
             String path = "./../../data/" + nazivFajlaZaCitanje;
             UcitaniRedovi = File.ReadAllLines(path);
-            UcitaniRedovi = UcitaniRedovi.Skip(1).ToArray(); // skip header row (State, Lat, Mort, Ocean, Long)
+            UcitaniRedovi = UcitaniRedovi.Skip(1).ToArray(); // preskakanje naslova 
 
-            IndeksKategorickihAtributa = 0;                 // krecem od 0 indeksiranje kategorickih atributa, inc na svaku pojavu jedno kategorickog atributa
-            KategorickiAtributi = new Dictionary<string, int>();
+            KoloneKategorickihAtributa = new List<List<double>>();
+            UniqKategorickiAtributi = new Dictionary<string, List<double>>();
+            IndeksKategorickihAtributa = 0;                 // krecem od 0 indeksiranje kategorickih atributa
+
+            Tipovi = new Dictionary<string, int>();
+            IndexTipa = 0;
         }
 
         #region Ucitavanje podataka
@@ -97,10 +155,11 @@ namespace ComputationalGraph.Utilities
 
                 if (!isNumeric)
                 {
-                    //TODO: Resiti ove kategoricke atribute !!!
+                    // TODO: KATEGORICKI ATRIBUT - zakomentarisem ukoliko ima previse kategorickih atributa, jer u tom slucaju nikad da se zavrsi jedna epoha a kamoli obucavanje citave mreze
+                    //kategorickiAtribut(atributString);
+                    IndeksKategorickihAtributa += 1;
 
-                    // znamo da je unos problematicni kategoricni string
-                    // pa je potrebno to resiti transformacijom u broj
+                    // atributBroj = IndeksKategorickihAtributa;       // ostavljam i ovo za slucaj da imam previse kategorickih atributa pa je algoritam prespor
                     atributBroj = transformisiUBroj(atributString);
                 }
 
@@ -112,17 +171,49 @@ namespace ComputationalGraph.Utilities
 
         #endregion
 
+        #region Kategoricki atribut
+
+        /// <summary>
+        /// Kada se pojavi kategoricki atribut:
+        /// 
+        /// 1. Napravim kolonu duzine koliko imam redova u tabeli
+        /// 2. Na tekuce mesto(tekuci red) stavljam 1 za taj atribut
+        /// </summary>
+        /// <param name="atributString"></param>
+        private void kategorickiAtribut(string atributString)
+        {
+            if (!UniqKategorickiAtributi.ContainsKey(atributString))
+            {
+                // pravim kolonu sa onoliko redova koliko ima redova ucitana tabela 
+                // referenca: https://stackoverflow.com/questions/466946/how-to-initialize-a-listt-to-a-given-size-as-opposed-to-capacity
+                List<double> novaKolonaKategorickogAtributa = new List<double>(new double[UcitaniRedovi.Length]);
+                novaKolonaKategorickogAtributa[IndeksKategorickihAtributa] = 1.0;
+
+
+                UniqKategorickiAtributi[atributString] = novaKolonaKategorickogAtributa;
+                KoloneKategorickihAtributa.Add(novaKolonaKategorickogAtributa);
+            }
+            else
+            {
+                // dobavim kolonu za taj atribut 
+                // i stavim u toj koloni na tekuci indeks keca 
+                UniqKategorickiAtributi[atributString][IndeksKategorickihAtributa] = 1;
+            }
+        }
+
+        #endregion
+
         #region Transformacija text atributa u broj
 
         private Double transformisiUBroj(String text)
         {
             //TODO: Resiti ovo, ovo sad samo svakom stringu poveca vrednost za 1, kao enumeracija
-            if (!KategorickiAtributi.ContainsKey(text))
+            if (!Tipovi.ContainsKey(text))
             {
-                IndeksKategorickihAtributa += 1;
-                KategorickiAtributi[text] = IndeksKategorickihAtributa;
+                IndexTipa += 1;
+                Tipovi[text] = IndexTipa;
             }
-            return IndeksKategorickihAtributa;
+            return IndexTipa;
         }
 
         #endregion
